@@ -162,7 +162,7 @@ console.log(century); */
 // const JohnsHeight = 1.95;
 
 //Data 2
-const marksWeight = 95;
+/* const marksWeight = 95;
 const marksHeight = 1.88;
 const johnsWeight = 85;
 const JohnsHeight = 1.76;
@@ -174,4 +174,30 @@ if (markBMI >= johnBMI) {
   console.log(`Mark's BMI(${markBMI}) is higher than John's (${johnBMI})`);
 } else {
   console.log(`John's BMI(${markBMI}) is higher than Mark's (${johnBMI})`);
-}
+} */
+
+///////////////////////////////
+// Type conversion adn type coersion
+
+//Type conversion
+const inputYear = "1991";
+console.log(inputYear + 18); //concatinate the string year : 199118
+console.log(Number(inputYear), inputYear);
+console.log(Number(inputYear) + 18); //type conversion
+
+console.log(Number("Mark")); //NaN - invalid Number
+console.log(typeof NaN);
+
+console.log(String("1209"));
+
+//Type coercion
+console.log(`I am ${23} years old`);
+console.log("23" + "10" - 3);
+console.log("23" - "10" - 3);
+console.log("23" * 2);
+console.log("23" / 2);
+console.log("23" > "18");
+
+let n = "1" + 1;
+n = n - 1;
+console.log(n);
