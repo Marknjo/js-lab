@@ -135,7 +135,7 @@ console.log(markBMI, johnBMI, markHigherBMI);
 /////////////////////////////////
 // Multiple decisions
 
-const age = 18;
+/* const age = 18;
 
 if (age >= 18) {
   console.log("Can have a driving license 🚕.");
@@ -153,4 +153,25 @@ if (birthYear <= 2000) {
   century = 21;
 }
 
-console.log(century);
+console.log(century); */
+
+//Data 1
+// const marksWeight = 78;
+// const marksHeight = 1.69;
+// const johnsWeight = 92;
+// const JohnsHeight = 1.95;
+
+//Data 2
+const marksWeight = 95;
+const marksHeight = 1.88;
+const johnsWeight = 85;
+const JohnsHeight = 1.76;
+
+const markBMI = marksWeight / marksHeight ** 2;
+const johnBMI = johnsWeight / JohnsHeight ** 2;
+
+if (markBMI >= johnBMI) {
+  console.log(`Mark's BMI(${markBMI}) is higher than John's (${johnBMI})`);
+} else {
+  console.log(`John's BMI(${markBMI}) is higher than Mark's (${johnBMI})`);
+}
