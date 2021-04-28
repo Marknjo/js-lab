@@ -234,11 +234,37 @@ console.log(n); // 10 */
 ///////////////////////////////////////////////
 //  Equality == and ===
 
-const age = "18";
+/* const age = "18";
 
 if (age === 18) {
   console.log("You just became and adult (Strict)");
 }
 if (age == 18) {
   console.log("You just became and adult (Loose)");
+} */
+
+///////////////////////////////////////////////
+//  Logical operators: And, or & not
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+const shouldDrive = hasDriversLicense && hasGoodVision;
+
+if (shouldDrive) {
+  console.log("Sarah is can drive");
+} else {
+  console.log("Someone else should drive");
+}
+
+const isTired = true;
+
+if (shouldDrive && !isTired) {
+  console.log("Sarah is can drive");
+} else {
+  console.log("Someone else should drive");
 }
