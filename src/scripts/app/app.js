@@ -86,7 +86,7 @@ console.log(ageJonas > ageSarah); // >, <, >=, <=
 console.log(ageSarah >= 18);
  */
 
-const currentYear = 2037;
+/* const currentYear = 2037;
 const ageJonas = currentYear - 1991;
 const ageSarah = currentYear - 2018;
 
@@ -99,3 +99,34 @@ console.log(x, y);
 const averageAge = (ageJonas + ageSarah) / 2;
 
 console.log(ageJonas, ageSarah, averageAge);
+ */
+
+//////////////////////////////////
+//          COding Challenge 1
+
+//Formula: BMI = mass / height ** 2 = mass / (height * height)
+let marksWeight, marksHeight, johnsWeight, JohnsHeight;
+//Data 1
+marksWeight = 78;
+marksHeight = 1.69;
+johnsWeight = 92;
+JohnsHeight = 1.95;
+
+let markBMI = marksWeight / marksHeight ** 2;
+let johnBMI = johnsWeight / JohnsHeight ** 2;
+
+let markHigherBMI = markBMI >= johnBMI;
+console.log(markBMI, johnBMI, markHigherBMI);
+
+//Data 2
+marksWeight = 95;
+marksHeight = 1.88;
+johnsWeight = 85;
+JohnsHeight = 1.76;
+
+markBMI = marksWeight / marksHeight ** 2;
+johnBMI = johnsWeight / JohnsHeight ** 2;
+
+markHigherBMI = markBMI >= johnBMI;
+
+console.log(markBMI, johnBMI, markHigherBMI);
