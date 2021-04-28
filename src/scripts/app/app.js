@@ -180,7 +180,7 @@ if (markBMI >= johnBMI) {
 // Type conversion adn type coersion
 
 //Type conversion
-const inputYear = "1991";
+/* const inputYear = "1991";
 console.log(inputYear + 18); //concatinate the string year : 199118
 console.log(Number(inputYear), inputYear);
 console.log(Number(inputYear) + 18); //type conversion
@@ -198,6 +198,35 @@ console.log("23" * 2);
 console.log("23" / 2);
 console.log("23" > "18");
 
-let n = "1" + 1;
-n = n - 1;
-console.log(n);
+let n = "1" + 1; //'11'
+n = n - 1; // '11' - 1
+console.log(n); // 10 */
+
+///////////////////////////////////////////////
+//    Falsy and Truthy
+
+// 5 falsy values: 0, '', undefined, null, NaN
+
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean("Jonas"));
+console.log(Boolean({}));
+console.log(Boolean(""));
+console.log(Boolean(null));
+console.log(Boolean(NaN));
+
+const money = 0;
+
+if (money) {
+  console.log("Don't spend it all :)");
+} else {
+  console.log("You should get a job!");
+}
+
+let height; //if height is assigned a zero the with only height as the test, the test will fail. Be buggy.
+
+if (height) {
+  console.log("Height is defined");
+} else {
+  console.log("height is UNDEFINED");
+}
