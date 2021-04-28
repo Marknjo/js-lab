@@ -105,7 +105,7 @@ console.log(ageJonas, ageSarah, averageAge);
 //          COding Challenge 1
 
 //Formula: BMI = mass / height ** 2 = mass / (height * height)
-let marksWeight, marksHeight, johnsWeight, JohnsHeight;
+/* let marksWeight, marksHeight, johnsWeight, JohnsHeight;
 //Data 1
 marksWeight = 78;
 marksHeight = 1.69;
@@ -130,3 +130,27 @@ johnBMI = johnsWeight / JohnsHeight ** 2;
 markHigherBMI = markBMI >= johnBMI;
 
 console.log(markBMI, johnBMI, markHigherBMI);
+ */
+
+/////////////////////////////////
+// Multiple decisions
+
+const age = 18;
+
+if (age >= 18) {
+  console.log("Can have a driving license 🚕.");
+} else {
+  const yearsLeft = 18 - age;
+  console.log(`The lad is too young. Wait another ${yearsLeft} years 😃`);
+}
+
+const birthYear = 2048;
+let century;
+
+if (birthYear <= 2000) {
+  century = 20;
+} else {
+  century = 21;
+}
+
+console.log(century);
