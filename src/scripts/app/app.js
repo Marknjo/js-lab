@@ -207,26 +207,38 @@ console.log(n); // 10 */
 
 // 5 falsy values: 0, '', undefined, null, NaN
 
-console.log(Boolean(0));
-console.log(Boolean(undefined));
-console.log(Boolean("Jonas"));
-console.log(Boolean({}));
-console.log(Boolean(""));
-console.log(Boolean(null));
-console.log(Boolean(NaN));
+// console.log(Boolean(0));
+// console.log(Boolean(undefined));
+// console.log(Boolean("Jonas"));
+// console.log(Boolean({}));
+// console.log(Boolean(""));
+// console.log(Boolean(null));
+// console.log(Boolean(NaN));
 
-const money = 0;
+// const money = 0;
 
-if (money) {
-  console.log("Don't spend it all :)");
-} else {
-  console.log("You should get a job!");
+// if (money) {
+//   console.log("Don't spend it all :)");
+// } else {
+//   console.log("You should get a job!");
+// }
+
+// let height; //if height is assigned a zero the with only height as the test, the test will fail. Be buggy.
+
+// if (height) {
+//   console.log("Height is defined");
+// } else {
+//   console.log("height is UNDEFINED");
+// }
+
+///////////////////////////////////////////////
+//  Equality == and ===
+
+const age = "18";
+
+if (age === 18) {
+  console.log("You just became and adult (Strict)");
 }
-
-let height; //if height is assigned a zero the with only height as the test, the test will fail. Be buggy.
-
-if (height) {
-  console.log("Height is defined");
-} else {
-  console.log("height is UNDEFINED");
+if (age == 18) {
+  console.log("You just became and adult (Loose)");
 }
