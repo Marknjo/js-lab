@@ -370,7 +370,7 @@ if (
 //           The Switch Statement           //
 //                                          //
 //////////////////////////////////////////////
-
+/* 
 const day = "thursday";
 
 switch (day) {
@@ -416,3 +416,21 @@ if (day === "monday") {
 } else {
   console.log("Not a valid day!😡");
 }
+ */
+
+//////////////////////////////////////////////
+//                                          //
+//              Conditional                 //
+//           Ternary Operator               //
+//                                          //
+//////////////////////////////////////////////
+
+const age = 23;
+
+age >= 18
+  ? console.log("I like to drink wine 🍷")
+  : console.log("I like to drink 💧");
+
+const drink = age >= 18 ? "wine 🍷" : "drink 💧";
+
+console.log(drink);
