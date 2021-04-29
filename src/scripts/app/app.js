@@ -246,7 +246,7 @@ if (age == 18) {
 ///////////////////////////////////////////////
 //  Logical operators: And, or & not
 
-const hasDriversLicense = true;
+/* const hasDriversLicense = true;
 const hasGoodVision = true;
 
 console.log(hasDriversLicense && hasGoodVision);
@@ -267,4 +267,99 @@ if (shouldDrive && !isTired) {
   console.log("Sarah is can drive");
 } else {
   console.log("Someone else should drive");
+}
+ */
+
+////////////////////////////////////////////
+//  Coding Challege #3
+
+//Data #1
+/* const scoredolphins1 = 96;
+const scoredolphins2 = 108;
+const scoredolphins3 = 89;
+const dolphinsAverageScore =
+  (scoredolphins1 + scoredolphins2 + scoredolphins3) / 3;
+
+const scoreKoalas1 = 96;
+const scoreKoalas2 = 108;
+const scoreKoalas3 = 89;
+const koalasAverageScore = (scoreKoalas1 + scoreKoalas2 + scoreKoalas3) / 3; */
+
+//Results: NO team won
+
+//Data #2
+
+/* const scoredolphins1 = 97;
+const scoredolphins2 = 112;
+const scoredolphins3 = 101;
+const dolphinsAverageScore =
+  (scoredolphins1 + scoredolphins2 + scoredolphins3) / 3;
+
+const scoreKoalas1 = 109;
+const scoreKoalas2 = 95;
+const scoreKoalas3 = 123;
+const koalasAverageScore = (scoreKoalas1 + scoreKoalas2 + scoreKoalas3) / 3; */
+
+//Results: Koalas team won, score 109 against dolphins, score: 103.33333333333333
+
+//Data #3
+const scoredolphins1 = 97;
+const scoredolphins2 = 112;
+const scoredolphins3 = 101;
+const dolphinsAverageScore =
+  (scoredolphins1 + scoredolphins2 + scoredolphins3) / 3;
+
+const scoreKoalas1 = 109;
+const scoreKoalas2 = 95;
+const scoreKoalas3 = 106;
+const koalasAverageScore = (scoreKoalas1 + scoreKoalas2 + scoreKoalas3) / 3;
+
+//Results: dolphins, score: 103.33333333333333 and Koalas, score: 103.33333333333333 - went into a draw.
+
+console.log(dolphinsAverageScore, koalasAverageScore);
+
+const minimumScrore = 100;
+
+if (
+  dolphinsAverageScore >= minimumScrore &&
+  koalasAverageScore >= minimumScrore
+) {
+  //determine which team won
+  if (dolphinsAverageScore > koalasAverageScore) {
+    //Dolphin won
+    console.log(
+      `dolphins team won 🏆, score ${dolphinsAverageScore} against Koalas, score: ${koalasAverageScore}`
+    );
+  } else if (dolphinsAverageScore === koalasAverageScore) {
+    //They both draw
+    console.log(
+      `dolphins, score: ${dolphinsAverageScore} and Koalas, score: ${koalasAverageScore} - went into a draw.`
+    );
+  } else {
+    //Koala won
+    console.log(
+      `Koalas team won 🏆, score ${koalasAverageScore} against dolphins, score: ${dolphinsAverageScore}`
+    );
+  }
+} else if (
+  dolphinsAverageScore >= minimumScrore &&
+  koalasAverageScore < minimumScrore
+) {
+  //Koalas did not have scores above the minimum score, Dolhine won automatically
+  console.log(
+    `Dolphins team won 🏆, score ${dolphinsAverageScore} against Koalas, score: ${koalasAverageScore}`
+  );
+} else if (
+  dolphinsAverageScore < minimumScrore &&
+  koalasAverageScore >= minimumScrore
+) {
+  //dolphins did not achieve more than 100 scores, koalas win automatically
+  console.log(
+    `Koalas team won 🏆, score: ${koalasAverageScore} against dolphins, score: ${dolphinsAverageScore}`
+  );
+} else {
+  //no team scored above the minimum score
+  console.log(
+    `No team won. Neither team achieved a score above the minimum score ${minimumScrore}`
+  );
 }
