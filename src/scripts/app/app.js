@@ -100,7 +100,7 @@ console.log(yearsUntilRetirement(1980, "Bob")); */
 //                                          //
 //////////////////////////////////////////////
 
-const cutFruitPieces = function (fruit) {
+/* const cutFruitPieces = function (fruit) {
   return fruit * 4;
 };
 
@@ -113,7 +113,7 @@ const fruitProcessor = function (apples, oranges) {
   return juice;
 };
 
-console.log(fruitProcessor(2, 3));
+console.log(fruitProcessor(2, 3)); */
 
 //////////////////////////////////////////////
 //                                          //
@@ -122,7 +122,7 @@ console.log(fruitProcessor(2, 3));
 //////////////////////////////////////////////
 
 //Scores Average calculator
-const calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3;
+/* const calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3;
 
 const avgDolphins1 = calcAverage(44, 23, 71);
 const avgKoalas1 = calcAverage(65, 54, 49);
@@ -149,3 +149,58 @@ const checkWinner = function (avgDolphins, avgKoalas) {
 
 checkWinner(avgDolphins1, avgKoalas1);
 checkWinner(avgDolphins2, avgKoalas2);
+ */
+
+//////////////////////////////////////////////
+//                                          //
+//        Arrays: Data Structure            //
+//                                          //
+//////////////////////////////////////////////
+
+//Two Most importand data structures in js: Arrays and objects
+//Big container we can throw variables and later reference
+
+const friends = ["Michael", "Steven", "Peter"]; //comma outside the strings - array literal syntax
+
+console.log(friends);
+
+const y = new Array(1991, 1984, 2008, 2020); //can hold any data type
+
+console.log(y);
+
+//getting out values from the array
+
+console.log(friends[0]); //arrays are zero based
+console.log(friends[2]);
+
+console.log(friends.length); //length is a property of array.
+console.log(friends[friends.length - 1]);
+
+//Array mutation: Only primitive values are immutable.
+friends[2] = "Jay";
+console.log(friends);
+
+//Array can hold different data types at the same time
+const firstName = "Jonas";
+const jonas = [firstName, "Schemedtmann", 2007 - 1991, "teacher", friends];
+
+console.log(jonas);
+
+console.log(jonas.length);
+
+//Exercise
+const calcAge = function (birthYear) {
+  return 2037 - birthYear;
+};
+
+const years = [1990, 1967, 2002, 2010, 2018];
+
+const age1 = calcAge(years[0]);
+const age2 = calcAge(years[1]);
+const age3 = calcAge(years[years.length - 1]);
+
+console.log(age1, age2, age3);
+
+const ages = [age1, age2, age3];
+
+console.log(ages);
