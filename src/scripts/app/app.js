@@ -418,7 +418,7 @@ console.log(
 //////////////////////////////////////////////
 
 //create methods
-const markMiller = {
+/* const markMiller = {
   name: "Mark Miller",
   mass: 78,
   height: 1.69,
@@ -453,4 +453,14 @@ const compareBMI = function (marksObj, johnsObj) {
   }
 };
 
-console.log(compareBMI(markMiller, johnSmith));
+console.log(compareBMI(markMiller, johnSmith)); */
+
+//////////////////////////////////////////////
+//                                          //
+//       Iteration: The For Loop            //
+//                                          //
+//////////////////////////////////////////////
+
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♂️.`);
+}
