@@ -160,7 +160,7 @@ checkWinner(avgDolphins2, avgKoalas2);
 //Two Most importand data structures in js: Arrays and objects
 //Big container we can throw variables and later reference
 
-const friends = ["Michael", "Steven", "Peter"]; //comma outside the strings - array literal syntax
+/* const friends = ["Michael", "Steven", "Peter"]; //comma outside the strings - array literal syntax
 
 console.log(friends);
 
@@ -203,4 +203,49 @@ console.log(age1, age2, age3);
 
 const ages = [age1, age2, age3];
 
-console.log(ages);
+console.log(ages); */
+
+//////////////////////////////////////////////
+//                                          //
+//      Arrays Operations: Methods          //
+//                                          //
+//////////////////////////////////////////////
+
+const friends = ["Michael", "Steven", "Peter"];
+const newLength = friends.push("Jay"); //adds elements to the end of array
+
+console.log(friends);
+console.log(newLength);
+
+//Adding element to the beginning or array
+const newLenghtShift = friends.unshift("John");
+console.log(friends);
+console.log(newLenghtShift);
+
+//Remove element to the end of array
+friends.pop(); //No need to pass the argument.Returns the removed element
+const popped = friends.pop();
+console.log(friends);
+console.log(popped);
+
+//Remove the element at the beggining of the array
+const firstElementRemoved = friends.shift();
+console.log(friends);
+console.log(firstElementRemoved);
+
+//The position of the element in the array
+
+console.log(friends.indexOf("Steven"));
+console.log(friends.indexOf("Bob"));
+
+//Checks if the element is in the array or not
+friends.push(23);
+
+console.log(friends.includes("Steven"));
+console.log(friends.includes("Bob"));
+console.log(friends.includes("23")); //It tests with strict mode. No tyep coesion
+//Use includes to test conditions
+
+if (friends.includes("Steven")) {
+  console.log("You have a friend called Steven");
+}
