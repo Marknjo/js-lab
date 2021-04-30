@@ -312,7 +312,7 @@ const jonas = {
 //        Dot vs Bracket Notation           //
 //                                          //
 //////////////////////////////////////////////
-const jonas = {
+/* const jonas = {
   firstName: "Jonas",
   lastName: "Schemidtmann",
   age: 2037 - 1991,
@@ -355,4 +355,58 @@ console.log(jonas);
 
 console.log(
   `${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}"`
-);
+); */
+
+//////////////////////////////////////////////
+//                                          //
+//               Objects Methods            //
+//                                          //
+//////////////////////////////////////////////
+
+const jonas = {
+  firstName: "Jonas",
+  lastName: "Schemidtmann",
+  birthYear: 1991,
+  job: "Teacher",
+  friends: ["Michael", "Peter", "Steven"],
+  hasDriversLicense: true,
+  /* calcAge: function (birthYear) {
+    return 2037 - birthYear;
+  }, */
+
+  /* calcAge: function () {
+    return 2037 - this.birthYear;
+  }, */
+  calcAge: function () {
+    this.age = 2037 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} is a ${this.age}-old ${this.job}, and he ${
+      this.hasDriversLicense ? "has a" : "does not have a"
+    } driver's license. He has ${this.friends.length} frieds namely: ${
+      this.friends[0]
+    }, ${this.friends[1]}, and ${this.friends[2]}. Of all his friends, ${
+      this.friends[0]
+    } is his best friend.`;
+  },
+};
+
+console.log(jonas.calcAge());
+console.log(jonas["calcAge"]());
+
+console.log(jonas.age);
+
+//Get Summary
+/* const getSummary = function () {
+  return `${this.firstName} is a ${this.age}-old ${this.job}, and ${
+    this.hasDriversLicense ? "has a" : "does not have a"
+  } driving license. He has ${this.friends.length} frieds namely: ${
+    this.friends[0]
+  }, ${this.friends[1]}, and ${this.friends[2]}. Of all his friends, ${
+    this.friends[0]
+  } is his best friend.`;
+}; */
+
+console.log(jonas.getSummary());
