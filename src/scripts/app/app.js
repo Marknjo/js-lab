@@ -211,7 +211,7 @@ console.log(ages); */
 //                                          //
 //////////////////////////////////////////////
 
-const friends = ["Michael", "Steven", "Peter"];
+/* const friends = ["Michael", "Steven", "Peter"];
 const newLength = friends.push("Jay"); //adds elements to the end of array
 
 console.log(friends);
@@ -248,4 +248,34 @@ console.log(friends.includes("23")); //It tests with strict mode. No tyep coesio
 
 if (friends.includes("Steven")) {
   console.log("You have a friend called Steven");
-}
+} */
+
+//////////////////////////////////////////////
+//                                          //
+//         Coding Challenge #2              //
+//                                          //
+//////////////////////////////////////////////
+
+const bills = [125, 555, 44];
+
+const calcTip = function (bill) {
+  return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+};
+
+const tips = [
+  calcTip(bills[0]),
+  calcTip(bills[1]),
+  calcTip(bills[bills.length - 1]),
+];
+
+console.log(tips);
+
+const totals = [
+  tips[0] + bills[0],
+  tips[1] + bills[1],
+  tips[tips.length - 1] + bills[bills.length - 1],
+];
+
+console.log(totals);
+
+console.log(bills, tips, totals);
