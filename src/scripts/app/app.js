@@ -363,50 +363,94 @@ console.log(
 //                                          //
 //////////////////////////////////////////////
 
-const jonas = {
-  firstName: "Jonas",
-  lastName: "Schemidtmann",
-  birthYear: 1991,
-  job: "Teacher",
-  friends: ["Michael", "Peter", "Steven"],
-  hasDriversLicense: true,
-  /* calcAge: function (birthYear) {
-    return 2037 - birthYear;
-  }, */
+// const jonas = {
+//   firstName: "Jonas",
+//   lastName: "Schemidtmann",
+//   birthYear: 1991,
+//   job: "Teacher",
+//   friends: ["Michael", "Peter", "Steven"],
+//   hasDriversLicense: true,
+//   /* calcAge: function (birthYear) {
+//     return 2037 - birthYear;
+//   }, */
 
-  /* calcAge: function () {
-    return 2037 - this.birthYear;
-  }, */
-  calcAge: function () {
-    this.age = 2037 - this.birthYear;
-    return this.age;
-  },
+//   /* calcAge: function () {
+//     return 2037 - this.birthYear;
+//   }, */
+//   calcAge: function () {
+//     this.age = 2037 - this.birthYear;
+//     return this.age;
+//   },
 
-  getSummary: function () {
-    return `${this.firstName} is a ${this.age}-old ${this.job}, and he ${
-      this.hasDriversLicense ? "has a" : "does not have a"
-    } driver's license. He has ${this.friends.length} frieds namely: ${
-      this.friends[0]
-    }, ${this.friends[1]}, and ${this.friends[2]}. Of all his friends, ${
-      this.friends[0]
-    } is his best friend.`;
+//   getSummary: function () {
+//     return `${this.firstName} is a ${this.age}-old ${this.job}, and he ${
+//       this.hasDriversLicense ? "has a" : "does not have a"
+//     } driver's license. He has ${this.friends.length} frieds namely: ${
+//       this.friends[0]
+//     }, ${this.friends[1]}, and ${this.friends[2]}. Of all his friends, ${
+//       this.friends[0]
+//     } is his best friend.`;
+//   },
+// };
+
+// console.log(jonas.calcAge());
+// console.log(jonas["calcAge"]());
+
+// console.log(jonas.age);
+
+// //Get Summary
+// /* const getSummary = function () {
+//   return `${this.firstName} is a ${this.age}-old ${this.job}, and ${
+//     this.hasDriversLicense ? "has a" : "does not have a"
+//   } driving license. He has ${this.friends.length} frieds namely: ${
+//     this.friends[0]
+//   }, ${this.friends[1]}, and ${this.friends[2]}. Of all his friends, ${
+//     this.friends[0]
+//   } is his best friend.`;
+// }; */
+
+// console.log(jonas.getSummary());
+
+//////////////////////////////////////////////
+//                                          //
+//         Coding Challenge #3              //
+//                                          //
+//////////////////////////////////////////////
+
+//create methods
+const markMiller = {
+  name: "Mark Miller",
+  mass: 78,
+  height: 1.69,
+  calcBMI: function () {
+    this.bmi = this.mass / this.height ** 2;
+    return this.bmi;
   },
 };
 
-console.log(jonas.calcAge());
-console.log(jonas["calcAge"]());
+const johnSmith = {
+  name: "John Smith",
+  mass: 92,
+  height: 1.95,
+  calcBMI: function () {
+    this.bmi = this.mass / this.height ** 2;
+    return this.bmi;
+  },
+};
 
-console.log(jonas.age);
+johnSmith.calcBMI();
+markMiller.calcBMI();
 
-//Get Summary
-/* const getSummary = function () {
-  return `${this.firstName} is a ${this.age}-old ${this.job}, and ${
-    this.hasDriversLicense ? "has a" : "does not have a"
-  } driving license. He has ${this.friends.length} frieds namely: ${
-    this.friends[0]
-  }, ${this.friends[1]}, and ${this.friends[2]}. Of all his friends, ${
-    this.friends[0]
-  } is his best friend.`;
-}; */
+const compareBMI = function (marksObj, johnsObj) {
+  if (marksObj.bmi > johnsObj.bmi) {
+    return `${marksObj.name}'s (${marksObj.bmi}) BMI is higher than ${johnsObj.name}'s (${johnsObj.bmi})`;
+  } else if (johnsObj.bmi > marksObj.bmi) {
+    return `${johnsObj.name}'s (${johnsObj.bmi}) BMI is higher than ${marksObj.name}'s (${marksObj.bmi})`;
+  } else if (johnsObj.bmi === marksObj.bmi) {
+    return `${johnsObj.name}'s (${johnsObj.bmi}) BMI is equal to ${marksObj.name}'s (${marksObj.bmi})`;
+  } else {
+    return "Something is wrong with the inputs.";
+  }
+};
 
-console.log(jonas.getSummary());
+console.log(compareBMI(markMiller, johnSmith));
