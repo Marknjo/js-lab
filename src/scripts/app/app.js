@@ -539,7 +539,7 @@ console.log("\n");
 //                                          //
 //////////////////////////////////////////////
 
-const jonas = [
+/* const jonas = [
   "Jonas",
   "Schemidtmann",
   2037 - 1991,
@@ -560,4 +560,44 @@ for (let exercise = 1; exercise < 4; exercise++) {
   }
 }
 
-console.log("\n");
+console.log("\n"); */
+
+//////////////////////////////////////////////
+//                                          //
+//            The While Loop                //
+//                                          //
+//////////////////////////////////////////////
+
+console.log("\n\n --- FOR LOOP --- ");
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♂️.`);
+}
+console.log("\n\n --- WHILE LOOP --- ");
+let rep = 1;
+while (rep <= 10) {
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♂️.`);
+  rep++;
+}
+
+console.log("\n\n");
+
+//No need of a counter variable
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+if (dice !== 6) {
+  while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+
+    if (dice === 6) {
+      console.log(`Loop is about to end... \n`);
+      console.log(`Bingo!🤗 You won (${dice}) 🍾`);
+    }
+  }
+} else {
+  console.log(`Bingo!🤗 You won on the first count. \n`);
+  console.log(`(${dice}) 🍾`);
+}
+
+console.log("\n\n");
