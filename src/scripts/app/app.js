@@ -568,7 +568,7 @@ console.log("\n"); */
 //                                          //
 //////////////////////////////////////////////
 
-console.log("\n\n --- FOR LOOP --- ");
+/* console.log("\n\n --- FOR LOOP --- ");
 for (let rep = 1; rep <= 10; rep++) {
   console.log(`Lifting weights repetition ${rep} 🏋️‍♂️.`);
 }
@@ -599,5 +599,75 @@ if (dice !== 6) {
   console.log(`Bingo!🤗 You won on the first count. \n`);
   console.log(`(${dice}) 🍾`);
 }
+
+console.log("\n\n");
+ */
+
+//////////////////////////////////////////////
+//                                          //
+//         Coding Challenge #4              //
+//                                          //
+//////////////////////////////////////////////
+
+//bills array
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+const calcTips = function (billsArray) {
+  const tips = [];
+  const totals = [];
+
+  for (let i = 0; i < billsArray.length; i++) {
+    //calculate A tip
+    let tip =
+      billsArray[i] >= 50 && billsArray[i] <= 300
+        ? billsArray[i] * 0.15
+        : billsArray[i] * 0.2;
+
+    //fill in tips array
+    tips.push(tip);
+
+    //fill in totals array
+    let total = tip + billsArray[i];
+    totals.push(total);
+  }
+
+  return {
+    tips: tips,
+    totals: totals,
+  };
+};
+
+//logTipsTotals(calcTips(bills));
+const tipsAndTotals = calcTips(bills);
+console.log(tipsAndTotals.tips);
+console.log(tipsAndTotals.totals);
+
+const tips = tipsAndTotals.tips;
+const totals = tipsAndTotals.totals;
+
+// sbArray - supplied array
+const calcAverage = function (sbArray) {
+  let sum = 0;
+
+  for (let i = 0; i < sbArray.length; i++) {
+    sum += sbArray[i]; //sum = sum + sbArray[i];
+  }
+  return sum / sbArray.length;
+};
+
+console.log("\n\n");
+console.log("--- AVERAGE --- ");
+
+const sampArray = [4, 4];
+console.log(calcAverage(sampArray));
+
+console.log("\n\n");
+console.log("--- AVERAGE TIPS --- ");
+console.log(calcAverage(tips));
+
+console.log("\n");
+console.log("--- AVERAGE TOTALS(BILLS AND TIPS) --- ");
+console.log(calcAverage(totals));
 
 console.log("\n\n");
