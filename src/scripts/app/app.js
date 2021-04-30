@@ -473,7 +473,7 @@ console.log(compareBMI(markMiller, johnSmith)); */
 //                                          //
 //////////////////////////////////////////////
 
-const jonas = [
+/* const jonas = [
   "Jonas",
   "Schemidtmann",
   2037 - 1991,
@@ -529,4 +529,35 @@ for (let i = 0; i < jonas.length; i++) {
 }
 
 console.log("\n");
+console.log("\n");
+ */
+
+//////////////////////////////////////////////
+//                                          //
+//              The For Loop                //
+//   Looping Backwards & Loops in Loops     //
+//                                          //
+//////////////////////////////////////////////
+
+const jonas = [
+  "Jonas",
+  "Schemidtmann",
+  2037 - 1991,
+  "Teacher",
+  ["Michael", "Peter", "Steven"],
+  true,
+];
+
+for (let i = jonas.length - 1; i >= 0; i--) {
+  console.log(jonas[i]);
+}
+
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`\n ---- Exercise ${exercise}: `);
+
+  for (let rep = 1; rep <= 5; rep++) {
+    console.log(`-> Lifting weight repeatition ${rep} 🏋️‍♂️`);
+  }
+}
+
 console.log("\n");
