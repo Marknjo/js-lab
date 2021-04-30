@@ -256,7 +256,7 @@ if (friends.includes("Steven")) {
 //                                          //
 //////////////////////////////////////////////
 
-const bills = [125, 555, 44];
+/* const bills = [125, 555, 44];
 
 const calcTip = function (bill) {
   return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
@@ -278,4 +278,30 @@ const totals = [
 
 console.log(totals);
 
-console.log(bills, tips, totals);
+console.log(bills, tips, totals); */
+
+//////////////////////////////////////////////
+//                                          //
+//        Introduction to Objects           //
+//                                          //
+//////////////////////////////////////////////
+
+const jonasArray = [
+  "Jonas",
+  "Schmedtmann",
+  2037 - 1991,
+  "teacher",
+  ["Michael", "Peter", "Steven"],
+];
+
+//groups together related variables together.
+//Order doesn't matter at all when retrieving them.
+//Unstructured data
+
+const jonas = {
+  firstName: "Mark",
+  lastName: "Njoroge",
+  age: 2037 - 1993,
+  job: "Frontend Developer",
+  friends: ["Michael", "Peter", "Steven"],
+};
