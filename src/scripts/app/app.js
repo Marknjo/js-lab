@@ -286,7 +286,7 @@ console.log(bills, tips, totals); */
 //                                          //
 //////////////////////////////////////////////
 
-const jonasArray = [
+/* const jonasArray = [
   "Jonas",
   "Schmedtmann",
   2037 - 1991,
@@ -304,4 +304,55 @@ const jonas = {
   age: 2037 - 1993,
   job: "Frontend Developer",
   friends: ["Michael", "Peter", "Steven"],
+}; */
+
+//////////////////////////////////////////////
+//                                          //
+//       Retrieving Data in Objects         //
+//        Dot vs Bracket Notation           //
+//                                          //
+//////////////////////////////////////////////
+const jonas = {
+  firstName: "Jonas",
+  lastName: "Schemidtmann",
+  age: 2037 - 1991,
+  job: "Frontend Developer",
+  friends: ["Michael", "Peter", "Steven"],
 };
+
+console.log(jonas);
+
+console.log(jonas.lastName); //dot notation
+console.log(jonas["lastName"]); // Bracket notation
+
+const nameKey = "Name";
+
+console.log(jonas["first" + nameKey]);
+console.log(jonas["last" + nameKey]);
+
+//dynamic naming and using of expression is possible when using the bracket notation
+
+const interestedIn = prompt(
+  "What would you like to know about Mark? Choose between firstName, lastName, age, job, and friends 🤪."
+);
+
+console.log(interestedIn, typeof interestedIn);
+
+if (jonas[interestedIn]) {
+  console.log(jonas[interestedIn]);
+} else {
+  console.log("Wrong request 🌋!");
+}
+
+//Adding elements to the object
+jonas.location = "Kenya";
+jonas["twitter"] = "@Marknjo";
+
+console.log(jonas);
+
+//challenge
+// "Jonas has 3 friends, and his best friend is called Michael";
+
+console.log(
+  `${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}"`
+);
