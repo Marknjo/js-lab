@@ -40,6 +40,7 @@ console.log(document.querySelector('.guess').value);
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let userWon = false;
+let highScore = 0;
 
 const resetBtn = document.querySelector('.again');
 const checkBtn = document.querySelector('.check');
@@ -98,14 +99,10 @@ if (!checkBtn.disabled) {
       //disable check button
       enableBtnStatus(false, 'check');
 
-      //Update score value
-      let highScore = document.querySelector('.highscore');
-
-      let highScoreValue = Number(highScore.textContent);
-
       //udating score if zero
-      if (score > highScoreValue) {
-        highScore.textContent = score;
+      if (score > highScore) {
+        highScore = score;
+        document.querySelector('.highscore').textContent = highScore;
       }
 
       //Logic when the guess No. is higher than the secret no.
