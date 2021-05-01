@@ -75,6 +75,48 @@ const enableBtnStatus = (enable, btnName) => {
 enableBtnStatus(false, 'again');
 
 /**
+ * Display message function
+ *
+ * @param {String} message
+ */
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
+/**
+ * Displays current score
+ * @param {Number} curScore
+ */
+const displayScore = function (curScore) {
+  document.querySelector('.score').textContent = curScore;
+};
+
+/**
+ * Determines the global display of the game
+ * interface after win or when still trying.
+ *
+ * @param {String|Number} guessValue
+ */
+const guessSuccessStatus = function (guessValue) {
+  let guessBoxWidth = '15rem';
+  let bgColor = '#222';
+  let guessText = '?';
+
+  if (userWon) {
+    guessBoxWidth = '30rem';
+    bgColor = '#60b347';
+    guessText = guessValue;
+  }
+
+  const numberText = document.querySelector('.number');
+  //reset/add styles
+  numberText.style.width = guessBoxWidth;
+  document.querySelector('body').style.backgroundColor = bgColor;
+  //hide/show score
+  numberText.textContent = guessText;
+};
+
+/**
  * Listen to event start guessing
  */
 if (!checkBtn.disabled) {
@@ -83,18 +125,14 @@ if (!checkBtn.disabled) {
 
     //zero or no number supplied logic
     if (!guess) {
-      document.querySelector('.message').textContent = '⛔ No number!';
+      displayMessage('⛔ No number!');
 
       //When the guess No. matches: Successful scenario
     } else if (guess === secretNumber) {
-      const message = document.querySelector('.number');
-      document.querySelector('.message').textContent = '🎉 Correct Number';
-      message.textContent = secretNumber;
-
-      document.querySelector('body').style.backgroundColor = '#60b347';
-      message.style.width = '30rem';
       userWon = true;
 
+      displayMessage('🎉 Correct Number');
+      guessSuccessStatus(secretNumber);
       //enable again button
       enableBtnStatus(true, 'again');
       //disable check button
@@ -112,15 +150,13 @@ if (!checkBtn.disabled) {
       if (resetBtn.disabled) enableBtnStatus(true, 'again');
 
       if (score > 1) {
-        document.querySelector('.message').textContent =
-          guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
+        displayMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
         //reduce score
         score--;
-        document.querySelector('.score').textContent = score;
+        displayScore(score);
       } else {
-        document.querySelector('.message').textContent =
-          '💥 You lost the game!';
-        document.querySelector('.score').textContent = 0;
+        displayMessage('💥 You lost the game!');
+        displayScore(0);
 
         //disable check button if reached 0 score
         enableBtnStatus(false, 'check');
@@ -138,22 +174,16 @@ resetBtn.addEventListener('click', () => {
 
   //reseting the game because it's successful
   //global resets
-  document.querySelector('.message').textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   score = 20;
-  document.querySelector('.score').textContent = score;
+  displayScore(score);
   document.querySelector('.guess').value = '';
   //generate a new sectret number
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 
   if (userWon) {
     userWon = false;
-    const numberText = document.querySelector('.number');
-    //hide score
-    numberText.textContent = '?';
-
-    //reset styles
-    document.querySelector('body').style.backgroundColor = '#222';
-    numberText.style.width = '15rem';
+    guessSuccessStatus('?');
     //reset the again button
     enableBtnStatus(false, 'again');
   }
