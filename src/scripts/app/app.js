@@ -18,9 +18,9 @@ console.log(document.querySelector('.guess').value);
 
 const secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
-document.querySelector('.number').textContent = secretNumber;
 
-document.querySelector('.check').addEventListener('click', evt => {
+const checkBtn = document.querySelector('.check');
+checkBtn.addEventListener('click', evt => {
   const guess = Number(document.querySelector('.guess').value);
 
   //zero or no number supplied logic
@@ -30,6 +30,8 @@ document.querySelector('.check').addEventListener('click', evt => {
     //When the guess No. matches: Successful scenario
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number';
+    document.querySelector('.number').textContent = secretNumber;
+
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
 
@@ -43,6 +45,8 @@ document.querySelector('.check').addEventListener('click', evt => {
     } else {
       document.querySelector('.message').textContent = '💥 You lost the game!';
       document.querySelector('.score').textContent = 0;
+      checkBtn.disabled = true;
+      checkBtn.style.cursor = 'not-allowed';
     }
 
     //Logic when the guess No. is below the secret no.
@@ -55,6 +59,8 @@ document.querySelector('.check').addEventListener('click', evt => {
     } else {
       document.querySelector('.message').textContent = '💥 You lost the game!';
       document.querySelector('.score').textContent = 0;
+      checkBtn.disabled = true;
+      checkBtn.style.cursor = 'not-allowed';
     }
   }
 });
