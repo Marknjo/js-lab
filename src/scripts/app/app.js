@@ -87,11 +87,12 @@ if (!checkBtn.disabled) {
 
       //When the guess No. matches: Successful scenario
     } else if (guess === secretNumber) {
+      const message = document.querySelector('.number');
       document.querySelector('.message').textContent = '🎉 Correct Number';
-      document.querySelector('.number').textContent = secretNumber;
+      message.textContent = secretNumber;
 
       document.querySelector('body').style.backgroundColor = '#60b347';
-      document.querySelector('.number').style.width = '30rem';
+      message.style.width = '30rem';
       userWon = true;
 
       //enable again button
@@ -106,41 +107,23 @@ if (!checkBtn.disabled) {
       }
 
       //Logic when the guess No. is higher than the secret no.
-    } else if (guess > secretNumber) {
+    } else if (guess !== secretNumber) {
+      //Don't keep resetting the again button if it is on
+      if (resetBtn.disabled) enableBtnStatus(true, 'again');
+
       if (score > 1) {
-        document.querySelector('.message').textContent = '📈 Too high!';
+        document.querySelector('.message').textContent =
+          guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
         //reduce score
         score--;
         document.querySelector('.score').textContent = score;
-
-        //enable again button
-        enableBtnStatus(true, 'again');
       } else {
         document.querySelector('.message').textContent =
           '💥 You lost the game!';
         document.querySelector('.score').textContent = 0;
 
-        //disable again button
-        enableBtnStatus(false, 'again');
-      }
-
-      //Logic when the guess No. is below the secret no.
-    } else if (guess < secretNumber) {
-      if (score > 1) {
-        document.querySelector('.message').textContent = '📉 Too low!';
-        //reduce score
-        score--;
-        document.querySelector('.score').textContent = score;
-
-        //enable again button
-        enableBtnStatus(true, 'again');
-      } else {
-        document.querySelector('.message').textContent =
-          '💥 You lost the game!';
-        document.querySelector('.score').textContent = 0;
-
-        //disable again button
-        enableBtnStatus(false, 'again');
+        //disable check button if reached 0 score
+        enableBtnStatus(false, 'check');
       }
     }
   });
@@ -171,7 +154,6 @@ resetBtn.addEventListener('click', () => {
     //reset styles
     document.querySelector('body').style.backgroundColor = '#222';
     numberText.style.width = '15rem';
-
     //reset the again button
     enableBtnStatus(false, 'again');
   }
