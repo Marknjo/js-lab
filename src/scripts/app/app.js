@@ -2,7 +2,7 @@
 
 //////////////////////////////////////////////
 //                                          //
-//          Starter Sections Separtor       //
+//                 Modal Project            //
 //                                          //
 //////////////////////////////////////////////
 
@@ -37,3 +37,14 @@ for (let i = 0; i < btnsOpenModal.length; i++) {
 //close modal even listeners-btn and overlay
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
+
+/**
+ * Listen to the keyboard esc event
+ * keydown, keypress & keyup
+ */
+
+document.addEventListener('keydown', function (e) {
+  if (!modal.classList.contains('hidden') && e.key === 'Escape') {
+    closeModal();
+  }
+});
