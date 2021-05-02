@@ -34,10 +34,6 @@ const btnNew = document.querySelector('.btn--new');
 const btnHold = document.querySelector('.btn--hold');
 const btnRoll = document.querySelector('.btn--roll');
 
-score0EL.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
-
 let scores, currentScore, activePlayer, playing;
 /**
  * Initialize the game
@@ -55,7 +51,7 @@ const init = function () {
   btnHold.classList.remove('disabled');
   btnHold.classList.add('btn--active');
 
-  //remove sinner class
+  //remove winner class
   player0El.classList.remove('player--winner');
   player1El.classList.remove('player--winner');
 
@@ -99,7 +95,7 @@ const switchPlayers = function () {
 //Rolling dice functionality
 btnRoll.addEventListener('click', function () {
   if (playing) {
-    //1. Generating a random dice roll
+    //1. Generating a random dice roll: 1 - 6
     const dice = Math.trunc(Math.random() * 6) + 1;
 
     //2. Display dice
@@ -133,8 +129,11 @@ btnHold.addEventListener('click', function () {
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
+    //all the time: hide the dice whenever the hold button is called
+    diceEl.classList.add('hidden');
+
     //3. Handle UI change if current player is more than 100
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= 100) {
       playing = false;
 
       //update the ui
@@ -152,15 +151,10 @@ btnHold.addEventListener('click', function () {
       btnHold.classList.add('disabled');
       btnRoll.classList.remove('btn--active');
       btnRoll.classList.add('disabled');
-
-      //hide the dice
-      diceEl.classList.add('hidden');
     } else {
       //4. Switch the players
       switchPlayers();
     }
-
-    //5. Handle the buttons if current player is more than 100
   }
 });
 
