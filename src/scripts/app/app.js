@@ -49,12 +49,53 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+
+//////////////////////////////////////////////
+//                                          //
+//            Looping Objects               //
+//      Object Keys, Values & Entries       //
+//                                          //
+//////////////////////////////////////////////
+
+//Objects are not iterable, but we can loop through them
+// depends on what we want to loop, entries, keys or values
+
+//Getting property NAMES
+const property = Object.keys(openingHours);
+console.log(property);
+
+let openStr = `We are open for ${property.length} days in a week: `;
+
+for (const day of Object.keys(openingHours).entries()) {
+  const [index, dayName] = day;
+  if (property.length - 1 === index) {
+    openStr += `and ${dayName}.`;
+  } else {
+    openStr += ` ${dayName}, `;
+  }
+}
+
+console.log(openStr);
+
+// Getting Property VAUES
+const values = Object.values(openingHours);
+console.log(values);
+
+//Getting entries
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for ([day, { open, close }] of entries) {
+  //   console.log(items);
+  console.log(`On ${day} we open at ${open} and close at ${close}`);
+}
+
 //////////////////////////////////////////////
 //                                          //
 //          Optional Chaining               //
 //                                          //
 //////////////////////////////////////////////
-restaurant.openingHours.mon && console.log(restaurant.openingHours.mon.open);
+/* restaurant.openingHours.mon && console.log(restaurant.openingHours.mon.open);
 
 //console.log(restaurant.openingHours.mon.open);
 
@@ -90,7 +131,7 @@ if (users.length > 0) {
   console.log(users[0].userName);
 } else {
   console.log('User array empty');
-}
+} */
 
 //////////////////////////////////////////////
 //                                          //
