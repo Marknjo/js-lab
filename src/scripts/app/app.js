@@ -49,6 +49,48 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+//////////////////////////////////////////////
+//                                          //
+//          Optional Chaining               //
+//                                          //
+//////////////////////////////////////////////
+restaurant.openingHours.mon && console.log(restaurant.openingHours.mon.open);
+
+//console.log(restaurant.openingHours.mon.open);
+
+//With optional chaining
+console.log(restaurant.openingHours.mon?.open); //Optional chaining
+console.log(restaurant.openingHours?.mon?.open); //Optional chaining
+
+//Example
+for (const day of weekdays) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+
+  open === 'closed'
+    ? console.log(`On ${day}, we are ${open}`)
+    : console.log(`On ${day}, we open at ${open === 0 ? 'Midnight' : open}`);
+}
+console.log('-----------Works on Methods-------------');
+//Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.() ?? 'Method does not exist');
+
+console.log('-----------Works on arrays-------------');
+
+//Works on arrays
+
+const users = [{ userName: 'Jonas', email: 'helloe@jonas.io' }];
+
+console.log(users[0]?.userName ?? 'User array empty');
+console.log(users[1]?.userName ?? 'User array empty');
+
+//what we could do in the past
+console.log('-----------Old Work Around-------------');
+if (users.length > 0) {
+  console.log(users[0].userName);
+} else {
+  console.log('User array empty');
+}
 
 //////////////////////////////////////////////
 //                                          //
