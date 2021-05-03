@@ -1,3 +1,75 @@
+//Data:
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+  //6. Task 6.
+  // 1. Create a function printGoals
+  // 2. Takes in arbitrary number of prayers names use: object destructuring
+  // 3. Print their names to the console
+  // 4. add the number of goals each player scored in the game.
+  printGoals: function (...players) {
+    try {
+      if (typeof players !== 'object') {
+        throw new Error(
+          'TypeError: Supply names of players as separated by commas as arguments.'
+        );
+      }
+
+      let playersString = '';
+
+      for (let i = 0; i < players.length; i++) {
+        if (i === players.length - 1) {
+          playersString += `and ${players[i]}...`;
+        } else {
+          playersString += `${players[i]}, `;
+        }
+      }
+
+      console.log(
+        `Players who scored in the game: ${playersString}: Goals Scored ${this.score}`
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  },
+};
+
 // Data needed for a later exercise
 // const flights =
 //   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
@@ -52,6 +124,65 @@ const restaurant = {
 
 //////////////////////////////////////////////
 //                                          //
+//           Coding Challenge #2            //
+//                                          //
+//////////////////////////////////////////////
+//Task #1.
+//1. Loop over the game.scored
+//2. Print player names to the console
+//3. Also print the goal number i.e Goal 1: <playerName>
+// sln1. use the for of loop
+// sln2. use entries to get the idex of the playes +1 to print the goal #
+for ([index, playerName] of game.scored.entries()) {
+  //console.log(index, playerName);
+  console.log(`Goal ${index + 1}: ${playerName}`);
+}
+
+//Task #2.
+//Prob: Calculate the average odds
+// Dealing with objects
+// Use loops
+// sln1. Grab the object values as an array
+// sln2. find the length and calculate the avg
+const gameOddsValues = Object.values(game.odds);
+console.log(gameOddsValues);
+let sum = 0;
+for (odd in gameOddsValues) {
+  sum += odd;
+}
+const avgOdd = sum / gameOddsValues.length;
+console.log(avgOdd);
+
+//Task #3.
+//Print ods + teams name
+//sln1. Pick the entreis of the odds objec, get an array of property name and values separately
+//sln2. Use the key values to get the teams name from the game object: Object notation will work
+//sln3. Use ternary operator to print draw since the x, which is draw is not the team name.
+
+for ([team, value] of Object.entries(game.odds)) {
+  console.log(
+    `Odd of ${game[team] ? 'victory' + game[team] : 'draw'}: ${value}`
+  );
+}
+
+//Tast #4
+//Create an object
+//sln1. Creat an empty object scores
+//sln2. Loop through the scorers adding the names as keys and scores as goals
+
+// So the solution is to loop over the array, and add the array elements as object properties, and then increase the count as we encounter a new occurence of a certain element
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player]
+    ? scorers[player]++
+    : player === 'Lewandowski'
+    ? (scorers[player] = 2)
+    : (scorers[player] = 1);
+}
+console.log(scorers);
+
+//////////////////////////////////////////////
+//                                          //
 //            Looping Objects               //
 //      Object Keys, Values & Entries       //
 //                                          //
@@ -61,7 +192,7 @@ const restaurant = {
 // depends on what we want to loop, entries, keys or values
 
 //Getting property NAMES
-const property = Object.keys(openingHours);
+/* const property = Object.keys(openingHours);
 console.log(property);
 
 let openStr = `We are open for ${property.length} days in a week: `;
@@ -88,7 +219,7 @@ console.log(entries);
 for ([day, { open, close }] of entries) {
   //   console.log(items);
   console.log(`On ${day} we open at ${open} and close at ${close}`);
-}
+} */
 
 //////////////////////////////////////////////
 //                                          //
