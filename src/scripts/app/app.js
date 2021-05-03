@@ -39,7 +39,72 @@ const restaurant = {
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2},${ing3}`);
+  },
 };
+
+//////////////////////////////////////////////
+//                                          //
+//              Spread Operator             //
+//                                          //
+//////////////////////////////////////////////
+
+const arr = [7, 8, 9];
+
+//old method of spreading
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+console.log(badNewArr);
+
+//ES6 approach: Created a new array, do not mutate original array
+
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+console.log(...newArr);
+
+//practical example
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+//Use cases.1. Shallow copy and merge arrays together
+//1. Copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+
+//2. Merge two arrays
+const menu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+
+console.log(menu);
+
+//spread operators work in all iterables: arrays, strings, maps, sets, but not objects
+const str = 'Jonas';
+
+const letter = [...str, ' ', 'S.'];
+
+console.log(letter);
+console.log(...str);
+//You cannot pass a spread operator into a string literal
+
+// const ingredients = [
+//   prompt("Let's make pasta! Ingredient 1?"),
+//   prompt('Ingredient 2?'),
+//   prompt('Ingredient 3?'),
+// ];
+
+// console.log(ingredients);
+// restaurant.orderPasta(...ingredients);
+
+//since 2018, spread operators also works with objects even if not itarable
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+
+console.log(newRestaurant);
+
+//Shallow copying
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
 
 //////////////////////////////////////////////
 //                                          //
@@ -49,7 +114,7 @@ const restaurant = {
 
 //we use the {} and provide the names of the objects
 
-const { name, openingHours, categories } = restaurant;
+/* const { name, openingHours, categories } = restaurant;
 console.log(name, openingHours, categories);
 //Renaming the object names
 const {
@@ -91,7 +156,7 @@ restaurant.orderDelivery({
 
 restaurant.orderDelivery({
   address: 'Via del Sole, 21',
-});
+}); */
 
 //////////////////////////////////////////////
 //                                          //
