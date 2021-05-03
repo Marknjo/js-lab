@@ -52,11 +52,30 @@ const restaurant = {
 
 //////////////////////////////////////////////
 //                                          //
+//             The For of Loop              //
+//                                          //
+//////////////////////////////////////////////
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+for (const item of menu) console.log(item); //you can add continue or break
+
+//The for of loop does not
+for (const item of menu.entries()) {
+  //console.log(item);
+  const [index, elem] = item;
+  console.log(`${index + 1}: ${elem}`);
+}
+
+console.log([...menu.entries()]);
+
+//////////////////////////////////////////////
+//                                          //
 //           Coding Challenge #1            //
 //                                          //
 //////////////////////////////////////////////
 //Data:
-const game = {
+/* const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
   players: [
@@ -168,7 +187,7 @@ game.printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
 // Team with lower odd is likely to win
 team1 < team2 && console.log('Team 1 is likely to win');
 
-team2 < team1 && console.log('Team 2 is likely to win');
+team2 < team1 && console.log('Team 2 is likely to win'); */
 
 //////////////////////////////////////////////
 //                                          //
