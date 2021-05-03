@@ -43,7 +43,62 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2},${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
+
+//////////////////////////////////////////////
+//                                          //
+//        Rest Pattern & Parameters         //
+//                                          //
+//////////////////////////////////////////////
+
+//1. Destructuring
+//SPREAD, because of the RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+
+//REST, because on LEFT side of ==
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+
+console.log(a, b, others);
+
+//MIXING, SPREAD & REST operators
+
+const [pizza, , risotto, ...otherFoods] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+]; //skipped elements are not included: the last in the assignment
+
+console.log(pizza, risotto, ...otherFoods);
+//There can only be only one rest operator in the destructuring
+
+//Rest in the Objets
+const { sat, ...weekdays } = restaurant.openingHours;
+
+console.log(sat, weekdays);
+
+//2. Functions: Compress
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 6, 2, 1, 4);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('Mushrooms', 'Onions', 'Olives', 'Spinach');
+
+restaurant.orderPizza('mushrooms');
 
 //////////////////////////////////////////////
 //                                          //
@@ -51,7 +106,7 @@ const restaurant = {
 //                                          //
 //////////////////////////////////////////////
 
-const arr = [7, 8, 9];
+/* const arr = [7, 8, 9];
 
 //old method of spreading
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -102,9 +157,10 @@ console.log(newRestaurant);
 
 //Shallow copying
 const restaurantCopy = { ...restaurant };
-restaurantCopy.name = 'Ristorante Roma';
-console.log(restaurantCopy.name);
-console.log(restaurant.name);
+// restaurantCopy.name = 'Ristorante Roma';
+// console.log(restaurantCopy.name);
+// console.log(restaurant.name);
+console.log(restaurant === restaurantCopy); */
 
 //////////////////////////////////////////////
 //                                          //
