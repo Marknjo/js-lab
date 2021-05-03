@@ -52,11 +52,53 @@ const restaurant = {
 
 //////////////////////////////////////////////
 //                                          //
+//             Short Circuiting             //
+//                (&& and ||)               //
+//                                          //
+//////////////////////////////////////////////
+
+// || Use ANY data type, return ANY data type, short-circuting operation
+//short-circuting - if the first operand is truthy, it is returned
+console.log(3 || 'Jonas');
+console.log('' || 'Jonas');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+//returns "Hello" because it is the first the truthy returned
+
+//Practical example
+restaurant.numGuests = 23;
+const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+
+console.log(guest1);
+
+const guest2 = restaurant.numGuests || 10;
+console.log(guest2);
+
+//AND operator
+console.log('---AND---');
+
+console.log(0 && 'Jonas'); //returns the falsey value
+console.log(7 && 'Jonas'); //Returns the last value if all operands are true
+
+console.log('Hello' && 23 && null && 'Jonas');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('Mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('Mushrooms', 'Spinach');
+
+//The short circuit makes code hard to read
+
+//////////////////////////////////////////////
+//                                          //
 //        Rest Pattern & Parameters         //
 //                                          //
 //////////////////////////////////////////////
 
-//1. Destructuring
+/* //1. Destructuring
 //SPREAD, because of the RIGHT side of =
 const arr = [1, 2, ...[3, 4]];
 
@@ -98,7 +140,7 @@ add(...x);
 
 restaurant.orderPizza('Mushrooms', 'Onions', 'Olives', 'Spinach');
 
-restaurant.orderPizza('mushrooms');
+restaurant.orderPizza('mushrooms'); */
 
 //////////////////////////////////////////////
 //                                          //
