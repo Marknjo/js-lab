@@ -52,6 +52,21 @@ const restaurant = {
 
 //////////////////////////////////////////////
 //                                          //
+//     Nullish Coalescing Operator          //
+//                                          //
+//////////////////////////////////////////////
+restaurant.numGuests = null;
+
+const guests = restaurant.numGuests ?? 10;
+
+console.log(guests);
+//Nullish: null and undefined (Not 0 or '')
+
+console.log('\n\n');
+console.log('--------------------------------------------------------');
+
+//////////////////////////////////////////////
+//                                          //
 //             Short Circuiting             //
 //                (&& and ||)               //
 //                                          //
@@ -59,7 +74,7 @@ const restaurant = {
 
 // || Use ANY data type, return ANY data type, short-circuting operation
 //short-circuting - if the first operand is truthy, it is returned
-console.log(3 || 'Jonas');
+/* console.log(3 || 'Jonas');
 console.log('' || 'Jonas');
 console.log(true || 0);
 console.log(undefined || null);
@@ -88,7 +103,7 @@ if (restaurant.orderPizza) {
   restaurant.orderPizza('Mushrooms', 'spinach');
 }
 
-restaurant.orderPizza && restaurant.orderPizza('Mushrooms', 'Spinach');
+restaurant.orderPizza && restaurant.orderPizza('Mushrooms', 'Spinach'); */
 
 //The short circuit makes code hard to read
 
