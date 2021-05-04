@@ -1,4 +1,5 @@
 //Data:
+
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -121,12 +122,81 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+
+const gameEvents = new Map([
+  [17, '⚽ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽ GOAL'],
+  [80, '⚽ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+//////////////////////////////////////////////
+//                                          //
+//           Coding Challenge #3            //
+//                                          //
+//////////////////////////////////////////////
+//Understanding the problem
+// 1. A game has 90 minutes + additional minutes
+// 2. Keys rep minutes events happened
+// 3. Values are the events
+// 4. summary = a single entry is ["time event happened" vs "Event itself"]
+
+// Task #1: Convert events into arrays of unique values
+// sln1. Get the values of the events - use the Object.values()
+// sln2. Spread it into an array of all events
+// sln3. use the Set to create unique values
+// sln4. store those in an array called events (Unique events)
+// sln5. use a short form to do the work
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+//Task #2: Remove a value from a map: Event 64
+console.log(gameEvents);
+gameEvents.delete(64);
+console.log(gameEvents);
+
+//Tast #3: Log a specific string that requires a average
+// sln1. Find the map length - use map size
+// sln2. divide it with the total minutes the game was played
+const gameTotalEvents = gameEvents.size;
+const gameTimesArr = [...gameEvents.keys()];
+
+let highestTime = gameTimesArr[0];
+
+//find the highest time of the game dynamically
+for (const time of gameTimesArr) {
+  highestTime = highestTime > time || time;
+}
+//Compute the average time per event
+const averageEvents = highestTime / gameTotalEvents;
+
+//Log the message
+const messageToLog = `An event happened, on average, every ${averageEvents} minutes"`;
+console.log(messageToLog);
+
+//Task #4: Determine if event happened before half time or after: 45 minutes
+// sln 1. Use the for loop to loop through the map
+// sln 2. Check if an event is below 45 minute, assign  etc "[FIRST HALF] 17: ⚽ GOAL"
+//  - else [SECOND HALF] 66: ⚽ GOAL
+// summary: looping maps
+for (const [evtTime, evtDesc] of gameEvents) {
+  const half = evtTime <= 45 ? 'FIRST' : 'SECOND';
+
+  console.log(`[${half} HALF] ${evtTime}: ${evtDesc}`);
+}
+
 //////////////////////////////////////////////
 //                                          //
 //          Data Structures:Maps            //
 //                                          //
 //////////////////////////////////////////////
-const rest = new Map(); //esiest way is to create an empty map then use set method
+/* const rest = new Map(); //esiest way is to create an empty map then use set method
 rest.set('name', 'Classico Italiano');
 rest.set(1, 'Fireze, Italy');
 console.log(rest.set(2, 'Lisbon, Portugal'));
@@ -200,7 +270,7 @@ const answer = 3; //Number(prompt('Your answer'));
 
 console.log(question.get(answer === question.get('correct')));
 //convert map to array
-console.log([...question]);
+console.log([...question]); */
 
 //////////////////////////////////////////////
 //                                          //
