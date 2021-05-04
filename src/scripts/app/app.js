@@ -123,10 +123,91 @@ const restaurant = {
 };
 //////////////////////////////////////////////
 //                                          //
+//          Data Structures:Maps            //
+//                                          //
+//////////////////////////////////////////////
+const rest = new Map(); //esiest way is to create an empty map then use set method
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Fireze, Italy');
+console.log(rest.set(2, 'Lisbon, Portugal'));
+//we can nest adding things on map
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open :D ')
+  .set(false, 'we are closed :(');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 21;
+console.log(rest.get(time > rest.get('opne') && time < rest.get('close')));
+//More methods
+//1. Contans certain keys
+console.log(rest.has('categories'));
+
+//2. Delete
+rest.delete(2);
+console.log(rest);
+
+//3. The size of a Map
+console.log(rest.size);
+
+//4. Clear all in a map
+rest.clear();
+
+console.log(rest.size);
+console.log(rest);
+
+//Using arrays/Objects as keys
+const arr = [1, 2];
+rest.set(arr, 'Test');
+console.log(rest);
+console.log(rest.size);
+console.log(rest.get(arr));
+
+rest.set(document.querySelector('h1'), 'Heading');
+
+console.log(rest);
+//Maps iteration
+//A different way of setting the map
+const question = new Map([
+  ['Question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try again 😢'],
+]);
+
+console.log(question);
+console.log(Object.entries(openingHours));
+
+//Convert Object to Maps
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+const answer = 3; //Number(prompt('Your answer'));
+
+console.log(question.get(answer === question.get('correct')));
+//convert map to array
+console.log([...question]);
+
+//////////////////////////////////////////////
+//                                          //
 //          Data Structures:Sets            //
 //                                          //
 //////////////////////////////////////////////
-const ordersSet = new Set([
+/* const ordersSet = new Set([
   'Pasta',
   'Pizza',
   'Pizza',
@@ -175,7 +256,7 @@ for (const order of ordersSet) {
 const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
 
 const staffUnique = [...new Set(staff)]; //easy to convert from set to array
-console.log(staffUnique);
+console.log(staffUnique); */
 
 //////////////////////////////////////////////
 //                                          //
