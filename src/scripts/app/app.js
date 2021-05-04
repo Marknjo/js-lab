@@ -121,6 +121,61 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+//////////////////////////////////////////////
+//                                          //
+//          Data Structures:Sets            //
+//                                          //
+//////////////////////////////////////////////
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+//1. Can't hold dublicates
+//2. Looks like array
+//3. It's also iterable
+//4. Order of elements in a set are illerevant
+console.log(ordersSet);
+
+console.log(new Set('Mark'));
+
+//get the length or size
+console.log(ordersSet.size);
+
+//what's in the set
+console.log(ordersSet.has('Pizza'));
+
+//add new elements into the set
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+
+console.log(ordersSet);
+
+//Can also delete the elements
+const deleleted = ordersSet.delete('Risotto');
+console.log(deleleted);
+console.log(ordersSet);
+
+//deleleting all elements of a set
+//ordersSet.clear();
+console.log(ordersSet);
+
+//No need of getting value out of a set
+
+//They are iterable
+for (const order of ordersSet) {
+  console.log(order);
+}
+
+//use cases
+//1. remove Dublicate of array
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+
+const staffUnique = [...new Set(staff)]; //easy to convert from set to array
+console.log(staffUnique);
 
 //////////////////////////////////////////////
 //                                          //
@@ -133,7 +188,7 @@ const restaurant = {
 //3. Also print the goal number i.e Goal 1: <playerName>
 // sln1. use the for of loop
 // sln2. use entries to get the idex of the playes +1 to print the goal #
-for ([index, playerName] of game.scored.entries()) {
+/* for ([index, playerName] of game.scored.entries()) {
   //console.log(index, playerName);
   console.log(`Goal ${index + 1}: ${playerName}`);
 }
@@ -178,8 +233,8 @@ for (const player of game.scored) {
     : player === 'Lewandowski'
     ? (scorers[player] = 2)
     : (scorers[player] = 1);
-}
-console.log(scorers);
+} 
+console.log(scorers);*/
 
 //////////////////////////////////////////////
 //                                          //
