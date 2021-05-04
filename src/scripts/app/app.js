@@ -346,32 +346,37 @@ console.log([...menu.entries()]);
   // 2. Takes in arbitrary number of prayers names use: object destructuring
   // 3. Print their names to the console
   // 4. add the number of goals each player scored in the game.
-  printGoals: function (...players) {
-    console.log(players);
-    try {
-      if (typeof players !== 'object') {
-        throw new Error(
-          'TypeError: Supply names of players as separated by commas as arguments.'
-        );
-      }
-
-      let playersString = '';
-
-      for (let i = 0; i < players.length; i++) {
-        if (i === players.length - 1) {
-          playersString += `and ${players[i]}...`;
-        } else {
-          playersString += `${players[i]}, `;
-        }
-      }
-
-      console.log(
-        `Players who scored in the game: ${playersString}: Goals Scored ${this.score}`
-      );
-    } catch (e) {
-      console.log(e);
+  printGoals(...players) {
+  try {
+    const ErrorMessage =
+      'Invalid Players Names Supplied. Hint! Wrong Arguments Supplied.';
+    if (
+      Array.isArray(players[0]) ||
+      typeof players !== 'object' ||
+      !Array.isArray(players)
+    ) {
+      throw new Error(ErrorMessage);
     }
-  },
+
+    let playersString = '';
+
+    for (let i = 0; i < players.length; i++) {
+      if (typeof players[i] !== 'string') {
+        throw new Error(ErrorMessage);
+      }
+
+      if (i === players.length - 1) {
+        playersString += `and ${players[i]}...`;
+      } else {
+        playersString += `${players[i]}, `;
+      }
+    }
+
+    playersString = `Players who scored in the game: ${playersString}: Goals Scored ${this.score}`;
+  } catch (e) {
+    console.log(`${e.name}🚫: ${e.message}`);
+  }
+},
 };
 
 //1. Taks 1
