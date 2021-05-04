@@ -72,8 +72,8 @@ const game = {
 };
 
 // Data needed for a later exercise
-// const flights =
-//   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 const weekdays = ['Mon', 'Tue', 'Wed', 'thu', 'fri', 'sat', 'sun'];
 
@@ -122,8 +122,161 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+//////////////////////////////////////////////
+//                                          //
+//          Working With Strings            //
+//                                          //
+//////////////////////////////////////////////
 
-const gameEvents = new Map([
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+//String Methods
+console.log(airline.indexOf('r')); //string are zero based: Results to the first occurance
+console.log(airline.lastIndexOf('r')); //last of
+console.log(airline.indexOf('portugal')); //case sensitive
+
+//Use cases
+//1. Extracting part of string
+// string methods do not mutate original object. Strings are primitive.
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7)); //7 - 4 = 3
+
+//2. Extraction without knowing the indexes
+console.log(airline.slice(0, airline.indexOf(' '))); //first occurance
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); //extract the last word
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+//
+const checkMiddleSeat = function (seat) {
+  // B & E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log('You got the middle seat 😷');
+  } else {
+    console.log('You got lucky 😎');
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+//The process of converting a string into an object is called boxing
+console.log(new String('Mark'));
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+//Fix capitalization in name
+const passanger = 'jOnAS'; //Jonas
+const passangerLower = passanger.toLowerCase();
+const passangerCorrect = passanger[0].toUpperCase() + passangerLower.slice(1);
+
+console.log(passangerCorrect);
+
+//comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = ' Hello@Jonas.Io \n';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim(lowerEmail);
+// console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+//Replacing part of the string
+const priceGB = '288,97$';
+const priceKsh = priceGB.replace('$', 'KES').replace(',', '.');
+console.log(priceKsh);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate')); //Its working
+
+//Regular expressing: Complex and confucing
+
+console.log(announcement.replace(/door/g, 'gate')); //It's case sensitive
+
+//Booleans
+// startWith and EndsWith
+const plane2 = 'Airbus A320neo';
+console.log(plane2.includes('A320'));
+console.log(plane2.includes('Boeing'));
+
+console.log(plane2.startsWith('Air'));
+
+//String split & Join
+console.log('a+very+nice+string'.split('+'));
+console.log('Mark Njoroge'.split(' '));
+const [firstName, lastName] = 'Mark Njoroge'.split(' ');
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const splitName = name.toLowerCase().trim().split(' ');
+  const upperCasedNameArr = [];
+  for (const sepName of splitName) {
+    // upperCasedNameArr.push(sepName[0].toUpperCase() + sepName.slice(1));
+    upperCasedNameArr.push(
+      sepName.replace(sepName[0], sepName[0].toUpperCase())
+    );
+  }
+
+  return upperCasedNameArr.join(' ');
+};
+
+const passanger2 = ' jessica ann smith davis';
+const passangerCapitalizedName = capitalizeName(passanger2);
+console.log(passangerCapitalizedName);
+
+console.log(capitalizeName('mArK njoRoGE '));
+
+//Padding
+//padStart & padEnd
+const newMessage = 'GO to gate 23!';
+console.log(newMessage.padStart(20, '+').padEnd(30, '+'));
+console.log('Mark'.padStart(20, '+').padEnd(30, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(684580236));
+console.log(maskCreditCard(3456567609235572));
+console.log(maskCreditCard('23423455646767885'));
+
+//repeat
+const message2 = 'Bad weather... All Departures Delayed... ';
+
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛬'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
+//////////////////////////////////////////////
+//                                          //
+//           Coding Challenge #3            //
+//                                          //
+//////////////////////////////////////////////
+/* const gameEvents = new Map([
   [17, '⚽ GOAL'],
   [36, '🔁 Substitution'],
   [47, '⚽ GOAL'],
@@ -136,11 +289,7 @@ const gameEvents = new Map([
   [80, '⚽ GOAL'],
   [92, '🔶 Yellow card'],
 ]);
-//////////////////////////////////////////////
-//                                          //
-//           Coding Challenge #3            //
-//                                          //
-//////////////////////////////////////////////
+
 //Understanding the problem
 // 1. A game has 90 minutes + additional minutes
 // 2. Keys rep minutes events happened
@@ -189,7 +338,7 @@ for (const [evtTime, evtDesc] of gameEvents) {
   const half = evtTime <= 45 ? 'FIRST' : 'SECOND';
 
   console.log(`[${half} HALF] ${evtTime}: ${evtDesc}`);
-}
+} */
 
 //////////////////////////////////////////////
 //                                          //
