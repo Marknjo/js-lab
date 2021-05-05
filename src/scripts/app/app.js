@@ -76,7 +76,7 @@ checkIn(flight, mark); */
 //                                          //
 //////////////////////////////////////////////
 //
-const oneWord = function (str) {
+/* const oneWord = function (str) {
   return str.replace(/ /g, '').toLowerCase();
 };
 
@@ -102,4 +102,30 @@ const high5 = function () {
 
 document.body.addEventListener('click', high5);
 
-['Jonas', 'Marth', 'Adam'].forEach(high5);
+['Jonas', 'Marth', 'Adam'].forEach(high5); */
+
+//////////////////////////////////////////////
+//                                          //
+//    First Class & High-Order Functions    //
+//       Functions Returning Functions      //
+//                                          //
+//////////////////////////////////////////////
+//
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greetingHey = greet('Hello');
+greetingHey('Jonas');
+greetingHey('Michael');
+
+greet('Hey')('Mark');
+//Works because of closures
+//Important in functional programming
+
+const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
+
+greetArrow('Hi')('Jennifer');
+greetArrow('Hi')('Lopez');
