@@ -197,7 +197,7 @@ console.log(swiss);
 //                                          //
 //////////////////////////////////////////////
 
-//3. The Bind method
+/* //3. The Bind method
 // Manually set the this keyword
 // It does not immediately call function returns new function where this keyword is bound
 console.log('\n\n');
@@ -246,7 +246,42 @@ const addTaxClosure = rate => value => value + value * rate;
 
 console.log(addTaxClosure(0.23)(500));
 console.log(addTaxClosure(0.24)(500));
-console.log(addTaxClosure(0.33)(500));
+console.log(addTaxClosure(0.33)(500)); */
+
+//////////////////////////////////////////////
+//                                          //
+//           Immediately Invoked            //
+//        Function Expressions (IIFE)       //
+//                                          //
+//////////////////////////////////////////////
+//
+//A Function which only executed once - a function that disappear when called once (async await - aplication)
+
+const runOnce = function () {
+  console.log('This function can be called again');
+};
+
+runOnce();
+
+//Immediately invocked function expression: IIFE
+(function () {
+  console.log('This will never run again: Function Expression');
+})();
+
+//works with arrow function
+(() => {
+  console.log('This will never run again: Function Arrow');
+})();
+
+//Why invent IIFE
+// Function creates scope
+// One scope's variables cannot be accessed outside that scope
+// Therefore: Used to create the scope
+// Data inside IIFE is private or encapsulated(Pattern):
+// important in programming to protect variables from been overwritten by other data
+// Modern JS does not use IIFE more often because let and const are block scope
+// But if the goal is to execute code only once, then,
+// even with modern JS, they are extremely useful.
 
 //
 //////////////////////////////////////////////////////////////////////
