@@ -191,7 +191,65 @@ console.log(swiss);
 book.call(swiss, ...flightData);
 console.log(swiss);
 
+//////////////////////////////////////////////
+//                                          //
+//         Functions: Bind Method           //
+//                                          //
+//////////////////////////////////////////////
+
+//3. The Bind method
+// Manually set the this keyword
+// It does not immediately call function returns new function where this keyword is bound
+console.log('\n\n');
+console.log(`${'-'.repeat(20)}     Bind Method    ${'-'.repeat(20)}`);
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthasa);
+const bookLX = book.bind(swiss);
+bookEW(23, 'Steven Williams');
+
+//in the bind we can pass additional arguments to create default values: Partial applications - part of original aargument is already predefined
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Jonas');
+bookEW23('Mathew Steddmann');
+
+//Application 2. When using objects with event listeners
+lufthasa.planes = 300;
+
+lufthasa.buyPlane = function (el) {
+  console.log(el.target);
+  console.log(this);
+
+  this.planes++;
+
+  console.log(this.planes);
+};
+
+//this keyword always point to the element attached to
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthasa.buyPlane.bind(lufthasa));
+
+//Apllication 3. Partial applications
+//We preset parameters
+const addTax = (rate, value) => value + value * rate;
+
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.16); //Creates a brand new function
+console.log(addVAT(100));
+console.log(addVAT(500));
+
+//Closure
+const addTaxClosure = rate => value => value + value * rate;
+
+console.log(addTaxClosure(0.23)(500));
+console.log(addTaxClosure(0.24)(500));
+console.log(addTaxClosure(0.33)(500));
+
 //
+//////////////////////////////////////////////////////////////////////
 //
 //
 //
