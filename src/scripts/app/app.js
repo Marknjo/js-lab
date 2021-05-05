@@ -39,7 +39,7 @@ console.log(bookings); */
 //                                          //
 //////////////////////////////////////////////
 
-const flight = 'LH234';
+/* const flight = 'LH234';
 const mark = {
   name: 'Mark Njoroge',
   passport: 23235209501,
@@ -65,6 +65,41 @@ const newPassport = function (person) {
 };
 
 newPassport(mark);
-checkIn(flight, mark);
+checkIn(flight, mark); */
 
 //Passing by Value or Reference: JS only passes by value
+
+//////////////////////////////////////////////
+//                                          //
+//    First Class & High-Order Functions    //
+//  Functions Accepting Callback functions  //
+//                                          //
+//////////////////////////////////////////////
+//
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+const transformer = function (str, fn) {
+  console.log(str);
+  console.log(`Transfromed string: ${fn(str)}`);
+
+  console.log(`Transformed by: ${fn.name}`);
+};
+
+transformer('JavaScript is the best!', upperFirstWord);
+transformer('JavaScript is the best!', oneWord);
+
+//JS uses callbacks all the time
+const high5 = function () {
+  console.log('🙋‍♀️');
+};
+
+document.body.addEventListener('click', high5);
+
+['Jonas', 'Marth', 'Adam'].forEach(high5);
