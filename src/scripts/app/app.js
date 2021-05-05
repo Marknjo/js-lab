@@ -71,10 +71,6 @@ const game = {
   },
 };
 
-// Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-
 const weekdays = ['Mon', 'Tue', 'Wed', 'thu', 'fri', 'sat', 'sun'];
 
 const openingHours = {
@@ -124,11 +120,77 @@ const restaurant = {
 };
 //////////////////////////////////////////////
 //                                          //
+//           Fun Strings Exercise           //
+//                                          //
+//////////////////////////////////////////////
+// Data needed for a later exercise
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+const getDelayedIcon = function (info) {
+  return info.toLowerCase().startsWith('_delayed') ? `🔴 ${info}` : info;
+};
+
+const findLongestStringLength = function (arrFlightsStmts) {
+  //Add Align right dynamically
+  let strLen = arrFlightsStmts[0].length;
+
+  for (const flight of arrFlightsStmts) {
+    //[10, 15, 25] // get the biggest number [0] = 10
+    strLen = strLen > arrFlightsStmts.length ? strLen : flight.length;
+  }
+
+  return strLen;
+};
+
+const humanReadableFlightStmt = function (statement) {
+  //1. start by spliting strings where there is a + sign. (Done)
+  /////// use s.split() - store in flights variable
+  //2. split the string into several segments recognizable staments
+  ///////i.  Loop using for of loop
+  ///////ii. variables [info], [from], [to], [time]
+  //3. Add the red dot where flight is delayed
+  //4. remove _ from info
+  //5. get the first 3 letters of from and info and capitalize them
+  //6. get the longest string length || right align
+
+  let flights = [];
+
+  for (const flight of statement.split('+')) {
+    const [info, from, to, time] = flight.split(';');
+    let flightInfo = `${getDelayedIcon(info).replaceAll('_', ' ')} ${from
+      .slice(0, 3)
+      .toUpperCase()} ${to.slice(0, 3).toUpperCase()} (${time.replace(
+      ':',
+      'h'
+    )})`;
+
+    flights.push(flightInfo);
+  }
+
+  return flights;
+};
+
+const leftAlignFlightStmts = function (flightStmtsArr) {
+  //1. get the longest string
+  const stmtLen = findLongestStringLength(flightStmtsArr);
+
+  //2. padEnd
+  for (const flight of flightStmtsArr) {
+    //Attach to the DOM:For now log to the console
+    console.log(flight.padStart(stmtLen, ' '));
+  }
+};
+
+leftAlignFlightStmts(humanReadableFlightStmt(flights));
+
+//////////////////////////////////////////////
+//                                          //
 //          Working With Strings            //
 //                                          //
 //////////////////////////////////////////////
 
-const airline = 'TAP Air Portugal';
+/* const airline = 'TAP Air Portugal';
 const plane = 'A320';
 
 console.log(plane[0]);
@@ -270,7 +332,7 @@ const planesInLine = function (n) {
 };
 planesInLine(5);
 planesInLine(3);
-planesInLine(12);
+planesInLine(12); */
 //////////////////////////////////////////////
 //                                          //
 //           Coding Challenge #3            //
