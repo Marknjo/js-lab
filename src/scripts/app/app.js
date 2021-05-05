@@ -111,7 +111,7 @@ document.body.addEventListener('click', high5);
 //                                          //
 //////////////////////////////////////////////
 //
-const greet = function (greeting) {
+/* const greet = function (greeting) {
   return function (name) {
     console.log(`${greeting} ${name}`);
   };
@@ -128,4 +128,73 @@ greet('Hey')('Mark');
 const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArrow('Hi')('Jennifer');
-greetArrow('Hi')('Lopez');
+greetArrow('Hi')('Lopez'); */
+
+//////////////////////////////////////////////
+//                                          //
+//        The Call & Apply Methods          //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Airline 1
+const lufthasa = {
+  airline: 'Lufthase',
+  iataCode: 'LH',
+  booking: [],
+  book(flightNum, pasgName) {
+    console.log(`${pasgName} booked a seat on ${this.iataCode}${flightNum}`);
+    this.booking.push({ flight: `${this.iataCode}${flightNum}`, pasgName });
+  },
+};
+
+lufthasa.book(239, 'Mark');
+lufthasa.book(635, 'Simmpson Wanjala');
+console.log(lufthasa.booking);
+
+//Airline 2
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  booking: [],
+};
+
+//Method borrowing
+const book = lufthasa.book;
+
+//does not work
+//book(23, 'Sarah Williams');
+
+book.call(eurowings, 23, 'Sarah Williums');
+console.log(eurowings);
+
+book.call(lufthasa, 239, 'Mary Cooper');
+console.log(lufthasa);
+
+// Airline 3
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  booking: [],
+};
+
+book.call(swiss, 583, 'Messy Zippy');
+console.log(swiss);
+
+//Apply: Works the same as call, though it receives array as inputs other than list or arguments
+const flightData = [583, 'Sir. George Humphrey'];
+
+book.apply(swiss, flightData); // not common coz you can spread the data to the call,
+console.log(swiss);
+
+//i.e. using the call with the same info
+book.call(swiss, ...flightData);
+console.log(swiss);
+
+//
+//
+//
+//
+//The end separator
+console.log('\n\n');
+console.log(`${'-'.repeat(30)}      ./End       ${'-'.repeat(30)}`);
