@@ -257,7 +257,7 @@ console.log(addTaxClosure(0.33)(500)); */
 //
 //A Function which only executed once - a function that disappear when called once (async await - aplication)
 
-const runOnce = function () {
+/* const runOnce = function () {
   console.log('This function can be called again');
 };
 
@@ -282,6 +282,32 @@ runOnce();
 // Modern JS does not use IIFE more often because let and const are block scope
 // But if the goal is to execute code only once, then,
 // even with modern JS, they are extremely useful.
+ */
+
+//////////////////////////////////////////////
+//                                          //
+//                 Closures                 //
+//                                          //
+//////////////////////////////////////////////
+//
+//Mythical feature of JavaScript: Closures
+//Closure not feature: Happens automatically in certain situation
+// Not a feature to implement by recognise when it happens
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passanger`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
+booker();
 
 //
 //////////////////////////////////////////////////////////////////////
