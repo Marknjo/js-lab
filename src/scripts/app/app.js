@@ -128,7 +128,7 @@ currenciesUnique.forEach((value, _, map) => {
 // adult age >= 3
 
 //Data 1
-const dogsJulia1 = [3, 5, 2, 12, 7];
+/* const dogsJulia1 = [3, 5, 2, 12, 7];
 const dogsKate1 = [4, 1, 15, 8, 3];
 
 //Data 2
@@ -239,7 +239,36 @@ const dogsData2 = [...dogsJulia2, ...dogsKate2];
 const dogsGroupData2 = checkDogs({ arrDogs: dogsData2 });
 
 console.log(dogsData2);
-console.log(dogsGroupData2);
+console.log(dogsGroupData2); */
+
+//////////////////////////////////////////////
+//                                          //
+//                Map Method                //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+
+//More inline with functional programming: This is the way to go, new and modern
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movUSD = [];
+movements.forEach(mov => movUSD.push(mov * eurToUsd));
+
+console.log(movUSD);
+
+consoleSeparator('New Section');
+
+const movementsDescription = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
+);
+console.log(movementsDescription);
 
 //
 //////////////////////////////////////////////////////////////////////
