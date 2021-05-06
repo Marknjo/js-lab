@@ -115,9 +115,15 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
-//Compute username initials
+//
 const user = 'Steven Thomas Williams';
-console.log(accounts);
+
+/**
+ * Compute username initials and
+ * Add to the user account as a property
+ *
+ * @param {Array} accs
+ */
 
 const createUsernames = function (accs) {
   accs.forEach(acc => {
@@ -128,8 +134,7 @@ const createUsernames = function (accs) {
       .join('');
   });
 };
-
-console.log(accounts);
+createUsernames(accounts);
 
 /////////////////////////////////////////////////
 //Separator for console logs
