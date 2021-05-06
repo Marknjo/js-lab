@@ -4,7 +4,20 @@
 //                                          //
 //////////////////////////////////////////////
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
+/**
+ * Creates as a separator in the console
+ * @param {String} title
+ * @param {Number} separatorLen
+ */
+const consoleSeparator = (title = './END', separatorLen = 20) => {
+  console.log('\n\n');
+  console.log(
+    `${'-'.repeat(separatorLen)}     ${title}      ${'-'.repeat(separatorLen)}`
+  );
+  console.log('\n');
+};
+
+/* let arr = ['a', 'b', 'c', 'd', 'e'];
 
 console.log(arr.slice(2)); //does not mutate the arr, works like strings
 console.log(arr.slice(2, 4)); //4-2 =2
@@ -40,7 +53,34 @@ console.log(letters);
 console.log(...arr, ...arr2);
 
 //Join
-console.log(letters.join('-')); //Works like the string, join
+console.log(letters.join('-')); //Works like the string, join */
+
+//////////////////////////////////////////////
+//                                          //
+//          Looping Arrays FOREACH          //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+consoleSeparator('FOREACH');
+//continue and break don't work in the 'forEach': Use 'for of' or 'for' loop
+movements.forEach(function (mvt, i) {
+  if (mvt > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mvt}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mvt)}`);
+  }
+});
 
 //
 //////////////////////////////////////////////////////////////////////
@@ -48,5 +88,4 @@ console.log(letters.join('-')); //Works like the string, join
 //
 //
 //The end separator
-console.log('\n\n');
-console.log(`${'-'.repeat(30)}      ./End       ${'-'.repeat(30)}`);
+consoleSeparator(undefined, 30);
