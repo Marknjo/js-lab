@@ -90,7 +90,7 @@ movements.forEach(function (mvt, i) {
 //
 
 //For each is also available in Mpas an sets
-consoleSeparator('FOREACH WITH MAP');
+/* consoleSeparator('FOREACH WITH MAP');
 
 const currencies = new Map([
   ['USD', 'United States dollar'],
@@ -112,7 +112,134 @@ console.log(currenciesUnique);
 // _ in javaScript is a throw away value
 currenciesUnique.forEach((value, _, map) => {
   console.log(`${value}`);
+}); */
+
+//////////////////////////////////////////////
+//                                          //
+//           Coding Challenge #1            //
+//                                          //
+//////////////////////////////////////////////
+//
+//JULIA AND KATE
+// @each 5 dog owners [separately|different data] : dogs age
+// Data stored in array
+// Knowledge: If puppy or adult
+// puppy age < 3 yrs
+// adult age >= 3
+
+//Data 1
+const dogsJulia1 = [3, 5, 2, 12, 7];
+const dogsKate1 = [4, 1, 15, 8, 3];
+
+//Data 2
+const dogsJulia2 = [9, 16, 6, 8, 3];
+const dogsKate2 = [10, 5, 6, 1, 4];
+
+//solution
+//1. create a function accepting an array
+//2. Loop through the array
+//3. check if the dog is above 3 or less than 3 and lable it adult or puppy
+//4. return the arr of labled dogs || log them to the console
+
+const checkDogType = (arrDogs = [], colName = 'Julia') => {
+  const labledDogs = [];
+  arrDogs.forEach((dog, i) => {
+    let type = '';
+    if (dog >= 3) {
+      //dog is an adult
+      type = 'an adult dog';
+    } else if (dog < 3) {
+      //dog is a puppy
+      type = 'a puppy 🐶';
+    }
+
+    //Dog 2 from Julia's Data Collection is puppy age 2
+    colName !== 'single'
+      ? labledDogs.push(
+          `Dog ${
+            i + 1
+          } from ${colName}'s Data Collection is ${type} age ${dog}.`
+        )
+      : arrDogs.length > 0
+      ? labledDogs.push(
+          `Dog number ${i + 1} is ${type}, and is ${dog} years old.`
+        )
+      : [];
+  });
+
+  return labledDogs;
+};
+
+const logDogTypes = arrDogs => {
+  arrDogs.forEach(dog => {
+    console.log(dog);
+  });
+};
+
+//
+const checkDogs = ({ arrDogs = [], arrDogsJulia = [], arrDogsKate = [] }) => {
+  //Never run checkDogsType if there is no supplied
+  dogsType = arrDogs.length > 0 && checkDogType(arrDogs, 'single');
+  dogsJulia = arrDogsJulia.length > 0 && checkDogType(arrDogsJulia);
+  dogsKate = arrDogsKate.length > 0 && checkDogType(arrDogsKate, 'Kate');
+
+  //Log dog types
+  //LOG ALL DOGS
+  arrDogs.length > 0 && logDogTypes(dogsType);
+
+  //LOG JULIA'S DATA
+  arrDogsJulia.length > 0 && logDogTypes(dogsJulia);
+
+  //LOG KATE'S DATA
+  arrDogsKate.length > 0 && logDogTypes(dogsKate);
+
+  return {
+    dogsType,
+    dogsJulia,
+    dogsKate,
+  };
+};
+
+consoleSeparator('DATA 1');
+const dogsCategorizedData1 = checkDogs({
+  arrDogsJulia: dogsJulia1,
+  arrDogsKate: dogsKate1,
 });
+console.log(dogsCategorizedData1);
+
+consoleSeparator('DATA 2');
+//New data
+const dogsCategorizedData2 = checkDogs({
+  arrDogsJulia: dogsJulia2,
+  arrDogsKate: dogsKate2,
+});
+console.log(dogsCategorizedData2);
+
+//prob: 1 - Julia data contains both cats and dogs. Exclude cats & don't mutate the array
+// 1 and last 2
+// sln 2. use the slice(1, 2)
+consoleSeparator('Prob 1. Remove Cats from Julia data', 10);
+console.log(dogsJulia1);
+const cleanedDogsJulia = dogsJulia1.slice(1, -2);
+console.log(cleanedDogsJulia);
+
+//Prob: 2 - new single array with both Julia and Kate's data
+consoleSeparator('Prob 2. Single Array', 10);
+const dogsData1 = [...cleanedDogsJulia, ...dogsKate1];
+console.log(dogsData1);
+
+//prob: 3 - Log if the dog is a puppy or a an adult
+consoleSeparator('Prob 3. Merge Array', 10);
+const dogsGroupedData1 = checkDogs({ arrDogs: dogsData1 });
+
+console.log(dogsGroupedData1);
+//prob: 4 - Log if the dog is a puppy or a an adult
+consoleSeparator('Prob 4. Merge Array', 10);
+const dogsData2 = [...dogsJulia2, ...dogsKate2];
+const dogsGroupData2 = checkDogs({ arrDogs: dogsData2 });
+
+console.log(dogsData2);
+console.log(dogsGroupData2);
 
 //
 //////////////////////////////////////////////////////////////////////
