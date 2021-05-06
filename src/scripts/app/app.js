@@ -62,7 +62,7 @@ console.log(letters.join('-')); //Works like the string, join */
 //////////////////////////////////////////////
 //
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 for (const movement of movements) {
   if (movement > 0) {
@@ -80,6 +80,38 @@ movements.forEach(function (mvt, i) {
   } else {
     console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mvt)}`);
   }
+}); */
+
+//////////////////////////////////////////////
+//                                          //
+//        FOREACH With Maps and Sets        //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//For each is also available in Mpas an sets
+consoleSeparator('FOREACH WITH MAP');
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((value, key, map) => {
+  console.log(`${key}: ${value}`);
+});
+
+//SET
+consoleSeparator('FOREACH WITH SET');
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EURO', 'EURO']);
+
+console.log(currenciesUnique);
+
+//both the key and value are the same in the sets
+// _ in javaScript is a throw away value
+currenciesUnique.forEach((value, _, map) => {
+  console.log(`${value}`);
 });
 
 //
