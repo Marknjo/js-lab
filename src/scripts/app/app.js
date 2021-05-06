@@ -297,15 +297,25 @@ console.log(withdrawals); */
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 //Accumulator is like a snowball (two arguments: callback function & initial value)
-/* const balance = movements.reduce(function (acc, cur, i, arr) {
+const balance = movements.reduce(function (acc, cur, i, arr) {
   console.log(`Iteration No. ${i}: ${acc}`);
   return acc + cur;
-}, 0); */
+}, 0);
 
-const balance = movements.reduce((acc, cur) => acc + cur, 0);
+//Example use case #1: Add values of an array
+const balance2 = movements.reduce((acc, cur) => acc + cur, 0);
 
-console.log(balance);
+console.log(balance2);
 
+//Example use case #2: Find the biggest value in the array
+const highestBalance = movements.reduce((acc, crrMov) => {
+  acc = acc > crrMov ? acc : crrMov;
+  console.log(`Accumulator ${acc} - Current ${crrMov}`);
+
+  return acc;
+}, movements[0]);
+
+console.log(highestBalance);
 //
 //////////////////////////////////////////////////////////////////////
 //
