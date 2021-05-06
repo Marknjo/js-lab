@@ -248,7 +248,7 @@ console.log(dogsGroupData2); */
 //////////////////////////////////////////////
 //
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const eurToUsd = 1.1;
 
 //More inline with functional programming: This is the way to go, new and modern
@@ -268,7 +268,26 @@ const movementsDescription = movements.map(
   (mov, i) =>
     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`
 );
-console.log(movementsDescription);
+console.log(movementsDescription); */
+
+//////////////////////////////////////////////
+//                                          //
+//            The Filter Method             //
+//                                          //
+//////////////////////////////////////////////
+//
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+console.log(movements);
+
+console.log(deposits);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
 
 //
 //////////////////////////////////////////////////////////////////////
