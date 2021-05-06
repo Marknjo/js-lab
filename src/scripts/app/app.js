@@ -294,7 +294,7 @@ console.log(withdrawals); */
 //                                          //
 //////////////////////////////////////////////
 //
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 //Accumulator is like a snowball (two arguments: callback function & initial value)
 const balance = movements.reduce(function (acc, cur, i, arr) {
@@ -315,7 +315,111 @@ const highestBalance = movements.reduce((acc, crrMov) => {
   return acc;
 }, movements[0]);
 
-console.log(highestBalance);
+console.log(highestBalance); */
+
+//////////////////////////////////////////////
+//                                          //
+//           Coding Challenge #2            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Julia Example #2
+//Data
+const data1 = [5, 2, 4, 1, 15, 8, 3];
+const data2 = [16, 6, 10, 5, 6, 1, 4];
+
+//Task #1: Calculate human age
+// 1. for every age of a dog, use a formula to determine the human age (Use the Map array)
+consoleSeparator('TASK #1: DATA 1', 15);
+const caculateAvgHumanAgeSamp = function (arrDogsAge) {
+  return arrDogsAge.map((dogAge, i) => {
+    let calAge = 0;
+
+    if (dogAge <= 2) {
+      calAge = dogAge * 2;
+    } else {
+      calAge = dogAge * 4 + 16;
+    }
+
+    return calAge;
+  });
+  //.filter(dogAge => dogAge > 18);
+};
+
+const humanAgesData1 = caculateAvgHumanAgeSamp(data1);
+console.log(humanAgesData1);
+
+consoleSeparator('TASK #1: DATA 2', 15);
+
+const humanAgesData2 = caculateAvgHumanAgeSamp(data2);
+console.log(humanAgesData2);
+
+consoleSeparator('TASK #2: Filtering', 15);
+//Task#2
+const adultHumaAges1 = humanAgesData1.filter(dogAge => dogAge > 18);
+const adultHumaAges2 = humanAgesData2.filter(dogAge => dogAge > 18);
+
+console.log(humanAgesData1.filter(dogAge => dogAge > 18));
+console.log(humanAgesData2.filter(dogAge => dogAge > 18));
+
+consoleSeparator('TASK #3: Filtering', 15);
+//Task#3
+console.log(
+  humanAgesData1
+    .filter(dogAge => dogAge > 18)
+    .reduce((acc, hAge) => {
+      return acc + hAge;
+    }, 0) / adultHumaAges1.length
+);
+console.log(
+  humanAgesData2
+    .filter(dogAge => dogAge > 18)
+    .reduce((acc, hAge) => {
+      return acc + hAge;
+    }, 0) / adultHumaAges2.length
+);
+
+//TASK #4:
+consoleSeparator('TASK #4: FINAL SOLUTION', 15);
+
+const caculateAverageHumanAge = function (arrDogsAge) {
+  /* const adultArr = arrDogsAge
+    .map((dogAge, i) => {
+      let calAge = 0;
+
+      if (dogAge <= 2) {
+        calAge = dogAge * 2;
+      } else {
+        calAge = dogAge * 4 + 16;
+      }
+
+      return calAge;
+    })
+    .filter(dogAge => dogAge >= 18);
+
+  return adultArr.reduce((acc, hAge) => acc + hAge, 0) / adultArr.length; */
+
+  //With chaining
+  return arrDogsAge
+    .map((dogAge, i) => {
+      let calAge = 0;
+
+      if (dogAge <= 2) {
+        calAge = dogAge * 2;
+      } else {
+        calAge = dogAge * 4 + 16;
+      }
+
+      return calAge;
+    })
+    .filter(dogAge => dogAge >= 18)
+    .reduce((acc, hAge, _, arr) => acc + hAge / arr.length, 0);
+};
+
+console.log(Math.round(caculateAverageHumanAge(data1), 1));
+console.log(Math.round(caculateAverageHumanAge(data2), 1));
+
 //
 //////////////////////////////////////////////////////////////////////
 //
