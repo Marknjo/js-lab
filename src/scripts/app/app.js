@@ -115,7 +115,21 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
-console.log(containerMovements.innerHTML);
+//Compute username initials
+const user = 'Steven Thomas Williams';
+console.log(accounts);
+
+const createUsernames = function (accs) {
+  accs.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(str => str[0])
+      .join('');
+  });
+};
+
+console.log(accounts);
 
 /////////////////////////////////////////////////
 //Separator for console logs
