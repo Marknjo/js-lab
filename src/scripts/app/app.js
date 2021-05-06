@@ -136,6 +136,14 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+const displayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  //show balance
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+displayBalance(account1.movements);
+
 /////////////////////////////////////////////////
 //Separator for console logs
 /////////////////////////////////////////////////
