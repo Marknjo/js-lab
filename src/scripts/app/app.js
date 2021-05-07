@@ -191,6 +191,7 @@ btnLogin.addEventListener('click', function (e) {
     //clear inout fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+    inputLoginUsername.blur();
 
     //display UI
     containerApp.style.opacity = 1;
@@ -225,6 +226,30 @@ btnTransfer.addEventListener('click', function (e) {
   } else {
     console.log('InValid transfer');
   }
+});
+
+btnClose.addEventListener('click', e => {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    //remove the user fo from the account array
+    const accIndex = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    accounts.splice(accIndex, 1);
+
+    //hide UI
+    containerApp.style.opacity = 0;
+  } else {
+    console.log(
+      "Invalid entries, can't close the account. Contanct the help team."
+    );
+  }
+  //clear the input fields
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 /////////////////////////////////////////////////
