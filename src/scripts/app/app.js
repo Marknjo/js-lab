@@ -428,11 +428,26 @@ console.log(Math.round(caculateAverageHumanAge(data2), 1));
 //
 
 //Returns the first element found in the array/ search
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const firstWithdrawal = movements.find(mov => mov < 0);
 
 console.log(movements);
-console.log(firstWithdrawal);
+console.log(firstWithdrawal); */
+
+//////////////////////////////////////////////
+//                                          //
+//              Some & Every                //
+//                                          //
+//////////////////////////////////////////////
+//
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//includes tests for equality
+console.log(movements.includes(-400));
+
+//Testing for a condition: Specify a condition
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
 
 //
 //////////////////////////////////////////////////////////////////////
