@@ -449,6 +449,20 @@ console.log(movements.includes(-400));
 const anyDeposits = movements.some(mov => mov > 1500);
 console.log(anyDeposits);
 
+//Every: It checks if all the values in the array are true. Only then it passes
+const deposits = movements.filter(mov => mov > 0); //get only deposits
+
+const checkDeposits = deposits.every(dep => dep > 0);
+console.log(checkDeposits);
+
+//callback is a function that can be written separately
+consoleSeparator('Separate Function in Array Methods', 15);
+const clMov = mov => mov > 0;
+
+console.log(movements.some(clMov));
+console.log(deposits.every(clMov));
+console.log(movements.filter(clMov));
+
 //
 //////////////////////////////////////////////////////////////////////
 //
