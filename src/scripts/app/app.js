@@ -440,7 +440,7 @@ console.log(firstWithdrawal); */
 //                                          //
 //////////////////////////////////////////////
 //
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/* const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 //includes tests for equality
 console.log(movements.includes(-400));
@@ -461,7 +461,73 @@ const clMov = mov => mov > 0;
 
 console.log(movements.some(clMov));
 console.log(deposits.every(clMov));
-console.log(movements.filter(clMov));
+console.log(movements.filter(clMov)); */
+
+//////////////////////////////////////////////
+//                                          //
+//           Flat and FlatMap               //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//flatten the nested arrays:: 1 level deep
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+//The default is 1, if you want several deep, you add the number.
+const arrDeep = [[1, [2, 3]], [[4, [5]], 6], 7, 8];
+console.log(arrDeep.flat(3));
+
+consoleSeparator('EXPLORING flatMap');
+//FlatMap, goes one level deep
+// It combines the use on maps and flat
+//suppose we need to add values of the movements below
+// here is the solution
+// Data
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+//Sln 1.
+const sumOfMovementsSln1 = accounts
+  .map(mov => mov.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(sumOfMovementsSln1);
+
+//Sln 1.
+const sumOfMovementsSln2 = accounts
+  .flatMap(mov => mov.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(sumOfMovementsSln2);
 
 //
 //////////////////////////////////////////////////////////////////////
