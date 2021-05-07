@@ -113,8 +113,6 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 //
 const user = 'Steven Thomas Williams';
 
@@ -142,20 +140,18 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} €`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements, interestRate) {
-  const income = movements
+const calcDisplaySummary = function (acc) {
+  const income = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(dep => dep * (interestRate / 100))
+    .map(dep => (dep * acc.interestRate) / 100)
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int, 0);
 
@@ -163,11 +159,41 @@ const calcDisplaySummary = function (movements, interestRate) {
   labelSumIn.textContent = `${income} €`;
   labelSumOut.textContent = `${Math.abs(out)} €`;
   labelSumInterest.textContent = `${interest} €`;
-
-  console.log(income, out);
 };
-calcDisplaySummary(account1.movements, account1.interestRate);
 
+//Event Handlers
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  //prevent form from submitting
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //1. Display UI a welcome message
+    labelWelcome.textContent = `Welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    //clear inout fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    //display UI
+    containerApp.style.opacity = 1;
+
+    //2. Calculate balance
+    calcDisplayBalance(currentAccount.movements);
+    //3. Display summary
+    calcDisplaySummary(currentAccount);
+    //4. Display movements
+    displayMovements(currentAccount.movements);
+  }
+});
+console.log(accounts);
 /////////////////////////////////////////////////
 //Separator for console logs
 /////////////////////////////////////////////////
