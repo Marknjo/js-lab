@@ -326,7 +326,7 @@ console.log(highestBalance); */
 
 //Julia Example #2
 //Data
-const data1 = [5, 2, 4, 1, 15, 8, 3];
+/* const data1 = [5, 2, 4, 1, 15, 8, 3];
 const data2 = [16, 6, 10, 5, 6, 1, 4];
 
 //Task #1: Calculate human age
@@ -384,21 +384,21 @@ console.log(
 consoleSeparator('TASK #4: FINAL SOLUTION', 15);
 
 const caculateAverageHumanAge = function (arrDogsAge) {
-  /* const adultArr = arrDogsAge
-    .map((dogAge, i) => {
-      let calAge = 0;
+  // const adultArr = arrDogsAge
+  //   .map((dogAge, i) => {
+  //     let calAge = 0;
 
-      if (dogAge <= 2) {
-        calAge = dogAge * 2;
-      } else {
-        calAge = dogAge * 4 + 16;
-      }
+  //     if (dogAge <= 2) {
+  //       calAge = dogAge * 2;
+  //     } else {
+  //       calAge = dogAge * 4 + 16;
+  //     }
 
-      return calAge;
-    })
-    .filter(dogAge => dogAge >= 18);
+  //     return calAge;
+  //   })
+  //   .filter(dogAge => dogAge >= 18);
 
-  return adultArr.reduce((acc, hAge) => acc + hAge, 0) / adultArr.length; */
+  // return adultArr.reduce((acc, hAge) => acc + hAge, 0) / adultArr.length;
 
   //With chaining
   return arrDogsAge
@@ -419,6 +419,20 @@ const caculateAverageHumanAge = function (arrDogsAge) {
 
 console.log(Math.round(caculateAverageHumanAge(data1), 1));
 console.log(Math.round(caculateAverageHumanAge(data2), 1));
+ */
+//////////////////////////////////////////////
+//                                          //
+//             The Find Method              //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Returns the first element found in the array/ search
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const firstWithdrawal = movements.find(mov => mov < 0);
+
+console.log(movements);
+console.log(firstWithdrawal);
 
 //
 //////////////////////////////////////////////////////////////////////
