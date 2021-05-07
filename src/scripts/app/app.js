@@ -134,10 +134,11 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+
   //show balance
-  labelBalance.textContent = `${balance} €`;
+  labelBalance.textContent = `${acc.balance} €`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -159,6 +160,15 @@ const calcDisplaySummary = function (acc) {
   labelSumIn.textContent = `${income} €`;
   labelSumOut.textContent = `${Math.abs(out)} €`;
   labelSumInterest.textContent = `${interest} €`;
+};
+
+const updateUI = acc => {
+  //2. Calculate balance
+  calcDisplayBalance(acc);
+  //3. Display summary
+  calcDisplaySummary(acc);
+  //4. Display movements
+  displayMovements(acc.movements);
 };
 
 //Event Handlers
@@ -185,15 +195,38 @@ btnLogin.addEventListener('click', function (e) {
     //display UI
     containerApp.style.opacity = 1;
 
-    //2. Calculate balance
-    calcDisplayBalance(currentAccount.movements);
-    //3. Display summary
-    calcDisplaySummary(currentAccount);
-    //4. Display movements
-    displayMovements(currentAccount.movements);
+    updateUI(currentAccount);
   }
 });
-console.log(accounts);
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  //Clean the transfer fields
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    currentAccount?.username &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //update the user interface
+    updateUI(currentAccount);
+  } else {
+    console.log('InValid transfer');
+  }
+});
+
 /////////////////////////////////////////////////
 //Separator for console logs
 /////////////////////////////////////////////////
