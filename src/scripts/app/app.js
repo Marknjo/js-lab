@@ -252,6 +252,28 @@ btnClose.addEventListener('click', e => {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  //1. there is at least one deposit
+  //2. Current balance is above 10% of the requested loan amount
+  const requestedAmount = Number(inputLoanAmount.value);
+
+  if (
+    requestedAmount > 0 &&
+    currentAccount.movements.some(mov => mov >= requestedAmount * 0.1)
+  ) {
+    //clear the input value
+    inputLoanAmount.value = '';
+    //add the balance to the movement
+    currentAccount.movements.push(requestedAmount);
+    //update UI
+    updateUI(currentAccount);
+  } else {
+    console.log('You do not qualify for the loan');
+  }
+});
+
 /////////////////////////////////////////////////
 //Separator for console logs
 /////////////////////////////////////////////////
