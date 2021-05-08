@@ -535,7 +535,7 @@ console.log(sumOfMovementsSln2); */
 //                                          //
 //////////////////////////////////////////////
 //
-
+/*
 const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
 
 console.log(owners.sort()); //mutates the original array
@@ -545,7 +545,7 @@ console.log(owners);
 //converst everything to strings firs
 
 // Data
-const account1 = {
+ const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
@@ -587,36 +587,195 @@ console.log(movements.sort());
 // return > 0,B, A  -> b is bigger than a
 
 //Ascending
-/* movements.sort((a, b) => {
-  if (a > b) {
-    return 1;
-  }
-  if (b > a) {
-    return -1;
-  }
-}); */
+// movements.sort((a, b) => {
+//   if (a > b) {
+//     return 1;
+//   }
+//   if (b > a) {
+//     return -1;
+//   }
+// });
 
 movements.sort((a, b) => a - b);
 
 console.log(movements);
 
 //Descending
-/* movements.sort((a, b) => {
-  if (a > b) {
-    return -1;
-  }
-  if (b > a) {
-    return 1;
-  }
-});
- */
+// movements.sort((a, b) => {
+//   if (a > b) {
+//     return -1;
+//   }
+//   if (b > a) {
+//     return 1;
+//   }
+// });
+
 
 movements.sort((a, b) => b - a);
-console.log(movements);
+console.log(movements); */
 
 //Mixed arrays don't work
 // an array with numbers and strings
 
+//////////////////////////////////////////////
+//                                          //
+//         Creating & filling Arrays        //
+//                                          //
+//////////////////////////////////////////////
+//
+/* console.log([1, 2, 3, 4, 5, 6, 7, 8]);
+const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+//programatic creating array
+//#1 Methods: EMpty new Arry(value) + fill method
+const x = new Array(7);
+console.log(x);
+
+//console.log(x.map(() => 5)); //desn't work
+
+x.fill(1, 3, 5);
+
+console.log(x);
+arr.fill(23, 2, 6);
+console.log(arr);
+
+//#2. Array.from()
+//Much cleaner
+const fromArr = Array.from({ length: 7 }, () => 1);
+console.log(fromArr);
+
+const arr1To7 = Array.from({ length: 7 }, (_, i) => i + 1);
+
+console.log(arr1To7);
+
+const random100DiceRolls = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 6) + 1
+);
+
+console.log(random100DiceRolls);
+console.log(random100DiceRolls.filter(i => i === 6));
+//Practical example of Array.from
+
+const gridItems = document.querySelectorAll('.grid-items');
+
+console.log(
+  Array.from(gridItems, el => el.textContent)
+    .slice(1)
+    .map(el => Number(el.split(' ').slice(-1).join()))
+); */
+
+//////////////////////////////////////////////
+//                                          //
+//              Arrays Practice             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const account1 = {
+  owner: 'Jonas Schmedtmann',
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 1111,
+};
+
+const account2 = {
+  owner: 'Jessica Davis',
+  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  interestRate: 1.5,
+  pin: 2222,
+};
+
+const account3 = {
+  owner: 'Steven Thomas Williams',
+  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  interestRate: 0.7,
+  pin: 3333,
+};
+
+const account4 = {
+  owner: 'Sarah Smith',
+  movements: [430, 1000, 700, 50, 90],
+  interestRate: 1,
+  pin: 4444,
+};
+
+const accounts = [account1, account2, account3, account4];
+
+const allTransanctions = accounts.flatMap(movs => movs.movements);
+
+const bankDepositSum = allTransanctions
+  .filter(dep => dep > 0)
+  .reduce((acc, cur) => acc + cur);
+
+console.log(bankDepositSum);
+
+// 2.
+// const numDeposits1000 = accounts
+//   .flatMap(movs => movs.movements)
+//   .filter(mov => mov >= 1000).length;
+const numDeposits1000 = allTransanctions.reduce(
+  (count, cur) => (cur >= 1000 ? ++count : count),
+  0
+);
+console.log(allTransanctions);
+console.log(numDeposits1000);
+
+// 3.
+const sums = allTransanctions.reduce(
+  (sums, cur) => {
+    // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+
+    sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+
+    return sums;
+  },
+  { deposits: 0, withdrawals: 0 }
+);
+
+const { deposits, withdrawals } = sums;
+console.log(deposits, withdrawals);
+
+// 4. title case example
+// this is a nice title -> This Is a Nice Title
+
+const convertToTitleCase = str => {
+  const exceptions = [
+    'a',
+    'an',
+    'the',
+    'but',
+    'or',
+    'on',
+    'in',
+    'is',
+    'and',
+    'with',
+  ];
+
+  const capitalize = str => str.replace(str[0], str[0].toUpperCase());
+  return capitalize(
+    str
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+      .join(' ')
+  );
+};
+const toTitleCase = convertToTitleCase(' JUMBLED leTterS in This STRIng ');
+const toTitleCase1 = convertToTitleCase(' this is a nice title ');
+const toTitleCase2 = convertToTitleCase(
+  ' this is a LONG title but Not too Long '
+);
+const toTitleCase3 = convertToTitleCase(
+  ' and here is another title with an EXAMPLE '
+);
+
+console.log(toTitleCase);
+console.log(toTitleCase1);
+console.log(toTitleCase2);
+console.log(toTitleCase3);
 //
 //////////////////////////////////////////////////////////////////////
 //
