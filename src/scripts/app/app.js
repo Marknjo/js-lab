@@ -92,12 +92,15 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //                                          //
 //////////////////////////////////////////////
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   //clean the container
   containerMovements.innerHTML = '';
 
+  //sort
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
   //add new data
-  movements.forEach((mov, i) => {
+  movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
         <div class="movements__row">
@@ -272,6 +275,16 @@ btnLoan.addEventListener('click', function (e) {
   } else {
     console.log('You do not qualify for the loan');
   }
+});
+
+let sorted = false;
+
+//sorting movements
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  //Sort descending
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
