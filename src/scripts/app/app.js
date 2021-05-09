@@ -1,7 +1,7 @@
 /**
  * Creates a separator markers with a title on the console
  * @param {String} title
- * @param {Number} separatorLen
+ * @param {+} separatorLen
  */
 const consoleSeparator = (title = './END', separatorLen = 20) => {
   console.log('\n\n');
@@ -232,7 +232,7 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.username === inputLoginUsername.value
   );
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     //1. Display UI a welcome message
     labelWelcome.textContent = `Welcome back ${
       currentAccount.owner.split(' ')[0]
@@ -252,7 +252,7 @@ btnLogin.addEventListener('click', function (e) {
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -282,7 +282,7 @@ btnClose.addEventListener('click', e => {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    currentAccount.pin === Number(inputClosePin.value)
+    currentAccount.pin === +inputClosePin.value
   ) {
     //remove the user fo from the account array
     const accIndex = accounts.findIndex(
@@ -306,7 +306,7 @@ btnLoan.addEventListener('click', function (e) {
 
   //1. there is at least one deposit
   //2. Current balance is above 10% of the requested loan amount
-  const requestedAmount = Number(inputLoanAmount.value);
+  const requestedAmount = +inputLoanAmount.value;
 
   if (
     requestedAmount > 0 &&
