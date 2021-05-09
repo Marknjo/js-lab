@@ -198,7 +198,7 @@ console.log(isEven(233)); */
 // 64bits numbers 64 1 & 0 = 53 are used to strore the digits themselves, the rest are for storing position
 //There is limit
 
-console.log(2 ** 53 - 1); // NUmber big than this
+/* console.log(2 ** 53 - 1); // NUmber big than this
 console.log(Number.MAX_SAFE_INTEGER);
 console.log(2 ** 53 + 1);
 console.log(2 ** 53 + 2);
@@ -215,6 +215,52 @@ console.log(10000n + 10000n);
 
 console.log(3434636346121344124252354126n * 101231210n);
 //you cannot mix int with intengers
+ */
+//////////////////////////////////////////////
+//                                          //
+//             Creating Dates               //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Messy and confusing in JavaScript
+//step 1. Creating dates (4 ways)
+//#1
+const now = new Date();
+console.log(now);
+
+//#2
+console.log(new Date('Aug 02 2020 18:05:41')); //parsing date
+console.log(new Date('December 24, 2014'));
+
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 11, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+consoleSeparator('DATES METHODS');
+//dates have special methods
+//Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+
+console.log(new Date(2142246180000));
+
+console.log(Date.now());
+
+future.setFullYear(2040);
+console.log(future);
 
 //Separator for console logs
 /////////////////////////////////////////////////
