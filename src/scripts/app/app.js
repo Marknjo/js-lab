@@ -271,12 +271,12 @@ const calcTimePassed = date => {
     } */
 
     if (milliseconds <= 1000 * 60) {
-      const secs = Math.floor(milliseconds / (1000 * 60));
+      const secs = Math.floor(milliseconds / 1000);
 
       return `${secs} second${secs > 1 ? 's' : ''} ago.`;
     } else if (milliseconds <= 1000 * 60 * 60 && milliseconds > 1000 * 60) {
       // Minutes
-      const mins = Math.floor(milliseconds / (1000 * 60 * 60));
+      const mins = Math.floor(milliseconds / (1000 * 60));
 
       return `${mins} minute${mins > 1 ? 's' : ''} ago.`;
     } else if (
@@ -284,7 +284,7 @@ const calcTimePassed = date => {
       milliseconds > 1000 * 60 * 60
     ) {
       // Hours
-      const hours = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(milliseconds / (1000 * 60 * 60));
 
       return `${hours} hour${hours > 1 ? 's' : ''} ago.`;
     } else if (
@@ -292,7 +292,7 @@ const calcTimePassed = date => {
       milliseconds >= 1000 * 60 * 60 * 24
     ) {
       // Days
-      const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 7));
+      const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
 
       return `${days} day${days > 1 ? 's' : ''} ago.`;
     } else if (
