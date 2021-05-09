@@ -138,6 +138,20 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //                                          //
 //////////////////////////////////////////////
 
+const showDate = (date = '', displayTime = false) => {
+  date = date ? new Date(date) : new Date();
+  console.log(date);
+  const day = `${date.getDate()}`.padStart(2, 0);
+  const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  const year = date.getFullYear();
+  const hour = date.getHours();
+  const min = date.getMinutes();
+
+  displayTime = displayTime ? `, ${hour}:${min}` : '';
+  //displat date
+  return `${day}/${month}/${year}${displayTime}`;
+};
+
 const displayMovements = function (acc, sort = false) {
   //clean the container
   containerMovements.innerHTML = '';
@@ -150,12 +164,15 @@ const displayMovements = function (acc, sort = false) {
   //add new data
   movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const displayDate = showDate(new Date(acc.movementsDates[i]));
+
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-          <div class="movements__date">3 days ago</div>
+          <div class="movements__date">${displayDate}</div>
           <div class="movements__value">${mov.toFixed(2)} €</div>
         </div>
       `;
@@ -230,18 +247,7 @@ let currentAccount;
 currentAccount = account1;
 containerApp.style.opacity = 1;
 updateUI(currentAccount);
-
-//construct today date
-// day/month/year, hh:mm
-const date = new Date();
-const day = `${date.getDate()}`.padStart(2, 0);
-const month = `${date.getMonth() + 1}`.padStart(2, 0);
-const year = date.getFullYear();
-const hour = date.getHours();
-const min = date.getMinutes();
-
-//displat date
-labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+labelDate.textContent = showDate('', true);
 
 btnLogin.addEventListener('click', function (e) {
   //prevent form from submitting
@@ -263,8 +269,10 @@ btnLogin.addEventListener('click', function (e) {
 
     //display UI
     containerApp.style.opacity = 1;
-
+    //update UI
     updateUI(currentAccount);
+    //display current date
+    labelDate.textContent = showDate('', true);
   }
 });
 
