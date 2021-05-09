@@ -138,7 +138,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //                                          //
 //////////////////////////////////////////////
 
-const caltTimePassed = date => {
+const calcTimePassed = date => {
   //find miliseconds
   // display 2 seconds ago: milliseconds <= 1000 * 60
   // display  2 minutes age : milliseconds <= 1000 * 60 * 60 && milliseconds > 1000 * 60
@@ -384,7 +384,7 @@ const displayMovements = function (acc, sort = false) {
   movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-    const displayDate = showDate(new Date(acc.movementsDates[i]));
+    const displayDate = calcTimePassed(new Date(acc.movementsDates[i]));
 
     const html = `
         <div class="movements__row">
