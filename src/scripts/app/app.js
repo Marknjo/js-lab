@@ -138,6 +138,210 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //                                          //
 //////////////////////////////////////////////
 
+const caltTimePassed = date => {
+  //find miliseconds
+  // display 2 seconds ago: milliseconds <= 1000 * 60
+  // display  2 minutes age : milliseconds <= 1000 * 60 * 60 && milliseconds > 1000 * 60
+  // display  5 hours ago : milliseconds < 1000 * 60 * 60 * 24 && milliseconds > 1000 * 60 * 60
+  // display 5 days ago : milliseconds <= 1000 * 60 * 60 * 24 * 7 && milliseconds >= 1000 * 60 * 60 * 24;
+  // display 3 weeks ago : milliseconds <= 1000 * 60 * 60 * 24 * 30 && milliseconds >= 1000 * 60 * 60 * 7;
+  // display 4 months ago : milliseconds <= 1000 * 60 * 60 * 24 * 365 && milliseconds >= 1000 * 60 * 60 * 24 * 30;
+  // display 1 year ago : milliseconds >= 1000 * 60 * 60 * 24 * 365
+
+  //start by convert time
+  const currentDate = new Date();
+
+  const prevDate = new Date(date);
+
+  const milliseconds = currentDate - prevDate;
+
+  /* console.log(`Years Test ${}`);
+  console.log(
+    `Months Test ${
+      
+    }`
+  );
+  console.log(
+    `Weeks Test ${
+      milliseconds <= 1000 * 60 * 60 * 24 * 30 &&
+      milliseconds >= 1000 * 60 * 60 * 7
+    }`
+  );
+  console.log(
+    `Days Test ${
+      
+    }`
+  );
+  console.log(
+    `Hours Test ${
+      milliseconds < 1000 * 60 * 60 * 24 && milliseconds > 1000 * 60 * 60
+    }`
+  );
+  console.log(
+    `MinutesTest ${milliseconds <= 1000 * 60 * 60 && milliseconds > 1000 * 60}`
+  );
+  console.log(`Seconds Test ${milliseconds <= 1000 * 60}`);
+  console.log(cnvtSecs > milliseconds);
+  console.log(milliseconds / (1000 * 60 * 60 * 24 * 365)); */
+
+  try {
+    /* switch (milliseconds) {
+      //seconds
+      case milliseconds <= 1000 * 60:
+        const secs = Math.floor(milliseconds / (1000 * 60));
+
+        return `${secs} second${secs > 1 ? 's' : ''} ago.`;
+        break;
+
+      // Minutes
+      case milliseconds <= 1000 * 60 * 60 && milliseconds > 1000 * 60:
+        const mins = Math.floor(milliseconds / (1000 * 60 * 60));
+
+        return `${mins} minute${mins > 1 ? 's' : ''} ago.`;
+        break;
+
+      // Hours
+      case milliseconds < 1000 * 60 * 60 * 24 && milliseconds > 1000 * 60 * 60:
+        const hours = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+
+        return `${hours} hour${hours > 1 ? 's' : ''} ago.`;
+
+        break;
+
+      // Days
+      case milliseconds <= 1000 * 60 * 60 * 24 * 7 &&
+        milliseconds >= 1000 * 60 * 60 * 24:
+        const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 7));
+
+        return `${days} day${days > 1 ? 's' : ''} ago.`;
+
+        break;
+
+      // Weeks
+      case milliseconds <= 1000 * 60 * 60 * 24 * 30 &&
+        milliseconds >= 1000 * 60 * 60 * 7:
+        let numDays = Math.floor(
+          (milliseconds % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24)
+        );
+        numDays = numDays > 0 ? ` and ${numDays} days` : '';
+
+        const weeks = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 7));
+
+        return `${weeks} week${weeks > 1 ? 's' : ''}${numDays} ago.`;
+
+        break;
+
+      // Months
+      case milliseconds <= 1000 * 60 * 60 * 24 * 365 &&
+        milliseconds >= 1000 * 60 * 60 * 24 * 30:
+        let numWeeks = Math.floor(
+          (milliseconds % (1000 * 60 * 60 * 24 * 365)) /
+            (1000 * 60 * 60 * 24 * 7)
+        );
+
+        numWeeks = numWeeks > 0 ? ` and ${numWeeks} weeks` : '';
+
+        const months = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 365));
+
+        return `${months} month${months > 1 ? 's' : ''}${numWeeks} ago.`;
+
+        break;
+
+      // Years
+      case milliseconds >= 1000 * 60 * 60 * 24 * 365:
+        console.log('Inside the equation');
+
+        let numMonths = Math.floor(
+          (milliseconds % (1000 * 60 * 60 * 24 * 365)) /
+            (1000 * 60 * 60 * 24 * 30)
+        );
+
+        numMonths = numMonths > 0 ? ` and ${numMonths} months` : '';
+
+        const years = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 365));
+
+        console.log(numMonths, years);
+
+        return `${years} year${years > 1 ? 's' : ''}${numMonths} ago.`;
+
+        break;
+
+      default:
+        throw new Error('Wrong Date Supplied');
+    } */
+
+    if (milliseconds <= 1000 * 60) {
+      const secs = Math.floor(milliseconds / (1000 * 60));
+
+      return `${secs} second${secs > 1 ? 's' : ''} ago.`;
+    } else if (milliseconds <= 1000 * 60 * 60 && milliseconds > 1000 * 60) {
+      // Minutes
+      const mins = Math.floor(milliseconds / (1000 * 60 * 60));
+
+      return `${mins} minute${mins > 1 ? 's' : ''} ago.`;
+    } else if (
+      milliseconds < 1000 * 60 * 60 * 24 &&
+      milliseconds > 1000 * 60 * 60
+    ) {
+      // Hours
+      const hours = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+
+      return `${hours} hour${hours > 1 ? 's' : ''} ago.`;
+    } else if (
+      milliseconds <= 1000 * 60 * 60 * 24 * 7 &&
+      milliseconds >= 1000 * 60 * 60 * 24
+    ) {
+      // Days
+      const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 7));
+
+      return `${days} day${days > 1 ? 's' : ''} ago.`;
+    } else if (
+      milliseconds <= 1000 * 60 * 60 * 24 * 30 &&
+      milliseconds >= 1000 * 60 * 60 * 7
+    ) {
+      // Weeks
+      let numDays = Math.floor(
+        (milliseconds % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24)
+      );
+      numDays = numDays > 0 ? ` and ${numDays} days` : '';
+
+      const weeks = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 7));
+
+      return `${weeks} week${weeks > 1 ? 's' : ''}${numDays} ago.`;
+    } else if (
+      milliseconds <= 1000 * 60 * 60 * 24 * 365 &&
+      milliseconds >= 1000 * 60 * 60 * 24 * 30
+    ) {
+      // Months
+      let numWeeks = Math.floor(
+        (milliseconds % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 7)
+      );
+
+      numWeeks = numWeeks > 0 ? ` and ${numWeeks} weeks` : '';
+
+      const months = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 365));
+
+      return `${months} month${months > 1 ? 's' : ''}${numWeeks} ago.`;
+    } else if (milliseconds >= 1000 * 60 * 60 * 24 * 365) {
+      // Years
+      let numMonths = Math.floor(
+        (milliseconds % (1000 * 60 * 60 * 24 * 365)) /
+          (1000 * 60 * 60 * 24 * 30)
+      );
+
+      numMonths = numMonths > 0 ? ` and ${numMonths} months` : '';
+
+      const years = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 365));
+
+      return `${years} year${years > 1 ? 's' : ''}${numMonths} ago.`;
+    } else {
+      throw new Error('Wrong Date Supplied');
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 /**
  * Formats the current date to ISO string for storage
  *
