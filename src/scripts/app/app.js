@@ -224,6 +224,23 @@ const updateUI = acc => {
 
 let currentAccount;
 
+//FAKE LOGIN
+currentAccount = account1;
+containerApp.style.opacity = 1;
+updateUI(currentAccount);
+
+//construct today date
+// day/month/year, hh:mm
+const date = new Date();
+const day = `${date.getDate()}`.padStart(2, 0);
+const month = `${date.getMonth() + 1}`.padStart(2, 0);
+const year = date.getFullYear();
+const hour = date.getHours();
+const min = date.getMinutes();
+
+//displat date
+labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+
 btnLogin.addEventListener('click', function (e) {
   //prevent form from submitting
   e.preventDefault();
