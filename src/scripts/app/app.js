@@ -138,6 +138,22 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //                                          //
 //////////////////////////////////////////////
 
+/**
+ * Formats the current date to ISO string for storage
+ *
+ * @returns Date
+ */
+const formatCurDateToISO = () => {
+  return new Date().toISOString();
+};
+
+/**
+ * Show the formated date
+ *
+ * @param {Date} date
+ * @param {Boolean} displayTime
+ * @returns
+ */
 const showDate = (date = '', displayTime = false) => {
   date = date ? new Date(date) : new Date();
   console.log(date);
