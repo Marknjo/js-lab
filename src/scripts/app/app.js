@@ -156,12 +156,11 @@ const formatCurDateToISO = () => {
  */
 const showDate = (date = '', displayTime = false) => {
   date = date ? new Date(date) : new Date();
-  console.log(date);
   const day = `${date.getDate()}`.padStart(2, 0);
   const month = `${date.getMonth() + 1}`.padStart(2, 0);
   const year = date.getFullYear();
-  const hour = date.getHours();
-  const min = date.getMinutes();
+  const hour = `${date.getHours()}`.padStart(2, 0);
+  const min = `${date.getMinutes()}`.padStart(2, 0);
 
   displayTime = displayTime ? `, ${hour}:${min}` : '';
   //displat date
@@ -312,6 +311,9 @@ btnTransfer.addEventListener('click', function (e) {
   ) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
+    //update dates of transfers
+    currentAccount.movementsDates.push(formatCurDateToISO());
+    receiverAcc.movementsDates.push(formatCurDateToISO());
 
     //update the user interface
     updateUI(currentAccount);
