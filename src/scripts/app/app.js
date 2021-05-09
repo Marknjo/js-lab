@@ -164,7 +164,7 @@ console.log(+(2.345).toFixed(2)); */
 //////////////////////////////////////////////
 //
 
-console.log(5 % 2);
+/* console.log(5 % 2);
 console.log(5 / 2); // 5 = 2 * 2 + 1
 
 console.log(8 % 3);
@@ -185,9 +185,36 @@ const isEven = n => n % 2 === 0;
 console.log(isEven(8));
 console.log(isEven(238));
 console.log(isEven(23));
-console.log(isEven(233));
+console.log(isEven(233)); */
 
-//Practical example
+//////////////////////////////////////////////
+//                                          //
+//          Working wuth BigINT             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//special, introduced in es2020
+// 64bits numbers 64 1 & 0 = 53 are used to strore the digits themselves, the rest are for storing position
+//There is limit
+
+console.log(2 ** 53 - 1); // NUmber big than this
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(234243222225455555555555555555555521214212031020);
+console.log(234243222225455555555555555555555521214212031020n); //from 2020
+
+console.log(BigInt(234243222225455555555555555555555521214212031020));
+console.log(BigInt(2342432222254));
+
+console.log(10000n + 10000n);
+
+console.log(3434636346121344124252354126n * 101231210n);
+//you cannot mix int with intengers
 
 //Separator for console logs
 /////////////////////////////////////////////////
