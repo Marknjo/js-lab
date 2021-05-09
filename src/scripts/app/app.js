@@ -359,6 +359,8 @@ btnLoan.addEventListener('click', function (e) {
     inputLoanAmount.value = '';
     //add the balance to the movement
     currentAccount.movements.push(requestedAmount);
+    //push date
+    currentAccount.movementsDates.push(formatCurDateToISO());
     //update UI
     updateUI(currentAccount);
   } else {
