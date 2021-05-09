@@ -314,12 +314,12 @@ const calcTimePassed = date => {
     ) {
       // Months
       let numWeeks = Math.floor(
-        (milliseconds % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 7)
+        (milliseconds % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7)
       );
 
       numWeeks = numWeeks > 0 ? ` and ${numWeeks} weeks` : '';
 
-      const months = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 365));
+      const months = Math.floor(milliseconds / (1000 * 60 * 60 * 24 * 30));
 
       return `${months} month${months > 1 ? 's' : ''}${numWeeks} ago.`;
     } else if (milliseconds >= 1000 * 60 * 60 * 24 * 365) {
