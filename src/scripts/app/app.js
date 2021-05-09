@@ -252,7 +252,7 @@ btnLogin.addEventListener('click', function (e) {
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = +inputTransferAmount.value;
+  const amount = Math.floor(inputTransferAmount.value);
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -306,7 +306,7 @@ btnLoan.addEventListener('click', function (e) {
 
   //1. there is at least one deposit
   //2. Current balance is above 10% of the requested loan amount
-  const requestedAmount = +inputLoanAmount.value;
+  const requestedAmount = Math.floor(inputLoanAmount.value);
 
   if (
     requestedAmount > 0 &&
