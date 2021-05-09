@@ -138,12 +138,14 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //                                          //
 //////////////////////////////////////////////
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   //clean the container
   containerMovements.innerHTML = '';
 
   //sort
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   //add new data
   movs.forEach((mov, i) => {
@@ -217,7 +219,7 @@ const updateUI = acc => {
   //3. Display summary
   calcDisplaySummary(acc);
   //4. Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 };
 
 //Event Handlers
@@ -346,7 +348,7 @@ let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
   //Sort descending
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
