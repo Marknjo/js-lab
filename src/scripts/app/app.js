@@ -1,5 +1,5 @@
 /**
- * Creates as a separator in the console
+ * Creates a separator markers with a title on the console
  * @param {String} title
  * @param {Number} separatorLen
  */
