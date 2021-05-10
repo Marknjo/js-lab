@@ -207,6 +207,61 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 
 //////////////////////////////////////////////
 //                                          //
+//                 Bankist                  //
+//           Sticky Navigation              //
+//                                          //
+//////////////////////////////////////////////
+//
+
+/* const initialCoords = section1.getBoundingClientRect();
+//Scroll event fires all the time. This creates a huge bottleneck on performance
+window.addEventListener('scroll', function (e) {
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+ */
+
+//Sticky navigation: INtersectonObserver API
+
+/* const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2],
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1); */
+
+const header = document.querySelector('.header');
+const navHeight = `-${nav.getBoundingClientRect().height}px`;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (entry.isIntersecting) {
+    nav.classList.remove('sticky');
+  } else {
+    nav.classList.add('sticky');
+  }
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: navHeight,
+});
+headerObserver.observe(header);
+
+//////////////////////////////////////////////
+//                                          //
 //                  LESSONS                 //
 // Selecting, Creating, & Deleting Elements //
 //                                          //
