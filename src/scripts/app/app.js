@@ -63,9 +63,54 @@ displayYear();
 
 //////////////////////////////////////////////
 //                                          //
-//          Starter Sections Separtor       //
+//                  LESSONS                 //
+// Selecting, Creating, & Deleting Elements //
 //                                          //
 //////////////////////////////////////////////
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+
+const header = document.querySelector('.header');
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
+
+document.getElementById('section--1');
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons);
+
+console.log(document.getElementsByClassName('btn'));
+
+//Creating and inserting elements
+//.insertAdjacentHTML - quick way to create HTML elements
+
+const message = document.createElement('div'); //create a DOM element - not in the DOM but in Memory
+message.classList.add('cookie-message');
+message.innerHTML =
+  'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Close</button>';
+
+//add as the first child of the parent element
+//header.prepend(message);
+
+//added at the last child of the parent element (You can't use both of the methods)
+header.append(message);
+
+//inserting multiple copies
+//header.append(message.cloneNode(true));
+
+//Insert after the header element
+//header.after(message);
+
+//Insert before the header element
+//header.before(message);
+
+//Delete elements in the node
+document.querySelector('.btn--close-cookie').addEventListener('click', () => {
+  //Old way of deleting elements in the DOM
+  //message.parentElement.removeChild(message);
+  //new way of deleting elements in the DOM
+  message.remove();
+});
 
 //Separator for console logs
 /////////////////////////////////////////////////
