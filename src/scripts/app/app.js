@@ -187,6 +187,25 @@ console.log(logo.src);
 console.log(logo.src); //absolute
 console.log(logo.getAttribute('src')); //relative */
 
+//////////////////////////////////////////////
+//                                          //
+//                  LESSONS                 //
+//    Types of Events and Even Handler      //
+//                                          //
+//////////////////////////////////////////////
+//
+const h1 = document.querySelector('h1');
+
+const alertH1 = e => {
+  alert('addEventListener: Great you are reading the heading :D');
+
+  //e.target.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
 //Separator for console logs
 /////////////////////////////////////////////////
 consoleSeparator(undefined, 40);
