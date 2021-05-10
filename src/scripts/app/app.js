@@ -26,6 +26,12 @@ const section1 = document.querySelector('#section--1');
 
 const btnNavLinks = document.querySelectorAll('.nav__link');
 
+const nav = document.querySelector('.nav');
+
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content');
+
 ///////////////////////////////////////
 // Modal window
 
@@ -148,10 +154,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 //////////////////////////////////////////////
 //
 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabContainer = document.querySelector('.operations__tab-container');
-const tabContent = document.querySelectorAll('.operations__content');
-
 tabContainer.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -173,6 +175,35 @@ tabContainer.addEventListener('click', function (e) {
 
   //
 });
+
+//////////////////////////////////////////////
+//                                          //
+//                 Bankist                  //
+//           Menu Fade Animation            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) {
+        el.style.opacity = this;
+      }
+    });
+
+    logo.style.opacity = this;
+  }
+};
+
+//Passing arguments into handler functions
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 //////////////////////////////////////////////
 //                                          //
