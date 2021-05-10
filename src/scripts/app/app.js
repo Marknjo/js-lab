@@ -67,7 +67,7 @@ displayYear();
 // Selecting, Creating, & Deleting Elements //
 //                                          //
 //////////////////////////////////////////////
-console.log(document.documentElement);
+/* console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
 
@@ -111,6 +111,40 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () => {
   //new way of deleting elements in the DOM
   message.remove();
 });
+ */
+//////////////////////////////////////////////
+//                                          //
+//                  LESSONS                 //
+//    Styles, attributes, and Classes       //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//styles
+/* message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.backgroundColor);
+
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 40 + 'px';
+
+console.log(getComputedStyle(message).height);
+
+document.documentElement.style.setProperty('--color-primary', '#334352');
+
+//Atributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+
+//logo.getAttribute()
+//logo.setAttribute('', '')
+console.log(logo.src); //absolute
+console.log(logo.getAttribute('src')); //relative */
 
 //Separator for console logs
 /////////////////////////////////////////////////
