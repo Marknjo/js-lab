@@ -142,6 +142,40 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 //////////////////////////////////////////////
 //                                          //
+//                 Bankist                  //
+//            Tabbed Navigation             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content');
+
+tabContainer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const clicked = e.target.closest('.operations__tab');
+
+  //Guard clause
+  if (!clicked) return;
+
+  //Activate the current clicked tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  //Activate content area
+  tabContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+
+  //
+});
+
+//////////////////////////////////////////////
+//                                          //
 //                  LESSONS                 //
 // Selecting, Creating, & Deleting Elements //
 //                                          //
@@ -290,7 +324,7 @@ document.querySelector('.nav__link').addEventListener('click', function (e) {
 //////////////////////////////////////////////
 //
 
-const h1 = document.querySelector('h1');
+/* const h1 = document.querySelector('h1');
 
 //going downwards: Child
 console.log(h1.querySelectorAll('.highlight'));
@@ -319,7 +353,7 @@ console.log(h1.parentElement.children);
 
 [...h1.parentElement.children].forEach(el => {
   if (el !== h1) el.style.transform = 'scale(0.5)';
-});
+}); */
 //Separator for console logs
 /////////////////////////////////////////////////
 consoleSeparator(undefined, 40);
