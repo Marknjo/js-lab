@@ -16,14 +16,18 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 //           BANKIST WEB HOME PAGE          //
 //                                          //
 //////////////////////////////////////////////
-
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+const btnNavLinks = document.querySelectorAll('.nav__link');
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -68,9 +72,6 @@ displayYear();
 //                                          //
 //////////////////////////////////////////////
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect(); //coordinates
   /*console.log(s1coords);
@@ -100,6 +101,43 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({
     behavior: 'smooth',
   });
+});
+
+//////////////////////////////////////////////
+//                                          //
+//                 Bankist                  //
+//   Implement Event Delegation to Links    //
+//                                          //
+//////////////////////////////////////////////
+//
+
+/* 
+Leads to Performance issue
+btnNavLinks.forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    const id = this.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  });
+}); */
+//Solution
+//1. Add event listener to common parent element
+//2. Determine what element origitnated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  //Matching Strategy
+  if (
+    e.target.classList.contains('nav__link') &&
+    !e.target.classList.contains('nav__link--btn')
+  ) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
 });
 
 //////////////////////////////////////////////
@@ -215,7 +253,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000); */
 //
 
 //rgb(255,255,255)
-const randomInt = (min, max) =>
+/* const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
 const randomColor = () =>
@@ -242,7 +280,7 @@ document.querySelector('.nav__link').addEventListener('click', function (e) {
 
   //stop event propagation
   //e.stopPropagation();
-});
+}); */
 
 //Separator for console logs
 /////////////////////////////////////////////////
