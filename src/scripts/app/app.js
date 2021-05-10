@@ -63,6 +63,47 @@ displayYear();
 
 //////////////////////////////////////////////
 //                                          //
+//                 Bankist                  //
+//      Implement Smooth Scrolling          //
+//                                          //
+//////////////////////////////////////////////
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect(); //coordinates
+  /*console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+  console.log('Current Scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    'Height/Width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  //scrolling
+    window.scrollTo(
+    s1coords.left + window.pageXOffset,
+    s1coords.top + window.pageYOffset
+  );
+
+   
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth',
+  });
+  */
+  //Only in modern browsers
+  section1.scrollIntoView({
+    behavior: 'smooth',
+  });
+});
+
+//////////////////////////////////////////////
+//                                          //
 //                  LESSONS                 //
 // Selecting, Creating, & Deleting Elements //
 //                                          //
