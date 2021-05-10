@@ -194,7 +194,7 @@ console.log(logo.getAttribute('src')); //relative */
 //                                          //
 //////////////////////////////////////////////
 //
-const h1 = document.querySelector('h1');
+/* const h1 = document.querySelector('h1');
 
 const alertH1 = e => {
   alert('addEventListener: Great you are reading the heading :D');
@@ -204,7 +204,45 @@ const alertH1 = e => {
 
 h1.addEventListener('mouseenter', alertH1);
 
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000); */
+
+//////////////////////////////////////////////
+//                                          //
+//                  LESSONS                 //
+// Event Propagation: Bubbling & Capturing  //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//rgb(255,255,255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+
+console.log(randomColor());
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget, this);
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log('UL Container', e.target, e.currentTarget, this);
+
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget, this);
+
+  console.log(e.currentTarget === this);
+
+  //stop event propagation
+  //e.stopPropagation();
+});
 
 //Separator for console logs
 /////////////////////////////////////////////////
