@@ -67,6 +67,35 @@ console.log(matilda.species);
 console.log(mark.hasOwnProperty('firstName'));
 console.log(mark.hasOwnProperty('species'));
 
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+// Prototypal Inheritance on Built-in Objs  //
+//                                          //
+//////////////////////////////////////////////
+//
+
+console.log(mark.__proto__);
+console.log(mark.__proto__.__proto__);
+console.log(mark.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [3, 6, 4, 5, 6, 7, 8, 2, 8, 3, 2, 9, 1, 7]; // new Array === []
+
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+console.log(arr.__proto__.__proto__);
+console.log(arr.__proto__.__proto__.__proto__);
+
+//bad idea
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
 //Separator for console logs
 /////////////////////////////////////////////////
 consoleSeparator(undefined, 40);
