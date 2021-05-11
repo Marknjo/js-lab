@@ -1,3 +1,13 @@
+import grow from '../../assets/images/grow.jpg';
+import digital from '../../assets/images/digital.jpg';
+import card from '../../assets/images/card.jpg';
+
+const lazyLoadImgMap = {
+  grow,
+  digital,
+  card,
+};
+
 /**
  * Creates a separator markers with a title on the console
  * @param {String} title
@@ -289,6 +299,43 @@ allSections.forEach(sec => {
   sec.classList.add('section--hidden');
 
   sectionObserver.observe(sec);
+});
+
+//////////////////////////////////////////////
+//                                          //
+//                 Bankist                  //
+//             Lazy Loading Imgs            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+
+  //Implement this on the production...
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTargets.forEach(img => {
+  //Hack because of webpack hashing the images
+  const imgName = img.dataset.src.split('/')[3].split('.')[0];
+  img.dataset.src = lazyLoadImgMap[imgName];
+
+  imgObserver.observe(img);
 });
 
 //////////////////////////////////////////////
