@@ -21,7 +21,7 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 
 //Arrow functions don't work to create objects
 
-const Person = function (firstName, birthYear) {
+/* const Person = function (firstName, birthYear) {
   //Instance properties
   this.firstName = firstName;
   this.birthYear = birthYear;
@@ -65,7 +65,7 @@ console.log(mark.species);
 console.log(matilda.species);
 
 console.log(mark.hasOwnProperty('firstName'));
-console.log(mark.hasOwnProperty('species'));
+console.log(mark.hasOwnProperty('species')); */
 
 //////////////////////////////////////////////
 //                                          //
@@ -75,7 +75,7 @@ console.log(mark.hasOwnProperty('species'));
 //////////////////////////////////////////////
 //
 
-console.log(mark.__proto__);
+/* console.log(mark.__proto__);
 console.log(mark.__proto__.__proto__);
 console.log(mark.__proto__.__proto__.__proto__);
 
@@ -94,7 +94,46 @@ Array.prototype.unique = function () {
   return [...new Set(this)];
 };
 
-console.log(arr.unique());
+console.log(arr.unique()); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//          Coding Challenge #1             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+
+  console.log(`${this.make} Accelerate to: ${this.speed} Km/h`);
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+
+  console.log(`${this.make} brake to: ${this.speed} Km/h`);
+};
+
+//Implementing the obkect using two cars
+const bmw = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
+
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.brake();
+
+mercedes.accelerate();
+mercedes.brake();
+mercedes.brake();
+mercedes.brake();
 
 //Separator for console logs
 /////////////////////////////////////////////////
