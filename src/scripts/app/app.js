@@ -13,9 +13,59 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 
 //////////////////////////////////////////////
 //                                          //
-//          Starter Sections Separtor       //
+//            Javascript OOP                //
+// Constructor functions & the new operator //
 //                                          //
 //////////////////////////////////////////////
+//
+
+//Arrow functions don't work to create objects
+
+const Person = function (firstName, birthYear) {
+  //Instance properties
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+
+  //Never do this
+  // this.calAge = function () {
+  //   console.log(2037 - this.birthYear);
+  // };
+};
+
+const mark = new Person('Mark', 1990);
+
+// 1. New {} is created
+// 2. function is called, this = {}
+// 3. {} linked to prototype
+// 4. function atomatically return {}
+
+console.log(mark.firstName, mark.birthYear);
+
+const matilda = new Person('Matilda', 2017);
+const jack = new Person('Jack', 1957);
+
+console.log(matilda, jack);
+
+console.log(mark instanceof Person);
+
+//mark.calAge();
+
+// Prototypes
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+mark.calcAge();
+matilda.calcAge();
+jack.calcAge();
+
+Person.prototype.species = 'Homo Sapiens';
+
+console.log(mark.species);
+console.log(matilda.species);
+
+console.log(mark.hasOwnProperty('firstName'));
+console.log(mark.hasOwnProperty('species'));
 
 //Separator for console logs
 /////////////////////////////////////////////////
