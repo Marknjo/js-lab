@@ -152,7 +152,7 @@ mercedes.brake();
 
 //class declaration
 
-class PersonCL {
+/* class PersonCL {
   //Constructor
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -254,7 +254,41 @@ PersonCL.hey();
 
 //Can't be called on an object calling the calles
 //i.e.
-//-> jessica.hey(); //does not work: Uncaught TypeError: jessica.hey is not a function
+//-> jessica.hey(); //does not work: Uncaught TypeError: jessica.hey is not a function */
+
+//////////////////////////////////////////////
+//                                          //
+//             Javascript OOP               //
+//             Object.create                //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//3rd way of creating Objects or classes in JavaScript
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  //Manual way of initializing the object
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+steven.firstName = 'Steven';
+steven.birthYear = 2002;
+
+steven.calcAge();
+
+//better way
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+
+sarah.calcAge();
+console.log(sarah);
 
 //Separator for console logs
 /////////////////////////////////////////////////
