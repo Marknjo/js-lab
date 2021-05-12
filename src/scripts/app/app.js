@@ -159,7 +159,7 @@ class PersonCL {
     this.birthYear = birthYear;
   }
 
-  //Method will be added to .prototype property
+  //Instance Methods will be added to .prototype property
   calcAge() {
     console.log(2037 - this.birthYear);
   }
@@ -186,6 +186,11 @@ class PersonCL {
 
   get fullName() {
     return this._fullName;
+  }
+
+  //Static methods
+  static hey() {
+    console.log('Hey there');
   }
 }
 
@@ -233,6 +238,23 @@ console.log(jessica.age);
 const walter = new PersonCL('Walter White', 1965);
 
 //1. useful for data Validation
+
+//////////////////////////////////////////////
+//                                          //
+//             Javascript OOP               //
+//             Static Methods               //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//1. Useful in implementing some sort of helper methods tied to the class or additional functions
+
+//calling static method
+PersonCL.hey();
+
+//Can't be called on an object calling the calles
+//i.e.
+//-> jessica.hey(); //does not work: Uncaught TypeError: jessica.hey is not a function
 
 //Separator for console logs
 /////////////////////////////////////////////////
