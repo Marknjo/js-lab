@@ -358,7 +358,7 @@ ford.brake(); */
 //////////////////////////////////////////////
 //
 
-const Person = function (firstName, birthYear) {
+/* const Person = function (firstName, birthYear) {
   //Instance properties
   this.firstName = firstName;
   this.birthYear = birthYear;
@@ -388,7 +388,99 @@ const mike = new Student('Mike', 2020, 'Computer Science');
 console.log(mike);
 
 mike.introduce();
-mike.calcAge();
+mike.calcAge(); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//          Coding Challenge #3             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+
+    console.log(`${this.make} accelerates to speed of: ${this.speed} km/h`);
+    console.log(`${this.make} accelerates to speed of: ${this.speedUS} mi/h`);
+    console.log('\n');
+  }
+
+  brake() {
+    this.speed -= 5;
+
+    console.log(`${this.make} brakes to speed of: ${this.speed} mi/h`);
+    console.log(`${this.make} brakes to speed of: ${this.speedUS} mi/h`);
+    console.log('\n');
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+}
+
+//1. create CarEV Class
+const CarEV = function (make, speed, charge) {
+  //2.1. Implement inheritance
+  CarCl.call(this, make, speed);
+
+  this.charge = charge;
+};
+
+//2.2. Linking propertotypes
+CarEV.prototype = Object.create(CarCl.prototype);
+//Set the constructor of CarEV to itself
+CarEV.prototype.constructor = CarEV;
+
+CarEV.prototype.chargeBattery = function (chargeTo) {
+  if (chargeTo + this.charge > 100) {
+    this.charge = 100;
+    return;
+  }
+
+  this.charge += chargeTo;
+};
+
+CarEV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge -= 1;
+
+  console.log(
+    `${this.make} going at ${this.speed}Km/h, with a charge of ${this.charge}%.`
+  );
+
+  console.log(
+    `${this.make} going at ${this.speedUS}mi/h, with a charge of ${this.charge}%.`
+  );
+  console.log('\n');
+};
+
+const tesla = new CarEV('Tesla', 120, 23);
+
+console.log(tesla);
+
+tesla.accelerate();
+tesla.brake();
+tesla.accelerate();
+
+tesla.chargeBattery(90);
+
+tesla.accelerate();
+tesla.brake();
+
+tesla.accelerate();
+
+tesla.brake();
 
 //Separator for console logs
 /////////////////////////////////////////////////
