@@ -568,7 +568,7 @@ martha.calcAge();
 //////////////////////////////////////////////
 //
 
-class Account {
+/* class Account {
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
@@ -611,7 +611,76 @@ acc1.requestLoan(1000);
 acc1.approveLoan(1000);
 
 console.log(acc1);
+console.log(acc1.pin); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//       ES6 Classes: Encapsulation         //
+//     Protected properties & methods       //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Reasons#1 protect code fomr outside the class from manipulating with internal logic
+//Reasons#2 prevent code breaking
+
+//JS does not yet support encapsulation out of the box
+//Still in proposal
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this._pin = pin;
+
+    //this is protected but not enforced
+    this._movements = []; //protect
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${this.owner}`);
+  }
+
+  //public interface
+  getMovements() {
+    return this._movements;
+  }
+
+  //Public Interface - API
+  deposit(val) {
+    this._movements.push(val);
+  }
+
+  withdrawal(val) {
+    this.deposit(-val);
+  }
+
+  _approveLoan(val) {
+    if (val < 100) return;
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+console.log(acc1);
+
+acc1.deposit(250);
+acc1.withdrawal(145);
+
+acc1.requestLoan(1000);
+
+console.log(acc1);
 console.log(acc1.pin);
+
+console.log(acc1.getMovements());
 
 //Separator for console logs
 /////////////////////////////////////////////////
