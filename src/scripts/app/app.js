@@ -154,8 +154,8 @@ mercedes.brake();
 
 class PersonCL {
   //Constructor
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
@@ -165,11 +165,31 @@ class PersonCL {
   }
 
   greet() {
-    console.log(`Hey ${this.firstName}.`);
+    console.log(`Hey ${this.fullName}.`);
+  }
+
+  //getters and setters
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  //Pattern important to understand
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not a full name!`);
+    }
+  }
+
+  get fullName() {
+    return this._fullName;
   }
 }
 
-const jessica = new PersonCL('Jesica', 1996);
+const jessica = new PersonCL('Jesica Jones', 1996);
 
 console.log(jessica);
 jessica.calcAge();
@@ -179,6 +199,40 @@ jessica.greet();
 //1. Classes are NOT hoisted - can't use them before declared in the code
 //2. Class are first-class citizes - pass them as arguments and returned as values
 //3. Classes are executed in strict mode
+
+//////////////////////////////////////////////
+//                                          //
+//             Javascript OOP               //
+//            Getters & Setters             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Accessors properties - normal
+const account = {
+  owner: 'Jonas',
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+
+account.latest = 350;
+
+console.log(account.movements);
+
+console.log(jessica.age);
+
+const walter = new PersonCL('Walter White', 1965);
+
+//1. useful for data Validation
 
 //Separator for console logs
 /////////////////////////////////////////////////
