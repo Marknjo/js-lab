@@ -490,7 +490,7 @@ tesla.brake(); */
 //                                          //
 //////////////////////////////////////////////
 //
-
+/* 
 class PersonCL {
   //Constructor
   constructor(fullName, birthYear) {
@@ -558,6 +558,60 @@ const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
 
 martha.introduce();
 martha.calcAge();
+ */
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//              ES6 Classes                 //
+//                Example                   //
+//                                          //
+//////////////////////////////////////////////
+//
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${this.owner}`);
+  }
+
+  //Public Interface - API
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdrawal(val) {
+    this.deposit(-val);
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this.approveLoan) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+console.log(acc1);
+
+acc1.deposit(250);
+acc1.withdrawal(145);
+
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
+
+console.log(acc1);
+console.log(acc1.pin);
 
 //Separator for console logs
 /////////////////////////////////////////////////
