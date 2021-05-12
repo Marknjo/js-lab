@@ -698,7 +698,7 @@ console.log(acc1.getMovements()); */
 
 //(There is a static method)
 
-class Account {
+/* class Account {
   //1)public field (Instances)
   locale = navigator.language;
 
@@ -753,7 +753,86 @@ acc1.withdrawal(145);
 console.log(acc1);
 console.log(acc1.getMovements());
 
-Account.helper();
+Account.helper(); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//              ES6 Classes                 //
+//            Chaining Methods              //
+//                                          //
+//////////////////////////////////////////////
+//
+class Account {
+  //1)public field (Instances)
+  locale = navigator.language;
+
+  //2)private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    console.log(`Thanks for opening an account ${this.owner}`);
+  }
+
+  //3)public methods
+  //public interface
+  getMovements() {
+    return this.#movements;
+  }
+
+  //Public Interface - API
+  deposit(val) {
+    this.#movements.push(val);
+
+    return this;
+  }
+
+  withdrawal(val) {
+    this.deposit(-val);
+
+    return this;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan) {
+      this.deposit(val);
+
+      console.log(`Loan approved`);
+
+      return this;
+    }
+  }
+
+  static helper() {
+    console.log(`Only available on this class alone`);
+  }
+
+  //4)private methods
+  //#approveLoan(val) not yet implemented
+  _approveLoan(val) {
+    if (val < 100) return;
+    return true;
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+acc1.deposit(250); //also works
+acc1.withdrawal(50);
+
+acc1
+  .deposit(300)
+  .deposit(500)
+  .withdrawal(35)
+  .requestLoan(25000)
+  .withdrawal(4000);
+
+console.log(acc1.getMovements());
 
 //Separator for console logs
 /////////////////////////////////////////////////
