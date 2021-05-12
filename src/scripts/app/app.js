@@ -398,7 +398,7 @@ mike.calcAge(); */
 //////////////////////////////////////////////
 //
 
-class CarCl {
+/* class CarCl {
   constructor(make, speed) {
     this.make = make;
     this.speed = speed;
@@ -480,7 +480,84 @@ tesla.brake();
 
 tesla.accelerate();
 
-tesla.brake();
+tesla.brake(); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//      Inheritance Btwn "Classes":         //
+//               ES6 Classes                //
+//                                          //
+//////////////////////////////////////////////
+//
+
+class PersonCL {
+  //Constructor
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  //Instance Methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}.`);
+  }
+
+  //getters and setters
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  //Pattern important to understand
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not a full name!`);
+    }
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  //Static methods
+  static hey() {
+    console.log('Hey there');
+  }
+}
+
+class StudentCl extends PersonCL {
+  constructor(fullName, birthYear, course) {
+    //Always needs to happen first!
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}.`);
+  }
+
+  calcAge() {
+    console.log(
+      `I am ${
+        2037 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+
+martha.introduce();
+martha.calcAge();
 
 //Separator for console logs
 /////////////////////////////////////////////////
