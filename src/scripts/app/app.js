@@ -104,7 +104,7 @@ console.log(arr.unique()); */
 //////////////////////////////////////////////
 //
 
-const Car = function (make, speed) {
+/* const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
 };
@@ -134,6 +134,51 @@ mercedes.accelerate();
 mercedes.brake();
 mercedes.brake();
 mercedes.brake();
+ */
+
+//////////////////////////////////////////////
+//                                          //
+//             Javascript OOP               //
+//               ES6 Classes                //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Class expression
+
+/* const personCL = class {
+
+} */
+
+//class declaration
+
+class PersonCL {
+  //Constructor
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  //Method will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}.`);
+  }
+}
+
+const jessica = new PersonCL('Jesica', 1996);
+
+console.log(jessica);
+jessica.calcAge();
+
+jessica.greet();
+
+//1. Classes are NOT hoisted - can't use them before declared in the code
+//2. Class are first-class citizes - pass them as arguments and returned as values
+//3. Classes are executed in strict mode
 
 //Separator for console logs
 /////////////////////////////////////////////////
