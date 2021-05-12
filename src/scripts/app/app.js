@@ -303,7 +303,7 @@ console.log(sarah); */
 //3. Getter speedUS
 //4. accelerate and Brake
 
-class CarCl {
+/* class CarCl {
   constructor(make, speed) {
     this.make = make;
     this.speed = speed;
@@ -344,10 +344,51 @@ ford.speedUS = 140;
 consoleSeparator('SPEED 140');
 ford.accelerate();
 ford.accelerate();
-ford.accelerate();
+ford.accelerate(); */
 
 /* f;
 ford.brake(); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//      Inheritance Btwn "Classes":         //
+//            Constructor Func              //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const Person = function (firstName, birthYear) {
+  //Instance properties
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+// Prototypes
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+//linking prototypes
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+};
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+
+console.log(mike);
+
+mike.introduce();
+mike.calcAge();
 
 //Separator for console logs
 /////////////////////////////////////////////////
