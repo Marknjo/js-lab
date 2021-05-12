@@ -628,7 +628,7 @@ console.log(acc1.pin); */
 //JS does not yet support encapsulation out of the box
 //Still in proposal
 
-class Account {
+/* class Account {
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
@@ -680,7 +680,80 @@ acc1.requestLoan(1000);
 console.log(acc1);
 console.log(acc1.pin);
 
+console.log(acc1.getMovements()); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//       ES6 Classes: Encapsulation         //
+//     Class Fields (Stage 3 - draft)       //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//1)public fields
+//2)private fields
+//3)public methods
+//4)private methods
+
+//(There is a static method)
+
+class Account {
+  //1)public field (Instances)
+  locale = navigator.language;
+
+  //2)private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+
+    console.log(`Thanks for opening an account ${this.owner}`);
+  }
+
+  //3)public methods
+  //public interface
+  getMovements() {
+    return this.#movements;
+  }
+
+  //Public Interface - API
+  deposit(val) {
+    this.#movements.push(val);
+  }
+
+  withdrawal(val) {
+    this.deposit(-val);
+  }
+  requestLoan(val) {
+    if (this._approveLoan) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+    }
+  }
+
+  static helper() {
+    console.log(`Only available on this class alone`);
+  }
+
+  //4)private methods
+  //#approveLoan(val) not yet implemented
+  _approveLoan(val) {
+    if (val < 100) return;
+    return true;
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+acc1.deposit(250);
+acc1.withdrawal(145);
+console.log(acc1);
 console.log(acc1.getMovements());
+
+Account.helper();
 
 //Separator for console logs
 /////////////////////////////////////////////////
