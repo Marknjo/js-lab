@@ -265,7 +265,7 @@ PersonCL.hey();
 //
 
 //3rd way of creating Objects or classes in JavaScript
-const PersonProto = {
+/* const PersonProto = {
   calcAge() {
     console.log(2037 - this.birthYear);
   },
@@ -288,7 +288,66 @@ const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 
 sarah.calcAge();
-console.log(sarah);
+console.log(sarah); */
+
+//////////////////////////////////////////////
+//                                          //
+//            Javascript OOP                //
+//          Coding Challenge #2             //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//1. Class: CarCl
+//2. Setter speedUS (mi/h) where = (km/h)/1.6
+//3. Getter speedUS
+//4. accelerate and Brake
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+
+    console.log(`${this.make} accelerates to speed of: ${this.speed} km/h`);
+    console.log(`${this.make} accelerates to speed of: ${this.speedUS} mi/h`);
+    console.log('\n');
+  }
+
+  brake() {
+    this.speed -= 5;
+
+    console.log(`${this.make} brakes to speed of: ${this.speed} mi/h`);
+    console.log(`${this.make} brakes to speed of: ${this.speedUS} mi/h`);
+    console.log('\n');
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+}
+
+const ford = new CarCl('Ford', 120); //120km/hr
+console.log(ford.speedUS);
+
+ford.accelerate();
+ford.brake();
+
+ford.speedUS = 140;
+consoleSeparator('SPEED 140');
+ford.accelerate();
+ford.accelerate();
+ford.accelerate();
+
+/* f;
+ford.brake(); */
 
 //Separator for console logs
 /////////////////////////////////////////////////
