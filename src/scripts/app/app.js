@@ -1,3 +1,5 @@
+import './leaflet';
+
 /**
  * Creates a separator markers with a title on the console
  * @param {String} title
@@ -47,16 +49,12 @@ if (navigator.geolocation) {
 
       //Leaflet libray implementation
       const map = L.map('map').setView(coords, 13);
+      console.log(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
-
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
     },
     function () {
       alert('Could not get your position!');
