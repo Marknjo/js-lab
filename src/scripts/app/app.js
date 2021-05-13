@@ -109,6 +109,7 @@ class Cycling extends Workout {
 class App {
   //private
   #map;
+  #mapZoomLevel = 13;
   #mapEvent;
   #workout = [];
 
@@ -121,6 +122,9 @@ class App {
 
     //Handling the input
     inputType.addEventListener('change', this._toggleElevationField);
+
+    //handling showing location of the pin on clicking the list item
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPosition() {
@@ -141,7 +145,7 @@ class App {
 
     //Leaflet libray implementation
     //console.log(L.map('map').setView(coords, 13));
-    this.#map = L.map('map').setView(coords, 13);
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
@@ -304,6 +308,22 @@ class App {
     form.insertAdjacentHTML('afterend', html);
 
     return this;
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+    if (!workoutEl) return;
+
+    const workout = this.#workout.find(
+      work => work.id === workoutEl.dataset.id
+    );
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
   }
 }
 
