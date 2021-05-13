@@ -159,6 +159,14 @@ class App {
     inputDistance.focus();
   }
 
+  _hideForm() {
+    // prettier-ignore
+    inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = inputType.value = '';
+    form.style.display = 'none';
+    form.classList.add('hidden');
+    setTimeout(() => (form.style.display = 'grid'), 1000);
+  }
+
   _toggleElevationField(e) {
     inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
     inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
@@ -211,13 +219,6 @@ class App {
     this.#workout.push(workout);
 
     // 6. Render workout on map as marker
-    //clear inputs
-    inputDistance.value =
-      inputDuration.value =
-      inputCadence.value =
-      inputElevation.value =
-      inputType.value =
-        '';
 
     //display marker
     this._renderWorkoutMarker(workout);
@@ -226,6 +227,7 @@ class App {
     this._renderWorkout(workout);
 
     // 8. Hide form + clear input fields
+    this._hideForm();
   }
 
   _renderWorkoutMarker(workout) {
