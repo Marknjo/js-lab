@@ -221,3 +221,45 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+
+// Reset btn
+.reset {
+  margin-bottom: 2rem;
+  margin-top: 1.2rem;
+}
+
+.btn-reset {
+  display: block;
+
+  color: var(--color-light--1);
+  font-weight: 700;
+
+  background-color: var(--color-dark--2);
+  padding: 0.6rem 1.2rem;
+  margin: 0 auto;
+
+  border: none;
+  outline: none;
+  border-radius: 2.5px;
+
+  box-shadow: 0 2px 1rem rgba(#000, 0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: transparent;
+    transform: translateY(-0.25rem);
+    box-shadow: 0 2px 2rem rgba(#000, 0.1);
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-brand--2);
+  }
+
+  &:focus {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+}
+
+.hidden {
+  display: none;
+}

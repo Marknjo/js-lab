@@ -28,6 +28,8 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+const btnReset = document.querySelector('.btn-reset');
+
 //////////////////////////////////////////////
 //                                          //
 //            Geolocation API               //
@@ -128,6 +130,9 @@ class App {
 
     //handling showing location of the pin on clicking the list item
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
+
+    //handle reset of the Local Storage data
+    this._reset();
   }
 
   _getPosition() {
@@ -243,6 +248,9 @@ class App {
 
     // 8. Hide form + clear input fields
     this._hideForm();
+
+    //9. Reset new workout
+    this._reset();
   }
 
   _moveToPopup(e) {
@@ -354,6 +362,33 @@ class App {
       if (work) {
         this._renderWorkout(work);
       }
+    });
+  }
+
+  _reset() {
+    //check if local storage has the item workouts
+    if (this.#workouts.length === 0) return;
+
+    //show the button to the UI
+    btnReset.classList.remove('hidden');
+
+    //listen to click
+    btnReset.addEventListener('click', () => {
+      //confirm the data
+      const confirmReset = confirm(
+        'You are about to clear all your workouts😟! By clicking yes, all your data will be deleted. Are you sure you want to proceed!'
+      );
+      //stop if no
+      if (!confirmReset) return;
+
+      //reset the local storage on click
+      localStorage.removeItem('workouts');
+
+      //hide the button from UI
+      btnReset.classList.add('hidden');
+
+      //reload the page
+      location.reload();
     });
   }
 }
