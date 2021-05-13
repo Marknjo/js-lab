@@ -29,6 +29,28 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+//////////////////////////////////////////////
+//                                          //
+//            Geolocation API               //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Very easy to use
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      const { latitude, longitude } = position.coords;
+      console.log(`https://www.google.com/maps/@-${latitude},${longitude}`);
+
+      console.log(latitude, longitude);
+    },
+    function () {
+      alert('Could not get your position!');
+    }
+  );
+}
+
 //Separator for console logs
 /////////////////////////////////////////////////
 consoleSeparator(undefined, 40);
