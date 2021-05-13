@@ -38,6 +38,60 @@ const inputElevation = document.querySelector('.form__input--elevation');
 //////////////////////////////////////////////
 //
 
+class Workout {
+  date = new Date();
+  id = (Date.now() + '').slice(-10);
+
+  constructor(coords, distance, duration) {
+    this.coords = coords; // [lat, lngt]
+    this.distance = distance; // in KM
+    this.duration = duration; // in min
+  }
+}
+
+class Running extends Workout {
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+
+    this.calcPace();
+  }
+
+  calcPace() {
+    //min/km
+    this.pace = this.duration / this.distance;
+
+    return this.pace;
+  }
+}
+
+class Cycling extends Workout {
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.calcSpeed();
+  }
+
+  calcSpeed() {
+    //min/km
+    this.speed = this.duration / (this.distance / 60);
+
+    return this.speed;
+  }
+}
+
+// const run = new Running([39, -12], 5.2, 24, 178);
+// const cycling = new Cycling([39, -12], 5.2, 24, 178);
+
+// console.log(run, cycling);
+
+//////////////////////////////////////////////
+//                                          //
+//         APPLICATION ARCHITECTURE         //
+//                                          //
+//////////////////////////////////////////////
+//
+
 class App {
   //private
   #map;
