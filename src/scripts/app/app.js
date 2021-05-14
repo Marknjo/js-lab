@@ -123,7 +123,7 @@ const renderCountry = (data, neighbour = '') => {
   countriesContainer.style.opacity = 1;
 };
 
-const getNeghboursCountyByCode = borders => {
+/* const getNeghboursCountyByCode = borders => {
   if (borders.length === 0) return;
 
   //get the borders
@@ -171,7 +171,25 @@ const getCountryAndNeighbour = (country, isCountryName = true) => {
   });
 };
 
-const url = getCountryAndNeighbour('kenya');
+const url = getCountryAndNeighbour('kenya'); */
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//          Promises & Fetch API            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const getCountryData = country => {
+  const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`);
+
+  request
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+
+getCountryData('kenya');
 
 //Separator for console logs
 /////////////////////////////////////////////////
