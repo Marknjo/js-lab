@@ -28,12 +28,17 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  width: 100%;
+  padding: 0 8rem;
 }
 
 .countries {
-  /* margin-bottom: 8rem; */
+  margin-top: 8rem;
+  margin-bottom: 8rem;
   display: flex;
-
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -127,4 +132,29 @@ body {
   margin: 2rem;
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.message-box {
+  height: 10rem;
+  display: block;
+  width: 100%;
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+}
+
+.message {
+  position: absolute;
+  display: block;
+  width: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 2rem;
+  margin: 2rem auto;
+  font-size: 1.4rem;
+  background-color: lavender;
+  box-shadow: 0 0.5rem 1rem 0.2rem rgba(0, 0, 0, 0.2);
+  text-align: center;
 }

@@ -21,6 +21,7 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
+const messageBox = document.querySelector('.message-box');
 
 //////////////////////////////////////////////
 //                                          //
@@ -123,6 +124,18 @@ const renderCountry = (data, neighbour = '') => {
   countriesContainer.style.opacity = 1;
 };
 
+const renderError = function (msg) {
+  messageBox.insertAdjacentHTML('beforeend', msg);
+  messageBox.style.opacity = 1;
+
+  console.log(msg);
+
+  setTimeout(() => {
+    messageBox.style.opacity = 0;
+    messageBox.innerHTML = '';
+  }, 8000);
+};
+
 /* const getNeghboursCountyByCode = borders => {
   if (borders.length === 0) return;
 
@@ -181,7 +194,7 @@ const url = getCountryAndNeighbour('kenya'); */
 //////////////////////////////////////////////
 //
 
-const getCountryData = country => {
+/* const getCountryData = country => {
   const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`);
 
   request
@@ -189,7 +202,58 @@ const getCountryData = country => {
     .then(data => renderCountry(data[0]));
 };
 
-getCountryData('kenya');
+getCountryData('kenya'); */
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//            Chaining Promises             //
+//                                          //
+//////////////////////////////////////////////
+//
+const getNeighbours = country => {
+  return fetch(`https://restcountries.eu/rest/v2/alpha/${country}`);
+};
+
+const getNeghboursCountyByCode = borders => {
+  if (borders.length === 0) return;
+
+  const responses = [];
+  borders.forEach(code =>
+    getNeighbours(code)
+      .then(response => response.json())
+      .then(data => {
+        renderCountry(data, 'neighbour');
+        return responses.push(data);
+      })
+  );
+
+  return responses;
+};
+
+const getCountryData = country => {
+  const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`);
+
+  request
+    .then(response => response.json())
+    .then(data => {
+      data = data[0];
+      renderCountry(data);
+
+      return getNeghboursCountyByCode(data.borders);
+    })
+    .catch(err => {
+      console.error(`${err} 💥 💥 💥`);
+
+      renderError(
+        `<p class="message">Something went wrong 💥💥 ${err.message}. Try Again</p>`
+      );
+    });
+};
+
+btn.addEventListener('click', function () {
+  getCountryData('Kenya');
+});
 
 //Separator for console logs
 /////////////////////////////////////////////////
