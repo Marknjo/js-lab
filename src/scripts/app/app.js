@@ -13,9 +13,14 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 
 //////////////////////////////////////////////
 //                                          //
-//          Starter Sections Separtor       //
+//          Asychronous JavaScript          //
 //                                          //
 //////////////////////////////////////////////
+
+('use strict');
+
+const btn = document.querySelector('.btn-country');
+const countriesContainer = document.querySelector('.countries');
 
 //Separator for console logs
 /////////////////////////////////////////////////
