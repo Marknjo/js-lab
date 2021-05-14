@@ -124,17 +124,72 @@ const renderCountry = (data, neighbour = '') => {
   countriesContainer.style.opacity = 1;
 };
 
-const renderError = function (msg) {
-  messageBox.insertAdjacentHTML('beforeend', msg);
-  messageBox.style.opacity = 1;
+const rmvMessBy = 25000;
 
-  console.log(msg);
+const messageBoxHTML = (msgText, messType) => {
+  let formatMessType = '';
+  switch (messType) {
+    case 'error':
+      formatMessType = 'message--error';
+      break;
+
+    case 'success':
+      formatMessType = 'message--success';
+      break;
+
+    case 'warning':
+      formatMessType = 'message--warning';
+      break;
+
+    case 'info':
+      formatMessType = 'message--info';
+      break;
+
+    default:
+      formatMessType = '';
+  }
+
+  return `<p class="message ${formatMessType}"><span class="message__text">${msgText}</span> <span class="message__close">&times;</span></p>`;
+};
+
+const removeMessFromDOM = (mess, removeMsgTime) => {
+  mess.classList.add('fadeIn');
 
   setTimeout(() => {
-    messageBox.style.opacity = 0;
-    messageBox.innerHTML = '';
-  }, 8000);
+    mess.classList.remove('fadeIn');
+
+    mess.classList.add('fadeOut');
+
+    setTimeout(() => {
+      mess.remove();
+    }, 500);
+  }, removeMsgTime);
 };
+
+const renderMessToDOM = function (msgText, messType = '') {
+  //check if there is array of messages
+  messageBox.insertAdjacentHTML('beforeend', messageBoxHTML(msgText, messType));
+
+  const messages = messageBox.querySelectorAll('.message');
+
+  if (messages.length > 1) {
+    //get the messsage context box
+    messages.forEach((mess, i) => {
+      removeMessFromDOM(mess, rmvMessBy);
+    });
+  } else if (messages.length === 1) {
+    removeMessFromDOM(messages[0], rmvMessBy);
+  }
+};
+
+//remove message from DOM by clicking it
+messageBox.addEventListener('click', e => {
+  if (!e.target.classList.contains('message__close')) return;
+
+  const mess = e.target.closest('.message');
+
+  removeMessFromDOM(mess, 0);
+});
 
 /* const getNeghboursCountyByCode = borders => {
   if (borders.length === 0) return;
@@ -245,14 +300,15 @@ const getCountryData = country => {
     .catch(err => {
       console.error(`${err} 💥 💥 💥`);
 
-      renderError(
-        `<p class="message">Something went wrong 💥💥 ${err.message}. Try Again</p>`
+      renderMessToDOM(
+        `Something went wrong 💥💥 ${err.message}. Try Again`,
+        'error'
       );
     });
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('Kenya');
+  getCountryData('adas');
 });
 
 //Separator for console logs
