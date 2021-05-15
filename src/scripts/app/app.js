@@ -1,3 +1,14 @@
+//Challenge #2 images
+import img1 from '../../assets/images/img-1.jpg';
+import img2 from '../../assets/images/img-2.jpg';
+import img3 from '../../assets/images/img-3.jpg';
+
+const mapImages = {
+  img1,
+  img2,
+  img3,
+};
+
 /**
  * Creates a separator markers with a title on the console
  * @param {String} title
@@ -22,6 +33,8 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 const messageBox = document.querySelector('.message-box');
+
+const imgContainer = document.querySelector('.images');
 
 //////////////////////////////////////////////
 //                                          //
@@ -703,64 +716,272 @@ getMultipleCountries('kenya', 'australia', 'uganda'); */
 // renders a country based on the GPS location - need GPS
 // 2nd API that
 
-const whereAmI = (lat, lng) => {
-  //use the navigator
+// const whereAmI = (lat, lng) => {
+//   //use the navigator
 
-  //use promise to fetch the data
-  const geoCodedCountry = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+//   //use promise to fetch the data
+//   const geoCodedCountry = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
 
-  //handle the promise
-  geoCodedCountry
-    .then(resp => {
-      if (!resp.ok)
-        throw new Error(
-          `Something went wrong. Could not fetch the country using the requested coordinates: Latitude:${lat} & Longitude: ${lng}.`
-        );
+//   //handle the promise
+//   geoCodedCountry
+//     .then(resp => {
+//       if (!resp.ok)
+//         throw new Error(
+//           `Something went wrong. Could not fetch the country using the requested coordinates: Latitude:${lat} & Longitude: ${lng}.`
+//         );
 
-      return resp.json();
-    })
-    .then(data => {
-      if (data.error)
-        throw new Error(`${data.error.description} (Code:${data.error.code})`);
+//       return resp.json();
+//     })
+//     .then(data => {
+//       if (data.error)
+//         throw new Error(`${data.error.description} (Code:${data.error.code})`);
 
-      //fetch the country name
+//       //fetch the country name
 
-      const { city, country } = data;
+//       const { city, country } = data;
 
-      renderMessToDOM(`You are in ${city}, ${country}`, 'info');
+//       renderMessToDOM(`You are in ${city}, ${country}`, 'info');
 
-      //fetch countries
-      return fetch(
-        `https://restcountries.eu/rest/v2/name/${country.toLowerCase()}`
-      );
-    })
-    .then(resp => {
-      if (!resp.ok)
-        throw new Error(
-          `Something went wrong. Could not fetch the requested country (${country}).`
-        );
+//       //fetch countries
+//       return fetch(
+//         `https://restcountries.eu/rest/v2/name/${country.toLowerCase()}`
+//       );
+//     })
+//     .then(resp => {
+//       if (!resp.ok)
+//         throw new Error(
+//           `Something went wrong. Could not fetch the requested country (${country}).`
+//         );
 
-      return resp.json();
-    })
-    .then(countryDt => {
-      const [data] = countryDt;
-      renderCountry(data);
-    })
-    .catch(err => {
-      renderMessToDOM(err, 'error');
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-      countriesContainer
-        .querySelectorAll('.country')
-        .forEach(c => (c.style.marginBottom = '6rem'));
-    });
+//       return resp.json();
+//     })
+//     .then(countryDt => {
+//       const [data] = countryDt;
+//       renderCountry(data);
+//     })
+//     .catch(err => {
+//       renderMessToDOM(err, 'error');
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//       countriesContainer
+//         .querySelectorAll('.country')
+//         .forEach(c => (c.style.marginBottom = '6rem'));
+//     });
+// };
+
+// //whereAmI('h', 13.381); //test for errors
+// whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//          Coding challenge #02            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const wait = function (secs) {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(), secs * 1000);
+  });
 };
 
-//whereAmI('h', 13.381); //test for errors
-whereAmI(52.508, 13.381);
-whereAmI(19.037, 72.873);
-whereAmI(-33.933, 18.474);
+
+
+btn.style.display = 'none';
+
+const fetchUrl = url => {
+  return new Promise((resolve, reject) => {
+    if (url) {
+      resolve(fetch(url));
+    }
+
+    reject(new Error(`Can't find the requested image: (${url})`));
+  });
+};
+
+/* const createImage = function (imgPath) {
+  return fetchUrl(imgPath)
+    .then(url => {
+      if (!url.ok) {
+        throw new Error(` ${url.status}. Could not fetch Image. `);
+      }
+      return new URL(url.url).pathname;
+    })
+    .then(validPath => {
+      return new Promise(resolve => {
+        const imgN = validPath
+          .split('/')
+          .slice(-1)[0]
+          .split('.')[0]
+          .split('-')[1];
+
+        const img = document.createElement('img');
+        img.src = validPath;
+        img.alt = `Image ${imgN}`;
+        img.classList.add(`image--${imgN}`);
+
+        img.addEventListener('load', function () {
+          resolve(imgContainer.insertAdjacentElement('beforeend', img));
+        });
+      });
+    });
+}; 
+
+const loadImg = resp => {
+  if (!resp) {
+    throw new Error(` Could not fetch Image. `);
+  }
+
+  resp.addEventListener('load', function () {
+    imgContainer.insertAdjacentElement('beforeend', resp);
+  });
+
+  return wait(5);
+};
+
+
+/* createImage(img1)
+  .then(resp => {
+    return loadImg(resp);
+  })
+  .then(() => {
+    imgContainer.querySelector('.image--1').style.display = 'none';
+
+    return createImage(img2);
+  })
+  .then(resp => {
+    return loadImg(resp);
+  })
+  .then(() => {
+    imgContainer.querySelector('.image--2').style.display = 'none';
+
+    return createImage(img3);
+  })
+  .then(resp => {
+    return loadImg(resp);
+  })
+  .then(() => {
+    imgContainer.querySelector('.image--3').style.display = 'none';
+  })
+  .catch(err => {
+    console.error(err);
+    renderMessToDOM(err, 'error');
+  }); 
+
+ const buildImg = resp => {
+  
+  //there is a response
+
+  
+}; 
+
+ createImage(img1)
+  .then(resp => {
+    buildImg(resp);
+
+    return wait(2);
+  })
+  .then(() => {
+    //wait loading the first image
+    //load img #1
+    imgContainer.querySelector('.image--1').style.display = 'none';
+
+    return createImage(img2);
+  })
+  .then(resp => {
+    buildImg(resp);
+
+    return wait(2);
+  })
+  .then(() => {
+    //wait loading the first image
+    //load img #1
+    imgContainer.querySelector('.image--2').style.display = 'none';
+
+    return createImage(img3);
+  })
+  .then(resp => {
+    buildImg(resp);
+
+    return wait(2);
+  })
+  .then(() => {
+    //wait loading the first image
+    //load img #1
+    imgContainer.querySelector('.image--3').style.display = 'none';
+  })
+  .catch(err => {
+    console.error(err);
+    renderMessToDOM(err, 'error');
+  }); */
+
+const createImage = function (imgPath) {
+  return new Promise((resolve, reject) => {
+    const imgN = imgPath.split('/').slice(-1)[0].split('.')[0].split('-')[1];
+
+    const img = document.createElement('img');
+    img.src = imgPath;
+    img.alt = `Image ${imgN}`;
+    img.classList.add(`image--${imgN}`);
+
+    img.addEventListener('load', function () {
+      resolve(imgContainer.insertAdjacentElement('beforeend', img));
+    });
+
+    img.addEventListener('error', function () {
+      console.log('there us error');
+      reject(new Error(`Could not fetch Image. (${img.src})`));
+    });
+  });
+};
+
+
+let resImg;
+
+createImage(img1)
+  .then(resp => {
+    resImg = resp;
+    return wait(2);
+  })
+  .then(() => {
+    resImg.style.display = 'none';
+
+    return createImage(img2);
+  })
+  .then(resp1 => {
+    resImg = resp1;
+
+    return wait(2);
+  })
+  .then(() => {
+    resImg.style.display = 'none';
+
+    return createImage(img3);
+  })
+  .then(resp2 => {
+    resImg = resp2;
+
+    return wait(2);
+  })
+  .then(() => {
+    resImg.style.display = 'none';
+  })
+  .catch(err => {
+    console.error(err);
+    renderMessToDOM(err, 'error');
+  });
+
+
+
+//img1
+//img2
+//img3
+
+//createImage(img1);
 
 //Separator for console logs
 /////////////////////////////////////////////////
