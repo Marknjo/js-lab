@@ -469,28 +469,45 @@ const getPosition = function () {
 
 const whereAmI = async function (country) {
   //1 | more awaits
-  //get current user coordinates
-  const pos = await getPosition();
+  try {
+    //get current user coordinates
+    const pos = await getPosition();
 
-  const { latitude: lat, longitude: lng } = pos.coords;
+    const { latitude: lat, longitude: lng } = pos.coords;
 
-  //Use geocode to fetch user location use coordinates
-  const ctry = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    //Use geocode to fetch user location use coordinates
+    const ctry = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
 
-  const ctryNameData = await ctry.json();
+    //handle error message for geocode
+    if (!ctry.ok) throw new Error('Ploblem getting location data');
 
-  //use restcountries to fetch user home country
-  const res = await fetch(
-    `https://restcountries.eu/rest/v2/name/${ctryNameData.country}`
-  );
+    const ctryNameData = await ctry.json();
 
-  const data = await res.json();
+    //use restcountries to fetch user home country
+    const res = await fetch(
+      `https://restcountries.eu/rest/v2/name/${ctryNameData.country}`
+    );
 
-  //show the user current country on the screen
-  renderCountry(data[0]);
+    //handle error message for country
+    if (!res.ok) throw new Error('Ploblem getting country');
+
+    const data = await res.json();
+
+    //show the user current country on the screen
+    renderCountry(data[0]);
+  } catch (error) {
+    console.error(`${error} 💥`);
+    renderMessToDOM(`${error.message} 💥💥💥`, 'error');
+  } finally {
+    //all is well. No error
+    countriesContainer.style.opacity = 1;
+  }
 };
 
-whereAmI('kenya').finally(() => (countriesContainer.style.opacity = 1));
+whereAmI();
+// whereAmI();
+// whereAmI();
+// whereAmI();
 
 //Separator for console logs
 /////////////////////////////////////////////////
