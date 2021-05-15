@@ -427,12 +427,12 @@ wait(2)
 //
 
 //Promisifying the geolocation API
-const getPosition = function () {
+/* const getPosition = function () {
   return new Promise(function (resolve, reject) {
-    /* navigator.geolocation.getCurrentPosition(
-      position => resolve(position),
-      err => reject(new Error(err))
-    ); */
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(new Error(err))
+    // );
 
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
@@ -445,6 +445,52 @@ getPosition()
   .catch(e => {
     console.error(e);
   });
+ */
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//           ES2017: Async Await            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//syntatic sugar over the .then methods
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(new Error(err))
+    // );
+
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function (country) {
+  //1 | more awaits
+  //get current user coordinates
+  const pos = await getPosition();
+
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  //Use geocode to fetch user location use coordinates
+  const ctry = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+
+  const ctryNameData = await ctry.json();
+
+  //use restcountries to fetch user home country
+  const res = await fetch(
+    `https://restcountries.eu/rest/v2/name/${ctryNameData.country}`
+  );
+
+  const data = await res.json();
+
+  //show the user current country on the screen
+  renderCountry(data[0]);
+};
+
+whereAmI('kenya').finally(() => (countriesContainer.style.opacity = 1));
 
 //Separator for console logs
 /////////////////////////////////////////////////

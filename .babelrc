@@ -1,5 +1,13 @@
 //.babelrc
 {
-	"presets": ["@babel/preset-env"],
+	"presets": [[
+		"@babel/preset-env", 
+		//Fixes: ReferenceError regeneratorRuntime is not defined
+		{
+			"targets": {
+				"esmodules":true
+			}
+		}
+	]],
 	"plugins": ["@babel/plugin-proposal-class-properties"]
 }
