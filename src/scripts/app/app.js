@@ -383,7 +383,7 @@ console.log('Test end'); */
 //
 
 //promisefying
-const lotteryPromise = new Promise(function (resolve, reject) {
+/* const lotteryPromise = new Promise(function (resolve, reject) {
   console.log('Lottery draw is happening 🔮');
 
   setTimeout(() => {
@@ -416,7 +416,35 @@ wait(2)
     console.log('I waited for 2 seconds');
     return wait(1);
   })
-  .then(() => console.log('I waited for 1 seconds'));
+  .then(() => console.log('I waited for 1 seconds')); */
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//        Promisifying Geolocation          //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//Promisifying the geolocation API
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    /* navigator.geolocation.getCurrentPosition(
+      position => resolve(position),
+      err => reject(new Error(err))
+    ); */
+
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition()
+  .then(res => {
+    console.log(res);
+  })
+  .catch(e => {
+    console.error(e);
+  });
 
 //Separator for console logs
 /////////////////////////////////////////////////
