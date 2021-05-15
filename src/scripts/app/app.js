@@ -121,7 +121,6 @@ const renderCountry = (data, neighbour = '') => {
   </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
 };
 
 const rmvMessBy = 25000;
@@ -266,36 +265,64 @@ getCountryData('kenya'); */
 //                                          //
 //////////////////////////////////////////////
 //
-const getNeighbours = country => {
-  return fetch(`https://restcountries.eu/rest/v2/alpha/${country}`);
+const buildRequestURL = (cName, isCName = true) => {
+  let country = `name/${cName}`;
+  let code = `alpha/${cName}`;
+
+  return fetch(`https://restcountries.eu/rest/v2/${isCName ? country : code}`);
 };
 
-const getNeghboursCountyByCode = borders => {
-  if (borders.length === 0) return;
+const catchRespErr = (response, errMess = 'Something went wrong 😞!') => {
+  if (!response.ok) throw new Error(`${errMess} 😞! (${response.status})`);
 
-  const responses = [];
+  return response.json();
+};
+
+const getNeghboursCountyByCode = (borders, parentCountry = 'Country') => {
+  //handle error if borders is wrong data/corrupt
+  if (borders.length === 0)
+    throw new Error(
+      `${parentCountry} does not have a bordering country or the supplied country code is not in the database`
+    );
+
+  const errMess = 'Neibouring Country Not Found';
+
+  //neighbouring country === 1
+  if (borders.length === 1) {
+    return fetchJSON(borders[0], false, errMess);
+  }
+
+  //neighbouring country > 1
   borders.forEach(code =>
-    getNeighbours(code)
-      .then(response => response.json())
+    buildRequestURL(code, false)
+      .then(response => catchRespErr(response, errMess))
       .then(data => {
         renderCountry(data, 'neighbour');
-        return responses.push(data);
       })
   );
 
-  return responses;
+  return null;
+};
+
+const fetchJSON = (cName, isCName = true, errMess) => {
+  return buildRequestURL(cName, isCName).then(response =>
+    catchRespErr(response, errMess)
+  );
 };
 
 const getCountryData = country => {
-  const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`);
-
-  request
-    .then(response => response.json())
+  fetchJSON(country, true, 'Country not Found')
     .then(data => {
       data = data[0];
+
+      //render parent country
       renderCountry(data);
 
-      return getNeghboursCountyByCode(data.borders);
+      //handle rendering neighbouring countries
+      return getNeghboursCountyByCode(data.borders, data.name);
+    })
+    .then(data => {
+      return data && renderCountry(data, 'neighbour');
     })
     .catch(err => {
       console.error(`${err} 💥 💥 💥`);
@@ -304,11 +331,16 @@ const getCountryData = country => {
         `Something went wrong 💥💥 ${err.message}. Try Again`,
         'error'
       );
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
     });
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('adas');
+  getCountryData('australia');
+
+  //getCountryData('kenya');
 });
 
 //Separator for console logs
