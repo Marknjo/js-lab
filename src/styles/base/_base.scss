@@ -191,6 +191,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  border-left: 0.8rem solid transparent;
 
   &__close {
     font-size: 2rem;
@@ -216,6 +217,14 @@ body {
     line-height: 1.2;
     padding-right: 0.5rem;
     border-right: 1px solid #e2e2e2;
+  }
+
+  &--error {
+    border-left-color: orangered;
+  }
+
+  &--success {
+    border-left-color: rgb(101, 160, 13);
   }
 }
 

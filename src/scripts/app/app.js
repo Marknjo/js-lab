@@ -356,7 +356,7 @@ btn.addEventListener('click', function () {
 //because it is queues in the event loop while micro tasks
 // are given higher priority in the microtask runner queue
 
-console.log('Test start');
+/* console.log('Test start');
 
 setTimeout(() => console.log('0 sec timer'), 0);
 
@@ -372,7 +372,51 @@ Promise.resolve('Resolve promise 2').then(res => {
   console.log(res);
 });
 
-console.log('Test end');
+console.log('Test end'); */
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//        Building A simple Promise         //
+//                                          //
+//////////////////////////////////////////////
+//
+
+//promisefying
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('Lottery draw is happening 🔮');
+
+  setTimeout(() => {
+    if (Math.random() >= 0.5) {
+      resolve('🥂 You WIN 💰💰💰');
+    } else {
+      reject(new Error('😭 You lost your money 💩💩💩!'));
+    }
+  }, 2000);
+});
+
+lotteryPromise
+  .then(res => {
+    renderMessToDOM(res, 'success');
+  })
+  .catch(e => {
+    console.error(e);
+    renderMessToDOM(e, 'error');
+  });
+
+//Promisifying setTimeout
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(2)
+  .then(() => {
+    console.log('I waited for 2 seconds');
+    return wait(1);
+  })
+  .then(() => console.log('I waited for 1 seconds'));
 
 //Separator for console logs
 /////////////////////////////////////////////////
