@@ -634,7 +634,7 @@ const getNeghboursCountyByCode = (borders, parentCountry = 'Country') => {
 //////////////////////////////////////////////
 //
 
-const catchRespErr = (response, errMess = 'Something went wrong 😞!') => {
+/* const catchRespErr = (response, errMess = 'Something went wrong 😞!') => {
   if (!response.ok) throw new Error(`${errMess} 😞! (${response.status})`);
 
   return response.json();
@@ -653,17 +653,17 @@ const fetchJSON = async (cName, isCName = true) => {
 
 const getMultipleCountries = async (c1, c2, c3) => {
   try {
-    /* const [data1] = await fetchJSON(c1);
+    //  const [data1] = await fetchJSON(c1);
 
-    console.log(data1.name);
+    // console.log(data1.name);
 
-    const [data2] = await fetchJSON(c2);
+    // const [data2] = await fetchJSON(c2);
 
-    console.log(data2.name);
+    // console.log(data2.name);
 
-    const [data3] = await fetchJSON(c3);
+    // const [data3] = await fetchJSON(c3);
 
-    console.log(data3.name); */
+    // console.log(data3.name); 
 
     //Promise.all -> takes in an array of promises and return them at once
 
@@ -688,7 +688,79 @@ const getMultipleCountries = async (c1, c2, c3) => {
   }
 };
 
-getMultipleCountries('kenya', 'australia', 'uganda');
+getMultipleCountries('kenya', 'australia', 'uganda'); */
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//          Coding challenge #01            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+// function whereAmI
+// Chains 2 promises
+// renders a country based on the GPS location - need GPS
+// 2nd API that
+
+const whereAmI = (lat, lng) => {
+  //use the navigator
+
+  //use promise to fetch the data
+  const geoCodedCountry = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+
+  //handle the promise
+  geoCodedCountry
+    .then(resp => {
+      if (!resp.ok)
+        throw new Error(
+          `Something went wrong. Could not fetch the country using the requested coordinates: Latitude:${lat} & Longitude: ${lng}.`
+        );
+
+      return resp.json();
+    })
+    .then(data => {
+      if (data.error)
+        throw new Error(`${data.error.description} (Code:${data.error.code})`);
+
+      //fetch the country name
+
+      const { city, country } = data;
+
+      renderMessToDOM(`You are in ${city}, ${country}`, 'info');
+
+      //fetch countries
+      return fetch(
+        `https://restcountries.eu/rest/v2/name/${country.toLowerCase()}`
+      );
+    })
+    .then(resp => {
+      if (!resp.ok)
+        throw new Error(
+          `Something went wrong. Could not fetch the requested country (${country}).`
+        );
+
+      return resp.json();
+    })
+    .then(countryDt => {
+      const [data] = countryDt;
+      renderCountry(data);
+    })
+    .catch(err => {
+      renderMessToDOM(err, 'error');
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+      countriesContainer
+        .querySelectorAll('.country')
+        .forEach(c => (c.style.marginBottom = '6rem'));
+    });
+};
+
+//whereAmI('h', 13.381); //test for errors
+whereAmI(52.508, 13.381);
+whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
 
 //Separator for console logs
 /////////////////////////////////////////////////
