@@ -456,7 +456,7 @@ getPosition()
 
 //syntatic sugar over the .then methods
 
-const getPosition = function () {
+/* const getPosition = function () {
   return new Promise(function (resolve, reject) {
     // navigator.geolocation.getCurrentPosition(
     //   position => resolve(position),
@@ -524,7 +524,171 @@ const whereAmI = async function (country) {
     //handle delagated errors
     renderMessToDOM(err, 'error');
   }
-})();
+})(); 
+
+const getNeghboursCountyByCode = borders => {
+  if (borders.length === 0) return;
+
+  //get the borders
+  borders.forEach(code => {
+    getNeighbouringCountry(code, false);
+  });
+};
+
+const getNeighbouringCountry = code => {
+  //AJAX call country 1
+  const request = new XMLHttpRequest();
+  request.open('GET', `https://restcountries.eu/rest/v2/alpha/${code}`);
+  request.send();
+
+  request.addEventListener('load', function () {
+    const apiData = JSON.parse(this.responseText);
+
+    //render country 1
+    renderCountry(apiData, 'neighbour');
+
+    //callback hell
+    //getNeghboursCountyByCode(apiData.borders);
+  });
+};
+
+const getCountryAndNeighbour = (country, isCountryName = true) => {
+  //AJAX call country 1
+  const request = new XMLHttpRequest();
+  request.open(
+    'GET',
+    isCountryName
+      ? `https://restcountries.eu/rest/v2/name/${country}`
+      : `https://restcountries.eu/rest/v2/alpha/${country}`
+  );
+  request.send();
+
+  request.addEventListener('load', function () {
+    const [apiData] = JSON.parse(this.responseText);
+
+    //render country 1
+    renderCountry(apiData);
+
+    //callback hell
+    getNeghboursCountyByCode(apiData.borders);
+  });
+};
+
+const url = getCountryAndNeighbour('kenya'); */
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//          Promises & Fetch API            //
+//                                          //
+//////////////////////////////////////////////
+//
+
+/* const getCountryData = country => {
+  const request = fetch(`https://restcountries.eu/rest/v2/name/${country}`);
+
+  request
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+
+getCountryData('kenya'); 
+
+
+//To be retrieved on demand
+const getNeghboursCountyByCode = (borders, parentCountry = 'Country') => {
+  //handle error if borders is wrong data/corrupt
+  if (borders.length === 0)
+    throw new Error(
+      `${parentCountry} does not have a bordering country or the supplied country code is not in the database`
+    );
+
+  const errMess = 'Neibouring Country Not Found';
+
+  //neighbouring country === 1
+  if (borders.length === 1) {
+    return fetchJSON(borders[0], false, errMess);
+  }
+
+  //neighbouring country > 1
+  borders.forEach(code =>
+    buildRequestURL(code, false)
+      .then(response => catchRespErr(response, errMess))
+      .then(data => {
+        renderCountry(data, 'neighbour');
+      })
+  );
+
+  return null;
+};
+
+
+
+*/
+
+//////////////////////////////////////////////
+//                                          //
+//         Asychronous JavaScript           //
+//      Running Promises in Parallel        //
+//                                          //
+//////////////////////////////////////////////
+//
+
+const catchRespErr = (response, errMess = 'Something went wrong 😞!') => {
+  if (!response.ok) throw new Error(`${errMess} 😞! (${response.status})`);
+
+  return response.json();
+};
+
+const fetchJSON = async (cName, isCName = true) => {
+  let country = `name/${cName}`;
+  let code = `alpha/${cName}`;
+
+  const response = await fetch(
+    `https://restcountries.eu/rest/v2/${isCName ? country : code}`
+  );
+
+  return catchRespErr(response, "Can't fetch the country 💥💥💥");
+};
+
+const getMultipleCountries = async (c1, c2, c3) => {
+  try {
+    /* const [data1] = await fetchJSON(c1);
+
+    console.log(data1.name);
+
+    const [data2] = await fetchJSON(c2);
+
+    console.log(data2.name);
+
+    const [data3] = await fetchJSON(c3);
+
+    console.log(data3.name); */
+
+    //Promise.all -> takes in an array of promises and return them at once
+
+    const data = await Promise.all([
+      fetchJSON(c1),
+      fetchJSON(c2),
+      fetchJSON(c3),
+    ]);
+
+    console.log(data);
+    data.forEach(c => {
+      renderCountry(c[0]);
+    });
+  } catch (e) {
+    console.error(`${e} 💥💥`);
+    renderMessToDOM(e, 'error');
+  } finally {
+    countriesContainer.style.opacity = 1;
+    countriesContainer
+      .querySelectorAll('.country')
+      .forEach(el => (el.style.marginBottom = '6rem'));
+  }
+};
+
+getMultipleCountries('kenya', 'australia', 'uganda');
 
 //Separator for console logs
 /////////////////////////////////////////////////
