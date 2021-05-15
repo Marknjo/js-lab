@@ -495,19 +495,36 @@ const whereAmI = async function (country) {
 
     //show the user current country on the screen
     renderCountry(data[0]);
+
+    return `My city is ${ctryNameData.city}, ${ctryNameData.country}`;
   } catch (error) {
     console.error(`${error} 💥`);
     renderMessToDOM(`${error.message} 💥💥💥`, 'error');
+
+    //delagate error
+    throw error;
   } finally {
     //all is well. No error
     countriesContainer.style.opacity = 1;
   }
 };
 
-whereAmI();
+//whereAmI();
 // whereAmI();
 // whereAmI();
 // whereAmI();
+
+(async function () {
+  try {
+    const city = await whereAmI();
+
+    renderMessToDOM(city, 'info');
+    //await the results
+  } catch (err) {
+    //handle delagated errors
+    renderMessToDOM(err, 'error');
+  }
+})();
 
 //Separator for console logs
 /////////////////////////////////////////////////

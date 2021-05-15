@@ -226,6 +226,10 @@ body {
   &--success {
     border-left-color: rgb(101, 160, 13);
   }
+
+  &--info {
+    border-left-color: rgb(13, 52, 160);
+  }
 }
 
 .hidden {
