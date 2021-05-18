@@ -1,1 +1,0 @@
-import consoleSeparator from './app';
