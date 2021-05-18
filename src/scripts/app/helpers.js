@@ -1,4 +1,5 @@
 //Helper methods
+import { TIMEOUT_SEC } from './config';
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -11,7 +12,7 @@ const timeout = function (s) {
 export const getJSON = async function (url) {
   try {
     //1. Loading single recipe
-    const resp = await fetch(url);
+    const resp = await Promise.race([timeout(TIMEOUT_SEC), fetch(url)]);
 
     //convert to JSON -> Get data
     const data = await resp.json();
