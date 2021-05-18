@@ -1,5 +1,8 @@
 import consoleSeparator from './app';
 
+import { API_URL } from './config';
+
+//Code
 export const state = {
   recipe: {},
 };
@@ -7,9 +10,7 @@ export const state = {
 export const loadRecipe = async function (id) {
   try {
     //1. Loading single recipe
-    const resp = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-    );
+    const resp = await fetch(`${API_URL}/${id}`);
 
     //convert to JSON -> Get data
     const data = await resp.json();

@@ -5,8 +5,6 @@ import * as model from './model';
 //views
 import recipeView from './views/recipeView';
 
-const recipeContainer = document.querySelector('.recipe');
-
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -30,7 +28,6 @@ const controlRecipes = async function () {
 
     //1). loading recipe
     await model.loadRecipe(id);
-    const { recipe } = model.state;
 
     //2. Rendering Recipe
     recipeView.render(model.state.recipe);
