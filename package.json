@@ -48,5 +48,8 @@
     "webpack-dashboard": "^3.3.1",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "fractional": "^1.0.0"
   }
 }
