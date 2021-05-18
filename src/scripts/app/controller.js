@@ -14,12 +14,27 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
+const renderSpinner = function (parentEl) {
+  const markup = `
+        div class="spinner">
+          <svg>
+            <use href="${svgIcon}#icon-loader"></use>
+          </svg>
+        </div> 
+    `;
+  parentEl.innerHTML = '';
+  parentEl.insertAdjacentHTML('afterbegin', markup);
+};
+
 const showRecipe = async function () {
   try {
+    //render spinner
+    renderSpinner(recipeContainer);
+
     //1. Loading single recipe
     const resp = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`
-      //`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcae1`
+      //`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`
+      `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcae1`
     );
 
     //convert to JSON -> Get data
@@ -96,8 +111,6 @@ const showRecipe = async function () {
         </button>
     </div>
 
-   
-
     <div class="recipe__ingredients">
         <h2 class="heading--2">Recipe ingredients</h2>
         <ul class="recipe__ingredient-list">
@@ -117,8 +130,6 @@ const showRecipe = async function () {
                 `
               )
               .join('')}
-            
-
         </ul>
     </div>
 
