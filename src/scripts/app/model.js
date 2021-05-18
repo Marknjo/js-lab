@@ -1,6 +1,7 @@
 import consoleSeparator from './app';
 
 import { API_URL } from './config';
+import { getJSON } from './helpers';
 
 //Code
 export const state = {
@@ -9,14 +10,8 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
-    //1. Loading single recipe
-    const resp = await fetch(`${API_URL}/${id}`);
-
-    //convert to JSON -> Get data
-    const data = await resp.json();
-
-    //check errors
-    if (!resp.ok) throw new Error(`${data.message} (${resp.status})`);
+    //get JSON data
+    const data = await getJSON(`${API_URL}/${id}`);
 
     //format recipe data
     let { recipe } = data.data;
