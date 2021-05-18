@@ -1,3 +1,5 @@
+import './controller';
+
 /**
  * Creates a separator markers with a title on the console
  * @param {String} title
