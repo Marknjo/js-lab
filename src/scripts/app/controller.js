@@ -16,7 +16,7 @@ const timeout = function (s) {
 
 const renderSpinner = function (parentEl) {
   const markup = `
-        div class="spinner">
+        <div class="spinner">
           <svg>
             <use href="${svgIcon}#icon-loader"></use>
           </svg>
@@ -28,13 +28,16 @@ const renderSpinner = function (parentEl) {
 
 const showRecipe = async function () {
   try {
+    const id = window.location.hash.slice(1);
+
+    if (!id) return;
+
     //render spinner
     renderSpinner(recipeContainer);
 
     //1. Loading single recipe
     const resp = await fetch(
-      //`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`
-      `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcae1`
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
 
     //convert to JSON -> Get data
@@ -161,4 +164,5 @@ const showRecipe = async function () {
   }
 };
 
-showRecipe();
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
+//window.addEventListener('load', showRecipe);
