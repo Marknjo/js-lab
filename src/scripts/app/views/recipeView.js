@@ -14,8 +14,46 @@ class RecipeView {
   //Data
   #data;
 
+  // Error
+  #errorMessage =
+    '😔 We could not retrived the requested recipe. Please try again 🤞.';
+
+  #message = '';
+
   #clear() {
     this.#parentEl.innerHTML = '';
+  }
+
+  renderError(message = this.#errorMessage) {
+    const markup = `
+        <div class="error">
+            <div>
+            <svg>
+                <use href="${svgIcon}#icon-alert-triangle"></use>
+            </svg>
+            </div>
+            <p>${message}</p>
+        </div>
+      `;
+
+    this.#clear();
+    this.#parentEl.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderMessage(message = this.#message) {
+    const markup = `
+        <div class="message">
+            <div>
+            <svg>
+                <use href="${svgIcon}#icon-smile"></use>
+            </svg>
+            </div>
+            <p>${message}</p>
+        </div>
+      `;
+
+    this.#clear();
+    this.#parentEl.insertAdjacentHTML('afterbegin', markup);
   }
 
   renderSpinner() {
