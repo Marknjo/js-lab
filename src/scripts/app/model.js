@@ -1,6 +1,6 @@
 import consoleSeparator from './app';
 
-import { API_URL } from './config';
+import { API_URL, RES_PER_PAGE } from './config';
 import { getJSON } from './helpers';
 
 //Code
@@ -9,6 +9,8 @@ export const state = {
   search: {
     query: '',
     results: [],
+    resultsPerPage: RES_PER_PAGE,
+    page: 1,
   },
 };
 
@@ -54,4 +56,14 @@ export const loadSearchResults = async function (query) {
     console.log(`${err} 💥💥💥💥`);
     throw err;
   }
+};
+
+export const getSearchResultsPage = function (page = state.search.page) {
+  state.search.page = page;
+  //calculate the pagination
+  const start = (page - 1) * state.search.resultsPerPage; //0
+  const end = page * state.search.resultsPerPage; // 9;
+
+  //return part of the results
+  return state.search.results.slice(start, end);
 };
