@@ -4,6 +4,7 @@ import * as model from './model';
 
 //views
 import recipeView from './views/recipeView';
+import resultsView from './views/resultsView';
 import searchView from './views/searchView';
 
 // https://forkify-api.herokuapp.com/v2
@@ -32,6 +33,7 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function () {
   try {
+    resultsView.renderSpinner();
     //1). Get Search query
     const query = searchView.getQuery();
 
@@ -41,7 +43,7 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     //3). Render results
-    console.log(model.state.search);
+    resultsView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
   }
