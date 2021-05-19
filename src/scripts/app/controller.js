@@ -37,15 +37,19 @@ const controlSearchResults = async function () {
     //1). Get Search query
     const query = searchView.getQuery();
 
-    if (!query) return;
+    if (!query) throw new Error('An invalid request');
 
     //2). call load search results
     await model.loadSearchResults(query);
+
+    //get the query string
+    resultsView.getQueryString(model.state.search.query);
 
     //3). Render results
     resultsView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
+    resultsView.renderError(err);
   }
 };
 

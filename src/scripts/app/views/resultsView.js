@@ -8,11 +8,17 @@ class ResultsView extends View {
   //parent element
   _parentEl = document.querySelector('.results');
 
-  // Error
-  _errorMessage =
-    '😔 We could not retrived recipes from your search query. Please try again 🤞.';
+  //Query string
+  _query = '';
 
-  _message = '';
+  #setErrorMessage() {
+    this._errorMessage = `You searched for: (${this._query}) recipe. 😔 Sadly, we could not find recipes with that match. Please use a different word or a variation of the keyword 🤞.`;
+  }
+
+  getQueryString(query) {
+    this._query = query;
+    this.#setErrorMessage();
+  }
 
   //generate markup
   _generateMarkup() {
