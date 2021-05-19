@@ -1,4 +1,5 @@
 import consoleSeparator from './app';
+import { calcNumPages } from './helpers';
 //model
 import * as model from './model';
 import paginationView from './views/paginationView';
@@ -59,10 +60,23 @@ const controlSearchResults = async function () {
 };
 
 const controlPagination = function (goToPage) {
-  //1). render new results
-  resultsView.render(model.getSearchResultsPage(goToPage));
-  //2). pagination updated buttons
-  paginationView.render(model.state.search);
+  try {
+    const numPages = calcNumPages(
+      model.state.search.results,
+      model.state.search.resultsPerPage
+    );
+
+    console.log(goToPage);
+
+    if (goToPage > numPages || !goToPage || goToPage < 0)
+      throw new Error(`Can't fetch requested page`);
+    //1). render new results
+    resultsView.render(model.getSearchResultsPage(goToPage));
+    //2). pagination updated buttons
+    paginationView.render(model.state.search);
+  } catch (err) {
+    resultsView.renderError(err);
+  }
 };
 
 //publisher-subscriber pattern

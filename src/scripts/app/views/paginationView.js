@@ -1,6 +1,7 @@
 //pagination view
 //import icons
 import svgIcon from '../../../assets/images/icons.svg';
+import { calcNumPages } from '../helpers';
 
 //extend from view
 import View from './view';
@@ -27,8 +28,9 @@ class PaginationView extends View {
   }
 
   _generateMarkup() {
-    const numPages = Math.ceil(
-      this._data.results.length / this._data.resultsPerPage
+    const numPages = calcNumPages(
+      this._data.results,
+      this._data.resultsPerPage
     );
     const curPage = this._data.page;
 

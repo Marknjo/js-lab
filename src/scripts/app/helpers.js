@@ -26,3 +26,7 @@ export const getJSON = async function (url) {
     throw `${err} 💥💥`;
   }
 };
+
+export const calcNumPages = (resultsArr, resultsPerPage) => {
+  return Math.ceil(resultsArr.length / resultsPerPage);
+};
