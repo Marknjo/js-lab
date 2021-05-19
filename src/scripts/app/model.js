@@ -6,12 +6,16 @@ import { getJSON } from './helpers';
 //Code
 export const state = {
   recipe: {},
+  search: {
+    query: '',
+    results: [],
+  },
 };
 
 export const loadRecipe = async function (id) {
   try {
     //get JSON data
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await getJSON(`${API_URL}${id}`);
 
     //format recipe data
     let { recipe } = data.data;
@@ -26,6 +30,26 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
+  } catch (err) {
+    console.log(`${err} 💥💥💥💥`);
+    throw err;
+  }
+};
+
+export const loadSearchResults = async function (query) {
+  try {
+    state.search.query = query;
+    //fetch datahttps://forkify-api.herokuapp.com/api/v2/recipes?search=pizza
+    const data = await getJSON(`${API_URL}?search=${query}`);
+
+    state.search.results = data.data.recipes.map(rec => {
+      return {
+        id: rec.id,
+        title: rec.title,
+        publisher: rec.publisher,
+        image: rec.image_url,
+      };
+    });
   } catch (err) {
     console.log(`${err} 💥💥💥💥`);
     throw err;
