@@ -4,6 +4,7 @@ import * as model from './model';
 
 //views
 import recipeView from './views/recipeView';
+import searchView from './views/searchView';
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -31,20 +32,27 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function () {
   try {
-    //call load search results
-    await model.loadSearchResults('pizza');
+    //1). Get Search query
+    const query = searchView.getQuery();
 
+    if (!query) return;
+
+    //2). call load search results
+    await model.loadSearchResults(query);
+
+    //3). Render results
     console.log(model.state.search);
   } catch (err) {
     console.log(err);
   }
 };
 
-controlSearchResults();
+//publisher subscriber pattern
 
 //publisher-subscriber pattern
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 
 init();
