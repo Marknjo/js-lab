@@ -13,6 +13,10 @@ export default class View {
 
   _message = '';
 
+  //pagination defaults
+  pageNo;
+  totalRecipes;
+
   _clear() {
     this._parentEl.innerHTML = '';
   }
@@ -71,5 +75,10 @@ export default class View {
 
     this._clear();
     this._parentEl.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  getPaginationInfo(pageNo = 0, totalRecipes = 0) {
+    this.pageNo = pageNo;
+    this.totalRecipes = totalRecipes;
   }
 }

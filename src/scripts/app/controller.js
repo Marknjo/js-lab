@@ -49,6 +49,11 @@ const controlSearchResults = async function () {
 
     //3). Render results
     //resultsView.render(model.state.search.results);
+    resultsView.getPaginationInfo(
+      model.state.search.page,
+      model.state.search.totalSearchResults
+    );
+
     resultsView.render(model.getSearchResultsPage(1));
 
     //4). Render initial pagination buttons
@@ -68,6 +73,12 @@ const controlPagination = function (goToPage) {
 
     if (goToPage > numPages || !goToPage || goToPage < 0)
       throw new Error(`Can't fetch requested page`);
+
+    resultsView.getPaginationInfo(
+      goToPage,
+      model.state.search.totalSearchResults
+    );
+
     //1). render new results
     resultsView.render(model.getSearchResultsPage(goToPage));
     //2). pagination updated buttons

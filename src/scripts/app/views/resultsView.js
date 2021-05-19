@@ -22,7 +22,9 @@ class ResultsView extends View {
 
   //generate markup
   _generateMarkup() {
-    return this._data.map(this.#generateMarkupPreview).join('');
+    return `${this._generateResultsInfoMarkup()} ${this._data
+      .map(this.#generateMarkupPreview)
+      .join('')}`;
   }
 
   #generateMarkupPreview(rec) {
@@ -42,12 +44,19 @@ class ResultsView extends View {
       `;
   }
 
-  #generateResultsPerPageMarkup() {
+  _generateResultsInfoMarkup() {
     return `
-        <li class="preview">
-            <div>Showing ${this._data.length} </div>
-          </li>
-      `;
+      <li class="preview">
+          <div class="preview__recipe-counts">
+              <span class="preview__recipe-page">${
+                this.pageNo === 1 ? '' : `Page ` + this.pageNo + ` of `
+              }</span> 
+              <span class="preview__recipe-count"> ${
+                this.pageNo === 1 ? 'About' : 'about'
+              } ${this.totalRecipes} recipes</span>
+          </div>
+      </li>
+    `;
   }
 }
 
