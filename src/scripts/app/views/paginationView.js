@@ -79,8 +79,6 @@ class PaginationView extends View {
         </button> 
       `;
   }
-
-  #generateResultsPerPageMarkup() {}
 }
 
 export default new PaginationView();

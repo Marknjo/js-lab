@@ -41,6 +41,14 @@ class ResultsView extends View {
           </li>
       `;
   }
+
+  #generateResultsPerPageMarkup() {
+    return `
+        <li class="preview">
+            <div>Showing ${this._data.length} </div>
+          </li>
+      `;
+  }
 }
 
 export default new ResultsView();

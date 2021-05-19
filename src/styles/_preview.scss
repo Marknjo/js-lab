@@ -102,4 +102,28 @@
       fill: $color-primary;
     }
   }
+
+  &__recipe-counts {
+    margin-top: -3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3.25rem;
+    font-size: 1.6rem;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-grad-1, 1),
+      rgba($color-grad-2, 1)
+    );
+    color: #fff;
+    font-weight: 700;
+  }
+
+  &__recipe-page {
+    margin-right: 0.4rem;
+  }
+
+  /* &__recipe-count {
+  } */
 }

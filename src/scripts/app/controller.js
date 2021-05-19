@@ -66,8 +66,6 @@ const controlPagination = function (goToPage) {
       model.state.search.resultsPerPage
     );
 
-    console.log(goToPage);
-
     if (goToPage > numPages || !goToPage || goToPage < 0)
       throw new Error(`Can't fetch requested page`);
     //1). render new results
