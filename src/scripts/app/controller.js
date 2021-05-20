@@ -114,8 +114,15 @@ const controlBookmarkStatus = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarksFreshPageLoad = function () {
+  if (model.state.bookmarks.length < 1) return;
+  bookmarksView.render(model.state.bookmarks);
+};
+
 //publisher-subscriber pattern
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarksFreshPageLoad);
+
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlBookmarkStatus);
