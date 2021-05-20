@@ -99,9 +99,15 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
-const controlAddBookmark = function () {
-  model.addBookmark(model.state.recipe);
-  //console.log(model.state.recipe);
+const controlBookmarkStatus = function () {
+  console.log(model.state.recipe);
+  console.log(model.state.recipe.bookmarked);
+
+  //handle delete bookmark
+  model.state.recipe.bookmarked
+    ? model.deleteBookmark(model.state.recipe.id)
+    : model.addBookmark(model.state.recipe);
+
   //update view
   recipeView.update(model.state.recipe);
 };
@@ -110,7 +116,7 @@ const controlAddBookmark = function () {
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
-  recipeView.addHandlerAddBookmark(controlAddBookmark);
+  recipeView.addHandlerAddBookmark(controlBookmarkStatus);
 
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
