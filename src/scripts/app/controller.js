@@ -2,6 +2,7 @@ import consoleSeparator from './app';
 import { calcNumPages } from './helpers';
 //model
 import * as model from './model';
+import addRecipeView from './views/addRecipeView';
 import bookmarksView from './views/bookmarksView';
 import paginationView from './views/paginationView';
 
@@ -119,6 +120,11 @@ const controlBookmarksFreshPageLoad = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlAddRecipe = function (newRecipe) {
+  //
+  console.log(newRecipe);
+};
+
 //publisher-subscriber pattern
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarksFreshPageLoad);
@@ -129,6 +135,10 @@ const init = function () {
 
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+
+  addRecipeView.addHandlerUpload(controlAddRecipe);
+
+  //addRecipeView();
 };
 
 init();
