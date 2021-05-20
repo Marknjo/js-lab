@@ -1,4 +1,5 @@
 import consoleSeparator from './app';
+import { MODAL_CLOSE_SECS } from './config';
 import { calcNumPages } from './helpers';
 //model
 import * as model from './model';
@@ -120,9 +121,33 @@ const controlBookmarksFreshPageLoad = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controlAddRecipe = function (newRecipe) {
+const controlAddRecipe = async function (newRecipe) {
   //
-  console.log(newRecipe);
+  try {
+    //show loading spinner
+    addRecipeView.renderSpinner();
+
+    //Upload data
+    await model.uploadRecipe(newRecipe);
+
+    //render recipe
+    recipeView.render(model.state.recipe);
+
+    //success message
+    addRecipeView.renderMessage();
+
+    //close model
+    await new Promise(resolve => {
+      resolve(
+        setTimeout(() => {
+          addRecipeView.toggleWindow();
+        }, MODAL_CLOSE_SECS * 1000)
+      );
+    });
+  } catch (err) {
+    console.log(`💥💥 ${err}`);
+    addRecipeView.renderError(err);
+  }
 };
 
 //publisher-subscriber pattern

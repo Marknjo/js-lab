@@ -21,7 +21,7 @@ class AddRecipeView extends View {
   _errorMessage =
     '😔 We could not retrived the requested recipe. Please try again 🤞.';
 
-  _message = '';
+  _message = 'Recipe was successfully Uploaded';
 
   constructor() {
     super();
@@ -29,7 +29,7 @@ class AddRecipeView extends View {
     this.#addHandleHideWindow();
   }
 
-  #toggleWindow() {
+  toggleWindow() {
     this.#overlay.classList.toggle('hidden');
     this.#window.classList.toggle('hidden');
   }
@@ -42,12 +42,12 @@ class AddRecipeView extends View {
   }
 
   #addHandlerShowWindow() {
-    this.#btnOpen.addEventListener('click', this.#toggleWindow.bind(this));
+    this.#btnOpen.addEventListener('click', this.toggleWindow.bind(this));
   }
 
   #addHandleHideWindow() {
-    this.#btnClose.addEventListener('click', this.#toggleWindow.bind(this));
-    this.#overlay.addEventListener('click', this.#toggleWindow.bind(this));
+    this.#btnClose.addEventListener('click', this.toggleWindow.bind(this));
+    this.#overlay.addEventListener('click', this.toggleWindow.bind(this));
     window.addEventListener(
       'keydown',
       this.#toggleWindowOnEscapeKey.bind(this)
@@ -55,8 +55,6 @@ class AddRecipeView extends View {
   }
 
   addHandlerUpload(handler) {
-    console.log(this._parentEl);
-
     this._parentEl.addEventListener('submit', function (evt) {
       evt.preventDefault();
 
