@@ -53,6 +53,7 @@ export const loadSearchResults = async function (query) {
         image: rec.image_url,
       };
     });
+    state.search.page = 1;
     state.search.totalSearchResults = data.results;
   } catch (err) {
     console.log(`${err} 💥💥💥💥`);
