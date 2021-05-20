@@ -2,6 +2,7 @@ import consoleSeparator from './app';
 import { calcNumPages } from './helpers';
 //model
 import * as model from './model';
+import bookmarksView from './views/bookmarksView';
 import paginationView from './views/paginationView';
 
 //views
@@ -20,6 +21,7 @@ const controlRecipes = async function () {
     if (!id) return;
     //0) update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+    bookmarksView.update(model.state.bookmarks);
 
     //render spinner
     recipeView.renderSpinner();
@@ -100,16 +102,16 @@ const controlServings = function (newServings) {
 };
 
 const controlBookmarkStatus = function () {
-  console.log(model.state.recipe);
-  console.log(model.state.recipe.bookmarked);
-
-  //handle delete bookmark
+  //1). handle toggle bookmarks status
   model.state.recipe.bookmarked
     ? model.deleteBookmark(model.state.recipe.id)
     : model.addBookmark(model.state.recipe);
 
-  //update view
+  //2) update recipe view
   recipeView.update(model.state.recipe);
+
+  //3). Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
 };
 
 //publisher-subscriber pattern
