@@ -78,8 +78,7 @@ export default class View {
   }
 
   update(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError();
+    if (!data || (Array.isArray(data) && data.length === 0)) return;
 
     this._data = data;
 
@@ -94,15 +93,14 @@ export default class View {
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
 
-      //console.log(curEl, newEl.isEqualNode(curEl));
       //update changed text
       if (
         !newEl.isEqualNode(curEl) &&
         newEl.firstChild?.nodeValue.trim() !== ''
       ) {
-        //
         curEl.textContent = newEl.textContent;
       }
+
       //update changed attributes
       if (!newEl.isEqualNode(curEl)) {
         Array.from(newEl.attributes).forEach(attr =>
