@@ -133,11 +133,14 @@ const controlAddRecipe = async function (newRecipe) {
     //render recipe
     recipeView.render(model.state.recipe);
 
+    //success message
+    addRecipeView.renderMessage();
+
     //Render bookmarks
     bookmarksView.render(model.state.bookmarks);
 
-    //success message
-    addRecipeView.renderMessage();
+    //change id in URL
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
 
     //close model
     await new Promise(resolve => {
