@@ -90,6 +90,11 @@ export default class View {
 
     const curElements = Array.from(this._parentEl.querySelectorAll('*'));
 
+    //Handle error if there is manipulatation of HTML elements(add or reduction)
+    if (newElements.length !== curElements.length) {
+      return this.renderMessage(`Internal Error. Can't process your request`);
+    }
+
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
 
