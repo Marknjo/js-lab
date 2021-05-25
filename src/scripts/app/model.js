@@ -64,6 +64,10 @@ export const loadSearchResults = async function (query) {
         ...(rec.key && { key: rec.key }),
       };
     });
+
+    state.search.estTotalPages = Math.ceil(
+      state.search.results.length / RES_PER_PAGE
+    );
     state.search.page = 1;
     state.search.totalSearchResults = data.results;
   } catch (err) {

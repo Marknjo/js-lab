@@ -1,7 +1,6 @@
 //pagination view
 //import icons
 import svgIcon from '../../../assets/images/icons.svg';
-import { calcNumPages } from '../helpers';
 
 //extend from view
 import View from './view';
@@ -12,6 +11,14 @@ class PaginationView extends View {
 
   //Query string
   _query = '';
+
+  //numPages
+  numPages;
+
+  setNumPages() {
+    const { estTotalPages: numPages } = this._data;
+    this.numPages = numPages;
+  }
 
   addHandlerClick(handler) {
     this._parentEl.addEventListener('click', function (evt) {
@@ -28,23 +35,22 @@ class PaginationView extends View {
   }
 
   _generateMarkup() {
-    const numPages = calcNumPages(
-      this._data.results,
-      this._data.resultsPerPage
-    );
+    //set numpages
+    this.setNumPages();
+
     const curPage = this._data.page;
 
-    if (curPage === 1 && numPages > 1) {
+    if (curPage === 1 && this.numPages > 1) {
       return this.#generateRightPagMarkup(curPage);
     }
     //page1, and there are other pages
     //Last page
-    if (curPage === numPages && numPages > 1) {
+    if (curPage === this.numPages && this.numPages > 1) {
       return this.#generateLeftPagMarkup(curPage);
     }
 
     //Other page
-    if (curPage < numPages && curPage > 1) {
+    if (curPage < this.numPages && curPage > 1) {
       return `${this.#generateLeftPagMarkup(
         curPage
       )} ${this.#generateRightPagMarkup(curPage)}`;

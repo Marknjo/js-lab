@@ -81,6 +81,6 @@ export const sendJSON = async function (url, uploadData) {
   }
 }; */
 
-export const calcNumPages = (resultsArr, resultsPerPage) => {
+/* export const calcNumPages = (resultsArr, resultsPerPage) => {
   return Math.ceil(resultsArr.length / resultsPerPage);
-};
+}; */

@@ -72,11 +72,8 @@ const controlSearchResults = async function () {
 
 const controlPagination = function (goToPage) {
   try {
-    const numPages = calcNumPages(
-      model.state.search.results,
-      model.state.search.resultsPerPage
-    );
-
+    const numPages = model.state.search.estTotalPages;
+    //Prevent malicious goToPage Entry via browser
     if (goToPage > numPages || !goToPage || goToPage < 0)
       throw new Error(`Can't fetch requested page`);
 
