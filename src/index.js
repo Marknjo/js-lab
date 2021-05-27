@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 /* Base Scripts import */
-import "./scripts/app/app";
-import "./styles/main.scss";
+import './app/App';
+import './app/styles/main.scss';
