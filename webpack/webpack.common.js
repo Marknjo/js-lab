@@ -1,19 +1,21 @@
-const htmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
-const DashboardPlugin = require("webpack-dashboard/plugin");
+const htmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
   entry: {
-    main: "./src/index.js",
-    vendor: "./src/scripts/vendor/vendor.js",
+    main: './src/index.js',
+    vendor: './src/App/scripts/vendor/vendor.js',
   },
   output: {
-    path: path.resolve(__dirname, "../public/"),
-    publicPath: "",
+    path: path.resolve(__dirname, '../public/'),
+    publicPath: '',
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
+      scriptLoading: 'defer',
     }),
     new DashboardPlugin(),
   ],
@@ -23,45 +25,34 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
       {
         test: /\.html$/,
-        loader: "html-loader",
+        loader: 'html-loader',
       },
       {
-        test: /\.(svg|png|jpg|jpeg|gif)$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "assests/images",
-          },
+        test: /\.(?:ico|svg|png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assests/images/[name].[hash].[ext]',
         },
       },
       {
         test: /\.(mp4|webm)$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "assests/videos",
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'assests/videos/[name].[hash].[ext]',
         },
       },
       {
         // Apply rule for fonts files
         test: /\.(woff|woff2|ttf|otf|eot)$/,
-        use: [
-          {
-            // Using file-loader too
-            loader: "file-loader",
-            options: {
-              outputPath: "assests/fonts",
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assests/fonts/[name].[hash].[ext]',
+        },
       },
     ],
   },
