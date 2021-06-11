@@ -5,7 +5,5 @@ import './App/styles/main.scss';
 
 //enable hot reload
 if (module.hot) {
-  module.hot.access();
+  module.hot.accept();
 }
-
-console.log(process.env);
