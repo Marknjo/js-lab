@@ -20,6 +20,22 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 //////////////////////////////////////////////
 
 const cafeList = document.getElementById('cafe-list');
+const cafeForm = document.getElementById('add-cafe-form');
+
+//saving data to firestore
+cafeForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const form = new FormData(cafeForm);
+
+  db.collection('cafe').add({
+    name: form.get('name'),
+    city: form.get('city'),
+  });
+
+  cafeForm.city.value = '';
+  cafeForm.name.value = '';
+});
 
 //create item li and render cafe
 const renderCafe = function (doc) {
@@ -36,6 +52,7 @@ const renderCafe = function (doc) {
   cafeList.appendChild(li);
 };
 
+//Fetch all cafes data
 const getCafes = async function () {
   const snapshot = await db.collection('cafe').get();
   snapshot.docs.forEach(doc => {
