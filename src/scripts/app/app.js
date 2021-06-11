@@ -70,7 +70,11 @@ const renderCafe = function (doc) {
 
 //Fetch all cafes data
 const getCafes = async function () {
-  const snapshot = await db.collection('cafe').get();
+  const snapshot = await db
+    .collection('cafe')
+    .where('city', '==', 'Manchester')
+    .orderBy('name')
+    .get();
   snapshot.docs.forEach(doc => {
     renderCafe(doc);
   });
