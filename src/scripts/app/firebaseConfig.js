@@ -12,3 +12,9 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+db.settings({ timestampsInSnapshots: true, merge: true });
+
+export default db;
