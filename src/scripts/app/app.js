@@ -1,3 +1,4 @@
+import { render } from 'node-sass';
 import db from './firebaseConfig';
 
 /**
@@ -69,18 +70,40 @@ const renderCafe = function (doc) {
 };
 
 //Fetch all cafes data
-const getCafes = async function () {
-  const snapshot = await db
-    .collection('cafe')
-    .where('city', '==', 'Manchester')
-    .orderBy('name')
-    .get();
-  snapshot.docs.forEach(doc => {
-    renderCafe(doc);
-  });
+// const getCafes = async function () {
+//   const snapshot = await db
+//     .collection('cafe')
+//     .where('city', '==', 'Manchester')
+//     .orderBy('name')
+//     .get();
+//   snapshot.docs.forEach(doc => {
+//     renderCafe(doc);
+//   });
+// };
+
+// getCafes();
+const liveFetchOnSnapshot = function () {
+  db.collection('cafe')
+    .orderBy('city')
+    .onSnapshot(snapshot => {
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+        console.log(change.doc.data());
+
+        if (change.type === 'added') {
+          renderCafe(change.doc);
+        } else if (change.type === 'removed') {
+          const getLiToRemove = document.querySelector(
+            `[data-id=${change.doc.id}]`
+          );
+
+          cafeList.removeChild(getLiToRemove);
+        }
+      });
+    });
 };
 
-getCafes();
+liveFetchOnSnapshot();
 
 //Separator for console logs
 /////////////////////////////////////////////////

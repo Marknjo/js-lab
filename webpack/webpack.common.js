@@ -23,6 +23,7 @@ module.exports = {
       'process.env': JSON.stringify(dotenv.parsed),
     }),
   ],
+
   module: {
     rules: [
       {
