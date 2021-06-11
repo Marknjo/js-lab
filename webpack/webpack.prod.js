@@ -1,8 +1,8 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssestsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const glob = require('glob');
@@ -34,10 +34,7 @@ module.exports = merge(common, {
   },
 
   optimization: {
-    minimizer: [
-      new TerserJSPlugin({}),
-      new OptimizeCssAssestsWebpackPlugin({}),
-    ],
+    minimizer: [new TerserJSPlugin({}), new CssMinimizerPlugin({})],
   },
 
   plugins: [
