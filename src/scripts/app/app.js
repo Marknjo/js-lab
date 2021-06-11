@@ -22,6 +22,18 @@ const consoleSeparator = (title = './END', separatorLen = 20) => {
 const cafeList = document.getElementById('cafe-list');
 const cafeForm = document.getElementById('add-cafe-form');
 
+//Deleting data
+const deleteCafe = function (event) {
+  const li = event.target.closest('li');
+
+  if (!li || li.tagName !== 'LI') return;
+
+  const id = li.dataset.id;
+
+  db.collection('cafe').doc(id).delete();
+};
+cafeList.addEventListener('click', deleteCafe);
+
 //saving data to firestore
 cafeForm.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -42,12 +54,16 @@ const renderCafe = function (doc) {
   let li = document.createElement('li');
   let name = document.createElement('span');
   let city = document.createElement('span');
+  let cross = document.createElement('div');
+
   li.setAttribute('data-id', doc.id);
   name.textContent = doc.data().name;
   city.textContent = doc.data().city;
+  cross.textContent = 'x';
 
   li.appendChild(name);
   li.appendChild(city);
+  li.appendChild(cross);
 
   cafeList.appendChild(li);
 };
