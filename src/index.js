@@ -1,4 +1,11 @@
-"use strict";
+'use strict';
 /* Base Scripts import */
-import "./scripts/app/app";
-import "./styles/main.scss";
+import './App/scripts/app';
+import './App/styles/main.scss';
+
+//enable hot reload
+if (module.hot) {
+  module.hot.access();
+}
+
+console.log(process.env);
