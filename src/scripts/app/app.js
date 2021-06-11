@@ -1,4 +1,3 @@
-import { render } from 'node-sass';
 import db from './firebaseConfig';
 
 /**
@@ -88,8 +87,6 @@ const liveFetchOnSnapshot = function () {
     .onSnapshot(snapshot => {
       let changes = snapshot.docChanges();
       changes.forEach(change => {
-        console.log(change.doc.data());
-
         if (change.type === 'added') {
           renderCafe(change.doc);
         } else if (change.type === 'removed') {
