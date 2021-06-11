@@ -1,3 +1,2 @@
-import "./scripts/app/app";
-import "./styles/main.scss";
-console.log("App in the index page");
+import "./App/scripts/app";
+import "./App/styles/main.scss";
