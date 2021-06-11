@@ -1,6 +1,8 @@
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const webpack = require('webpack');
+const dotenv = require('dotenv').config();
 
 module.exports = {
   entry: {
@@ -17,6 +19,9 @@ module.exports = {
       scriptLoading: 'defer',
     }),
     new DashboardPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed),
+    }),
   ],
   module: {
     rules: [
