@@ -9,9 +9,13 @@ const createForm = document.getElementById('create-form');
 
 //getting data from firebase
 const fetchGuides = async function () {
-  const snapshot = await DB.collection('guides').get();
-
-  setupGuides(snapshot.docs);
+  try {
+    await DB.collection('guides').onSnapshot(snapshot => {
+      setupGuides(snapshot.docs);
+    });
+  } catch (error) {
+    console.error(`💥💥💥 ${error}`);
+  }
 };
 
 //Autheticating user status check
