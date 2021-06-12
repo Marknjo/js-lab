@@ -8,14 +8,12 @@ const loginForm = document.getElementById('login-form');
 const createForm = document.getElementById('create-form');
 
 //getting data from firebase
-const fetchGuides = async function () {
-  try {
-    await DB.collection('guides').onSnapshot(snapshot => {
+const fetchGuides = function () {
+  DB.collection('guides').onSnapshot(snapshot => {
+    if (snapshot) {
       setupGuides(snapshot.docs);
-    });
-  } catch (error) {
-    console.error(`💥💥💥 ${error}`);
-  }
+    }
+  });
 };
 
 //Autheticating user status check
