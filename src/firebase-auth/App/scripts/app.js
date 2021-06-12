@@ -1,5 +1,7 @@
 import { consoleSeparator } from './helpers/general';
 
+import './utils/auth';
+
 // setup materialize components
 document.addEventListener('DOMContentLoaded', function () {
   var modals = document.querySelectorAll('.modal');
