@@ -2,6 +2,7 @@ import { AUTH } from '../configs/firebase';
 
 //Signup
 const signupForm = document.getElementById('signup-form');
+const logoutBtn = document.getElementById('logout');
 
 signupForm.addEventListener('submit', async function (event) {
   event.preventDefault();
@@ -27,4 +28,14 @@ signupForm.addEventListener('submit', async function (event) {
   //close the modal
   const modal = document.getElementById('modal-signup');
   M.Modal.getInstance(modal).close();
+});
+
+//logout user
+logoutBtn.addEventListener('click', async function (event) {
+  event.preventDefault();
+
+  const resp = await AUTH.signOut();
+
+  console.log('User Signed Out');
+  console.log(resp);
 });
