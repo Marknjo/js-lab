@@ -1,5 +1,7 @@
 //Selelctors
 
+import { DB } from '../configs/firebase';
+
 const guides = document.querySelector('.guides');
 
 const loggedOutLinks = document.querySelectorAll('.logged-out');
@@ -28,14 +30,24 @@ export const setupGuides = function (data) {
   }
 };
 
-const showUserInfo = function (userEmail) {
+const showUserInfo = function (userEmail, bio = '') {
   if (userEmail) {
     const html = `
               <div>Logged in as ${userEmail}</div>
+              <div>${bio}</div>
           `;
     accountDetails.innerHTML = html;
   } else {
     accountDetails.innerHTML = '';
+  }
+};
+
+const fetchExtraUserInfo = async function (user) {
+  try {
+    const doc = await DB.collection('users').doc(user.uid).get();
+    showUserInfo(user.email, doc.data().bio);
+  } catch (error) {
+    console.log(`💥💥💥 ${error}`);
   }
 };
 
@@ -44,7 +56,7 @@ export const setUpUI = function (user) {
   if (user) {
     //handling account Info
     //showUserInfo(user)
-    showUserInfo(user.email);
+    fetchExtraUserInfo(user);
     //toggle UI elements
     loggedInLinks.forEach(el => (el.style.display = 'block'));
     loggedOutLinks.forEach(el => (el.style.display = 'none'));
