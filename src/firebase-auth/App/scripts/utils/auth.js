@@ -5,6 +5,7 @@ import { setupGuides, setUpUI } from './guides';
 const signupForm = document.getElementById('signup-form');
 const logoutBtn = document.getElementById('logout');
 const loginForm = document.getElementById('login-form');
+const createForm = document.getElementById('create-form');
 
 //getting data from firebase
 const fetchGuides = async function () {
@@ -96,5 +97,34 @@ loginForm.addEventListener('submit', async function (event) {
     closeModalHelper('modal-login');
   } catch (error) {
     console.error(` 💥💥💥 ${error}`);
+  }
+});
+
+//Creating Guides
+createForm.addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  try {
+    //grab the form values
+    const formFieldsValues = new FormData(createForm);
+    const content = formFieldsValues.get('content');
+    const title = formFieldsValues.get('title');
+
+    //@TODO: clense the values
+
+    //save the info to the db
+    await DB.collection('guides').add({
+      title,
+      content,
+    });
+
+    //reset the fields
+    createForm.reset();
+    createForm['title'].focus();
+
+    //close the modal
+    closeModalHelper('modal-create');
+  } catch (error) {
+    console.error(`💥💥💥 ${error}`);
   }
 });
