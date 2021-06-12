@@ -9,11 +9,12 @@ const createForm = document.getElementById('create-form');
 
 //getting data from firebase
 const fetchGuides = function () {
-  DB.collection('guides').onSnapshot(snapshot => {
-    if (snapshot) {
+  DB.collection('guides').onSnapshot(
+    snapshot => {
       setupGuides(snapshot.docs);
-    }
-  });
+    },
+    error => console.log(`💥💥💥 ${error}`)
+  );
 };
 
 //Autheticating user status check
@@ -46,6 +47,7 @@ signupForm.addEventListener('submit', async function (event) {
   const formValues = new FormData(signupForm);
   const email = formValues.get('signup-email').trim().toLowerCase();
   const password = formValues.get('signup-password').trim();
+  const bio = formValues.get('signup-bio').trim();
 
   //@TODO: Do some validations here first
 
@@ -53,9 +55,14 @@ signupForm.addEventListener('submit', async function (event) {
 
   const credential = await AUTH.createUserWithEmailAndPassword(email, password);
 
+  DB.collection('users').doc(credential.user.uid).set({
+    bio,
+  });
+
   //reset form values
   signupForm['signup-email'].value = '';
   signupForm['signup-password'].value = '';
+  signupForm['signup-bio'].value = '';
 
   //set the focus to email
   signupForm['signup-email'].focus();
