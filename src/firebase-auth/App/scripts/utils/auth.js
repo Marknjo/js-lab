@@ -5,6 +5,15 @@ const signupForm = document.getElementById('signup-form');
 const logoutBtn = document.getElementById('logout');
 const loginForm = document.getElementById('login-form');
 
+//Autheticating user status check
+AUTH.onAuthStateChanged(user => {
+  if (user) {
+    console.log('User logged in: ', user);
+  } else {
+    console.log('User logged out');
+  }
+});
+
 /**
  * A helper function to close Materialize modal .i.e. After successful action
  *
@@ -47,10 +56,7 @@ signupForm.addEventListener('submit', async function (event) {
 logoutBtn.addEventListener('click', async function (event) {
   event.preventDefault();
 
-  const resp = await AUTH.signOut();
-
-  console.log('User Signed Out');
-  console.log(resp);
+  await AUTH.signOut();
 });
 
 //login user
@@ -64,9 +70,7 @@ loginForm.addEventListener('submit', async function (event) {
     const email = formValues.get('login-email').trim().toLowerCase();
     const password = formValues.get('login-password').trim();
 
-    //validata user details
-    console.log(email);
-    console.log(password);
+    //@TODO: validata user details
 
     //login user
     const credential = await AUTH.signInWithEmailAndPassword(email, password);
