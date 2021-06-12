@@ -1,7 +1,6 @@
 //Selelctors
 
 const guides = document.querySelector('.guides');
-console.log(guides);
 
 //setup guides
 export const setupGuides = function (data) {
@@ -17,6 +16,9 @@ export const setupGuides = function (data) {
         </li>
       `;
     });
-    guides.insertAdjacentHTML('afterbegin', html);
+    guides.innerHTML = html;
+  } else {
+    //user is not logged in
+    guides.innerHTML = `<h5 class="center-align">Login to View guides!</h5>`;
   }
 };

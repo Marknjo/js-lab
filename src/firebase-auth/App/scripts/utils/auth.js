@@ -6,15 +6,6 @@ const signupForm = document.getElementById('signup-form');
 const logoutBtn = document.getElementById('logout');
 const loginForm = document.getElementById('login-form');
 
-//Autheticating user status check
-AUTH.onAuthStateChanged(user => {
-  if (user) {
-    console.log('User logged in: ', user);
-  } else {
-    console.log('User logged out');
-  }
-});
-
 //getting data from firebase
 const fetchGuides = async function () {
   const snapshot = await DB.collection('guides').get();
@@ -22,7 +13,14 @@ const fetchGuides = async function () {
   setupGuides(snapshot.docs);
 };
 
-fetchGuides();
+//Autheticating user status check
+AUTH.onAuthStateChanged(user => {
+  if (user) {
+    fetchGuides();
+  } else {
+    setupGuides([]);
+  }
+});
 
 /**
  * A helper function to close Materialize modal .i.e. After successful action
