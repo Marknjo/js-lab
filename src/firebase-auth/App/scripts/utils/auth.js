@@ -1,5 +1,5 @@
 import { AUTH, DB } from '../configs/firebase';
-import { setupGuides } from './guides';
+import { setupGuides, setUpUI } from './guides';
 
 //selectors
 const signupForm = document.getElementById('signup-form');
@@ -15,6 +15,7 @@ const fetchGuides = async function () {
 
 //Autheticating user status check
 AUTH.onAuthStateChanged(user => {
+  setUpUI(user);
   if (user) {
     fetchGuides();
   } else {
