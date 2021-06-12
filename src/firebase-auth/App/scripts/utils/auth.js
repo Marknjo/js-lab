@@ -1,4 +1,5 @@
-import { AUTH } from '../configs/firebase';
+import { AUTH, DB } from '../configs/firebase';
+import { setupGuides } from './guides';
 
 //selectors
 const signupForm = document.getElementById('signup-form');
@@ -13,6 +14,15 @@ AUTH.onAuthStateChanged(user => {
     console.log('User logged out');
   }
 });
+
+//getting data from firebase
+const fetchGuides = async function () {
+  const snapshot = await DB.collection('guides').get();
+
+  setupGuides(snapshot.docs);
+};
+
+fetchGuides();
 
 /**
  * A helper function to close Materialize modal .i.e. After successful action
