@@ -1,9 +1,4 @@
 import consoleSeparator from '../app';
-//icons
-import svgIcon from '../../../assets/images/icons.svg';
-
-//fractional
-import { Fraction } from 'fractional';
 
 //parent view
 import View from './view';

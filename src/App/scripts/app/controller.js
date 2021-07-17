@@ -1,6 +1,5 @@
-import consoleSeparator from './app';
 import { MODAL_CLOSE_SECS } from './config';
-import { calcNumPages } from './helpers';
+
 //model
 import * as model from './model';
 import addRecipeView from './views/addRecipeView';
