@@ -4,6 +4,7 @@ import { MODAL_CLOSE_SECS } from './config';
 import * as model from './model';
 import addRecipeView from './views/addRecipeView';
 import bookmarksView from './views/bookmarksView';
+import DateView from './views/dateView';
 import paginationView from './views/paginationView';
 
 //views
@@ -154,6 +155,9 @@ const controlAddRecipe = async function (newRecipe) {
 
 //publisher-subscriber pattern
 const init = function () {
+  //show date
+  DateView.renderCurrentYear();
+
   bookmarksView.addHandlerRender(controlBookmarksFreshPageLoad);
 
   recipeView.addHandlerRender(controlRecipes);
