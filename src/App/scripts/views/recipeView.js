@@ -1,6 +1,5 @@
-import consoleSeparator from '../app';
 //icons
-import svgIcon from '../../../assets/images/icons.svg';
+import svgIcon from '../../assets/images/icons.svg';
 
 //fractional
 import { Fraction } from 'fractional';

@@ -1,5 +1,5 @@
 //import icons
-import svgIcon from '../../../assets/images/icons.svg';
+import svgIcon from '../../assets/images/icons.svg';
 
 //Views Parent Class
 export default class View {

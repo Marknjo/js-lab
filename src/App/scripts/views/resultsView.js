@@ -1,6 +1,3 @@
-//import icons
-import svgIcon from '../../../assets/images/icons.svg';
-
 //extend from view
 import PreviewView from './previewView';
 

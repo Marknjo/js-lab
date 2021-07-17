@@ -1,7 +1,5 @@
 //Bookmarks view
 
-//import icons
-import svgIcon from '../../../assets/images/icons.svg';
 import previewView from './previewView';
 
 class BookmarksView extends previewView {

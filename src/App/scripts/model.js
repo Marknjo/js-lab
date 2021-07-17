@@ -1,5 +1,3 @@
-import consoleSeparator from './app';
-
 import { API_URL, RES_PER_PAGE, API_KEY } from './config';
 import { AJAX } from './helpers';
 

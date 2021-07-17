@@ -1,5 +1,3 @@
-import consoleSeparator from '../app';
-
 //parent view
 import View from './view';
 

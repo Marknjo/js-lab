@@ -1,6 +1,6 @@
 //pagination view
 //import icons
-import svgIcon from '../../../assets/images/icons.svg';
+import svgIcon from '../../assets/images/icons.svg';
 
 //extend from view
 import View from './view';
